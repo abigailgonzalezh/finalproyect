@@ -14,6 +14,24 @@ Router.get("/", (req, res) =>{
     })
 })
 
-
+Router.post("/", (req, res) =>{
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    const nombre = req.body.nombre1;
+    const compra = req.body.precioCompra1;
+    const venta = req.body.precioVenta1;
+    const cantidad = req.body.cantidad1;
+    const categoria = 1;
+    var values = [
+        nombre, compra, venta, cantidad, categoria
+    ];
+    mysqlConnection.query("INSERT INTO productos (nombre, precio_compra, precio_venta, cantidad, categorias_id) VALUES ('" + nombre + "', "+ compra +", " + venta +",  "+ cantidad + ",  "+categoria+" );", (err, rows, fields) =>{
+        if(!err){
+            //res.send(rows);
+        }else{
+            console.log(err);
+        }
+    })
+})
 
 module.exports = Router;    

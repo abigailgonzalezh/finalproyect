@@ -24,21 +24,10 @@ function Productos(props) {
       minHeight: 50
     };
 
-    getProductos();
+    //getProductos();
   
     return (
       <div>
-        <div>  
-        <Button
-              id="submit-button"
-              onClick={() => getProductos()}
-              variant="outlined"
-              size="large"
-              color="primary"
-              style={mystlye} >
-          INSERT PRODUCTOS
-          </Button>
-        </div>
         <br/>
         <table style={{width: "100%"}}>
           <TableHead>
