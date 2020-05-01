@@ -6,7 +6,6 @@ function Productos(props) {
     const [productos, setProductos] = useState([]);
     useEffect(() => {
       
-      console.log("La respuesta es");
 
       const getProductos = async () => {
         const res = await fetch("/productos", {

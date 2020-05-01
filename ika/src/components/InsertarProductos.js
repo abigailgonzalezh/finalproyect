@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import {Button, TextField} from '@material-ui/core'
+import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core'
 
 function InsertarProductos(props) {
     const [nombre, setNombre] = useState('');
@@ -9,6 +9,16 @@ function InsertarProductos(props) {
     const [cantidad, setCantidad] = useState('');
     //const [categoria, setCategoria] = useState('');
     //console.log("La respuesta es");
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };  
 
     const postProductos = async () => {
       const res = await fetch("/productos", {
@@ -24,8 +34,13 @@ function InsertarProductos(props) {
       //console.log(res);
       const response = await res.json();
       //setProductos(response);
+
     }
     
+    function agregar(){
+      handleClose();
+      postProductos();
+    }
     //console.log(plot);
   
     const mystlye = {
@@ -63,54 +78,70 @@ function InsertarProductos(props) {
   
     return (
       <div>
-         <div> 
-            <TextField
-                    id="Nombre"
-                    value={nombre}
-                    onChange={(ev) => setNombre(ev.target.value)}
-                    label="Nombre"
-                    variant="outlined"
-                    style={mystlye1}
-                />
-            <TextField
-                    id="Precio de Compra"
-                    value={precioCompra}
-                    onChange={(ev) => setPrecioCompra(ev.target.value)}
-                    label="Precio de Compra"
-                    variant="outlined"
-                    style={mystlye2}
-            />
-            <br></br>
-            <TextField
-                    id="Precio de Venta"
-                    value={precioVenta}
-                    onChange={(ev) => setPrecioVenta(ev.target.value)}
-                    label="Precio de Venta"
-                    variant="outlined"
-                    style={mystlye1}
-                />
-            <TextField
-                    id="Cantidad"
-                    value={cantidad}
-                    onChange={(ev) => setCantidad(ev.target.value)}
-                    label="Cantidad"
-                    variant="outlined"
-                    style={mystlye2}
-            />
-        </div>
-        <div>  
-        <Button
-              id="submit-button"
-              onClick={() => postProductos()}
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Insertar Producto
+      </Button>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Agregar</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Llene el formulario para agregar productos
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="Nombre"
+            value={nombre}
+            onChange={(ev) => setNombre(ev.target.value)}
+            label="Nombre"
+            variant="outlined"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="Precio de Compra"
+            value={precioCompra}
+            onChange={(ev) => setPrecioCompra(ev.target.value)}
+            label="Precio de Compra"
+            variant="outlined"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="Precio de Venta"
+            value={precioVenta}
+            onChange={(ev) => setPrecioVenta(ev.target.value)}
+            label="Precio de Venta"
+            variant="outlined"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="Cantidad"
+            value={cantidad}
+            onChange={(ev) => setCantidad(ev.target.value)}
+            label="Cantidad"
+            variant="outlined"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancelar
+          </Button>
+          <Button id="submit-button"
+              onClick={() => agregar()}
               variant="outlined"
               size="large"
-              color="primary"
-              style={mystlye3} >
-          Agregar Producto
+              color="primary"color="primary">
+            Agregar Producto
           </Button>
-        </div>
-  
-      </div>
+        </DialogActions>
+      </Dialog>
+    </div>
     );
 }
 
