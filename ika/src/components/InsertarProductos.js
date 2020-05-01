@@ -98,7 +98,6 @@ function InsertarProductos(props) {
             fullWidth
           />
           <TextField
-            autoFocus
             margin="dense"
             id="Precio de Compra"
             value={precioCompra}
@@ -108,7 +107,6 @@ function InsertarProductos(props) {
             fullWidth
           />
           <TextField
-            autoFocus
             margin="dense"
             id="Precio de Venta"
             value={precioVenta}
@@ -118,7 +116,6 @@ function InsertarProductos(props) {
             fullWidth
           />
           <TextField
-            autoFocus
             margin="dense"
             id="Cantidad"
             value={cantidad}
