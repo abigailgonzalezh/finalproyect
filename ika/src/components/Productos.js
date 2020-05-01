@@ -1,21 +1,24 @@
-import React, {useState} from 'react';
-
+import React, {useEffect, useState} from 'react';
 import {Button, TableHead, 
   TableRow, TableCell, TableBody} from '@material-ui/core'
 
 function Productos(props) {
     const [productos, setProductos] = useState([]);
-    console.log("La respuesta es");
+    useEffect(() => {
+      
+      console.log("La respuesta es");
 
-    const getProductos = async () => {
-      const res = await fetch("/productos", {
-          method: 'GET',
-          headers: {'Content-Type': 'application/json'},
-      })
-      //console.log(res);
-      const response = await res.json();
-      setProductos(response);
-    }
+      const getProductos = async () => {
+        const res = await fetch("/productos", {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        })
+        //console.log(res);
+        const response = await res.json();
+        setProductos(response);
+      }
+      getProductos();
+    })
     
     //console.log(plot);
   
@@ -24,7 +27,7 @@ function Productos(props) {
       minHeight: 50
     };
 
-    //getProductos();
+    //
   
     return (
       <div>
