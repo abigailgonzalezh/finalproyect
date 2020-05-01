@@ -1,0 +1,89 @@
+-- -----------------------------------------------------
+-- Table categorias
+-- -----------------------------------------------------
+CREATE TABLE categorias (
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(45) NULL,
+  PRIMARY KEY (id))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table productos
+-- -----------------------------------------------------
+CREATE TABLE productos (
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(45) NULL,
+  precio_compra FLOAT NULL,
+  precio_venta FLOAT NULL,
+  cantidad INT NULL,
+  categorias_id INT NOT NULL,
+  PRIMARY KEY (id, categorias_id),
+  CONSTRAINT fk_productos_categorias
+    FOREIGN KEY (categorias_id)
+    REFERENCES categorias (id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table empleado
+-- -----------------------------------------------------
+CREATE TABLE empleado (
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(45) NULL,
+  apellido VARCHAR(45) NULL,
+  salario FLOAT NULL,
+  telefono VARCHAR(10) NULL,
+  PRIMARY KEY (id))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table Ventas
+-- ----------------------------------------------------
+CREATE TABLE ventas (
+  idVentas INT NOT NULL AUTO_INCREMENT,
+  cantidad INT NULL,
+  ganancia FLOAT NULL,
+  empleado_id INT NOT NULL,
+  productos_id INT NOT NULL,
+  productos_categorias_id INT NOT NULL,
+  PRIMARY KEY (idVentas, empleado_id, productos_id, productos_categorias_id),
+  CONSTRAINT fk_ventas_empleado1
+    FOREIGN KEY (empleado_id)
+    REFERENCES empleado (id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_ventas_productos1
+    FOREIGN KEY (productos_id , productos_categorias_id)
+    REFERENCES productos (id , categorias_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table compras
+-- -----------------------------------------------------
+CREATE TABLE compras (
+  idcompras INT NOT NULL AUTO_INCREMENT,
+  cantidad INT NULL,
+  inversion FLOAT NULL,
+  productos_id INT NOT NULL,
+  productos_categorias_id INT NOT NULL,
+  PRIMARY KEY (idcompras, productos_id, productos_categorias_id),
+  CONSTRAINT fk_compras_productos1
+    FOREIGN KEY (productos_id , productos_categorias_id)
+    REFERENCES productos (id , categorias_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- INSERTS
+-- -----------------------------------------------------
+INSERT INTO categorias (nombre) VALUES ("Marino");
+INSERT INTO productos (nombre, precio_compra, precio_venta, cantidad, categorias_id) VALUES ("pez veta", 10, 20, 4, 1);
+INSERT INTO productos (nombre, precio_compra, precio_venta, cantidad, categorias_id) VALUES ("tortuga", 10, 20, 4, 1);
