@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {Button, TableHead, 
   TableRow, TableCell, TableBody, Table} from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import InsertarProductos from './InsertarProductos';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -54,7 +57,17 @@ function Productos(props) {
     const classes = useStyles();
     return (
       <div>
-        <br/>
+        
+      <br />
+        <Grid container spacing={3}>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={3}>
+         <InsertarProductos productoInsert="fer"/>
+        </Grid>
+      </Grid>
+      <br />
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
