@@ -4,7 +4,6 @@ import {Button, TableHead,
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import InsertarProductos from './InsertarProductos';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
