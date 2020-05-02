@@ -1,6 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import {Button, TableHead, 
-  TableRow, TableCell, TableBody} from '@material-ui/core'
+  TableRow, TableCell, TableBody, Table} from '@material-ui/core'
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+}))(TableRow);
 
 function Productos(props) {
     const [productos, setProductos] = useState([]);
@@ -19,6 +38,11 @@ function Productos(props) {
       getProductos();
     })
     
+    const useStyles = makeStyles({
+      table: {
+        minWidth: 700,
+      },
+    });
     //console.log(plot);
   
     const mystlye = {
@@ -27,34 +51,34 @@ function Productos(props) {
     };
 
     //
-  
+    const classes = useStyles();
     return (
       <div>
         <br/>
-        <table style={{width: "100%"}}>
+        <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Nombre</TableCell>
-              <TableCell>Precio de Compra</TableCell>
-              <TableCell>Precio de Venta</TableCell>
-              <TableCell>Cantidad</TableCell>
-              <TableCell>Categoria</TableCell>
+              <StyledTableCell>ID</StyledTableCell>
+              <StyledTableCell>Nombre</StyledTableCell>
+              <StyledTableCell>Precio de Compra</StyledTableCell>
+              <StyledTableCell>Precio de Venta</StyledTableCell>
+              <StyledTableCell>Cantidad</StyledTableCell>
+              <StyledTableCell>Categoria</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {productos.map((producto) =>
               <TableRow className="data-row">
-                <TableCell>{producto.id}</TableCell>
-                <TableCell>{producto.nombre}</TableCell>
-                <TableCell>{producto.precio_compra}</TableCell>
-                <TableCell>{producto.precio_venta}</TableCell>
-                <TableCell>{producto.cantidad}</TableCell>
-                <TableCell>{producto.categorias_id}</TableCell>
+                <StyledTableCell>{producto.id}</StyledTableCell>
+                <StyledTableCell>{producto.nombre}</StyledTableCell>
+                <StyledTableCell>{producto.precio_compra}</StyledTableCell>
+                <StyledTableCell>{producto.precio_venta}</StyledTableCell>
+                <StyledTableCell>{producto.cantidad}</StyledTableCell>
+                <StyledTableCell>{producto.categorias_id}</StyledTableCell>
               </TableRow>
             )}
           </TableBody>
-        </table>
+        </Table>
   
       </div>
     );
