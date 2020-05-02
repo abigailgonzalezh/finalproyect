@@ -18,6 +18,14 @@ function InsertarProductos(props) {
   
     const handleClose = () => {
       setOpen(false);
+      var limpiar = document.getElementById("nombr");
+      limpiar.value = " ";
+      var comprav = document.getElementById("compr");
+      comprav.value = " ";
+      var venti = document.getElementById("vent");
+      venti.value = " ";
+      var compri = document.getElementById("cant");
+      compri.value = " ";
     };  
 
     const postProductos = async () => {
@@ -35,6 +43,14 @@ function InsertarProductos(props) {
       const response = await res.json();
       //setProductos(response);
 
+      var limpiar = document.getElementById("nombr");
+      limpiar.value = " ";
+      var comprav = document.getElementById("compr");
+      comprav.value = " ";
+      var venti = document.getElementById("vent");
+      venti.value = " ";
+      var compri = document.getElementById("cant");
+      compri.value = " ";
     }
     
     function agregar(){
@@ -90,8 +106,8 @@ function InsertarProductos(props) {
           <TextField
             autoFocus
             margin="dense"
-            id="Nombre"
-            value={nombre}
+            id="nombr"
+            //value={nombre}
             onChange={(ev) => setNombre(ev.target.value)}
             label="Nombre"
             variant="outlined"
@@ -99,8 +115,8 @@ function InsertarProductos(props) {
           />
           <TextField
             margin="dense"
-            id="Precio de Compra"
-            value={precioCompra}
+            id="compr"
+            //value={precioCompra}
             onChange={(ev) => setPrecioCompra(ev.target.value)}
             label="Precio de Compra"
             variant="outlined"
@@ -108,8 +124,8 @@ function InsertarProductos(props) {
           />
           <TextField
             margin="dense"
-            id="Precio de Venta"
-            value={precioVenta}
+            id="vent"
+            //value={precioVenta}
             onChange={(ev) => setPrecioVenta(ev.target.value)}
             label="Precio de Venta"
             variant="outlined"
@@ -117,8 +133,8 @@ function InsertarProductos(props) {
           />
           <TextField
             margin="dense"
-            id="Cantidad"
-            value={cantidad}
+            id="cant"
+            //value={cantidad}
             onChange={(ev) => setCantidad(ev.target.value)}
             label="Cantidad"
             variant="outlined"
