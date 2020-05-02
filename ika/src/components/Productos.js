@@ -4,6 +4,7 @@ import {Button, TableHead,
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import InsertarProductos from './InsertarProductos';
 import Grid from '@material-ui/core/Grid';
+import EditIcon from '@material-ui/icons/Edit';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -76,6 +77,7 @@ function Productos(props) {
               <StyledTableCell>Precio de Venta</StyledTableCell>
               <StyledTableCell>Cantidad</StyledTableCell>
               <StyledTableCell>Categoria</StyledTableCell>
+              <StyledTableCell>Editar</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -87,6 +89,7 @@ function Productos(props) {
                 <StyledTableCell>{producto.precio_venta}</StyledTableCell>
                 <StyledTableCell>{producto.cantidad}</StyledTableCell>
                 <StyledTableCell>{producto.categorias_id}</StyledTableCell>
+                <StyledTableCell> <Button variant="outlined" ><EditIcon /> </Button></StyledTableCell>
               </TableRow>
             )}
           </TableBody>
