@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Button, TableHead, 
-  TableRow, TableCell, TableBody, Table} from '@material-ui/core'
+import {Button, TableHead, TableRow, TableCell, TableBody, Table} from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import InsertarProductos from './InsertarProductos';
 import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -26,6 +26,8 @@ const StyledTableRow = withStyles((theme) => ({
 
 function Productos(props) {
     const [productos, setProductos] = useState([]);
+    var id='';
+
     useEffect(() => {
       
 
@@ -40,6 +42,27 @@ function Productos(props) {
       }
       getProductos();
     })
+
+
+    function eliminar(producto){
+      console.log(producto.id);
+      id=producto.id;
+      deleteProductos();
+    }
+
+
+    const deleteProductos = async () => {
+      console.log("entro");
+      console.log(id);
+      const res = await fetch("/productos", {
+          method: 'DELETE',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            id: id
+          })
+      })
+      const response = await res.json();
+    }
     
     const useStyles = makeStyles({
       table: {
@@ -77,7 +100,7 @@ function Productos(props) {
               <StyledTableCell>Precio de Venta</StyledTableCell>
               <StyledTableCell>Cantidad</StyledTableCell>
               <StyledTableCell>Categoria</StyledTableCell>
-              <StyledTableCell>Editar</StyledTableCell>
+              <StyledTableCell>Extras</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -89,7 +112,9 @@ function Productos(props) {
                 <StyledTableCell>{producto.precio_venta}</StyledTableCell>
                 <StyledTableCell>{producto.cantidad}</StyledTableCell>
                 <StyledTableCell>{producto.categorias_id}</StyledTableCell>
-                <StyledTableCell> <Button variant="outlined" ><EditIcon /> </Button></StyledTableCell>
+                <StyledTableCell> <Button variant="outlined" ><EditIcon /> </Button>
+                <Button variant="outlined" onClick={() => eliminar(producto)} ><DeleteIcon /> </Button>
+                </StyledTableCell>
               </TableRow>
             )}
           </TableBody>

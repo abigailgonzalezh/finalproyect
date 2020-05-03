@@ -34,4 +34,18 @@ Router.post("/", (req, res) =>{
     })
 })
 
+Router.delete("/", (req, res) =>{
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    const id = req.body.id;
+    console.log(id);
+    mysqlConnection.query("DELETE FROM productos WHERE id="+id+";", (err, rows, fields) =>{
+        if(!err){
+            //res.send(rows);
+        }else{
+            console.log(err);
+        }
+    })
+})
+
 module.exports = Router;    
