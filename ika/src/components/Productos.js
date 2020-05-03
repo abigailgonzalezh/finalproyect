@@ -48,6 +48,7 @@ function Productos(props) {
       console.log(producto.id);
       id=producto.id;
       deleteProductos();
+      window.location.reload();
     }
 
 
