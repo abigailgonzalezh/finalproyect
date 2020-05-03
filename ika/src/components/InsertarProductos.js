@@ -7,8 +7,7 @@ function InsertarProductos(props) {
     const [precioCompra, setPrecioCompra] = useState('');
     const [precioVenta, setPrecioVenta] = useState('');
     const [cantidad, setCantidad] = useState('');
-    //const [categoria, setCategoria] = useState('');
-    //console.log("La  respuesta es");
+    //console.log("La respuesta es");
 
     const [open, setOpen] = React.useState(false);
 
