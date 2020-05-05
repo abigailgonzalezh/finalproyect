@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const Sugerencia = new Schema ({
-    cliente: { type: String, required: true },
-    sugerencia: { type: String, required: true },
+const SugerenciaSchema = new mongoose.Schema({
+    cliente: { 
+    type: String, required: true 
+    },
+
+    peticion: { 
+    type: String, required: true
+     },
 });
 
-module.exports = mongoose.model('Sugerencia', Sugerencia)
+const Sugerencia = mongoose.model("sugerencias", SugerenciaSchema);
+module.exports = Sugerencia;
