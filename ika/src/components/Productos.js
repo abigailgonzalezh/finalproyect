@@ -5,6 +5,7 @@ import InsertarProductos from './InsertarProductos';
 import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditarProductos from './EditarProductos';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -26,7 +27,8 @@ const StyledTableRow = withStyles((theme) => ({
 
 function Productos(props) {
     const [productos, setProductos] = useState([]);
-    var id='';
+    const [id, setId] = useState('');
+    var id2 = '';
 
     useEffect(() => {
       
@@ -43,23 +45,27 @@ function Productos(props) {
       getProductos();
     })
 
+    function editar(producto){
+      console.log("entro 1");
+      console.log(producto.id);
+      setId(producto.id);
+    }
 
     function eliminar(producto){
       console.log(producto.id);
-      id=producto.id;
+      id2 = producto.id;
       deleteProductos();
       window.location.reload();
     }
 
-
     const deleteProductos = async () => {
       console.log("entro");
-      console.log(id);
+      console.log(id2);
       const res = await fetch("/productos", {
           method: 'DELETE',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            id: id
+            id: id2
           })
       })
       const response = await res.json();
@@ -81,7 +87,10 @@ function Productos(props) {
     const classes = useStyles();
     return (
       <div>
-        
+        {id && 
+         <EditarProductos productoEdit={id} />
+         } 
+         {id2}
       <br />
         <Grid container spacing={3}>
         <Grid item xs={3}></Grid>
@@ -113,14 +122,16 @@ function Productos(props) {
                 <StyledTableCell>{producto.precio_venta}</StyledTableCell>
                 <StyledTableCell>{producto.cantidad}</StyledTableCell>
                 <StyledTableCell>{producto.categorias_id}</StyledTableCell>
-                <StyledTableCell> <Button variant="outlined" ><EditIcon /> </Button>
+                <StyledTableCell> 
+                <Button variant="outlined" onClick={() => editar(producto)}>
+                  <EditIcon />
+                </Button>
                 <Button variant="outlined" onClick={() => eliminar(producto)} ><DeleteIcon /> </Button>
                 </StyledTableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
-  
       </div>
     );
 }

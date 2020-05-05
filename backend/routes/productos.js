@@ -48,4 +48,24 @@ Router.delete("/", (req, res) =>{
     })
 })
 
+Router.put("/", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    const id = req.body.id;
+    const nombre = req.body.nombre1;
+    const compra = req.body.precioCompra1;
+    const venta = req.body.precioVenta1;
+    const cantidad = req.body.cantidad1;
+    const categoria = 1;
+
+    mysqlConnection.query("UPDATE productos SET nombre = '"+nombre+"', precio_compra = "+compra+", precio_venta = "+venta+", cantidad = "+cantidad+", categorias_id = "+categoria+" WHERE id = "+id+";", (err, rows, fields) => {
+        if(!err){
+            console.log("Edit");
+        }else{
+            console.log(err);
+        }
+    })
+})
+
 module.exports = Router;    
