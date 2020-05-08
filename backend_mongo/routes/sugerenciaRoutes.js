@@ -7,6 +7,7 @@ app.get('/sugerencias', async (req, res) => {
 
   try {
     res.send(sugerencias);
+    console.log(sugerencias);
   } catch (err) {
     res.status(500).send(err);
   }

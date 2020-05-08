@@ -12,3 +12,4 @@ const SugerenciaSchema = new mongoose.Schema({
 
 const Sugerencia = mongoose.model("sugerencias", SugerenciaSchema);
 module.exports = Sugerencia;
+
