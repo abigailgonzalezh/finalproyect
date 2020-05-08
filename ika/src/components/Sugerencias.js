@@ -4,8 +4,7 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import InsertarProductos from './InsertarProductos';
 import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditarProductos from './EditarProductos';
+import CheckIcon from '@material-ui/icons/CheckBox';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -63,7 +62,7 @@ function Sugerencias(props) {
             <TableRow>
               <StyledTableCell>Cliente</StyledTableCell>
               <StyledTableCell>Sugerencia</StyledTableCell>
-              <StyledTableCell>Extras</StyledTableCell>
+              <StyledTableCell size="small">Extras</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -71,11 +70,8 @@ function Sugerencias(props) {
               <TableRow className="data-row">
                 <StyledTableCell>{sugerencia.cliente}</StyledTableCell>
                 <StyledTableCell>{sugerencia.peticion}</StyledTableCell>
-                <StyledTableCell> 
-                <Button variant="outlined">
-                  <EditIcon />
-                </Button>
-                <Button variant="outlined" ><DeleteIcon /> </Button>
+                <StyledTableCell size="small"> 
+                <Button variant="outlined" ><CheckIcon /> </Button>
                 </StyledTableCell>
               </TableRow>
             )}
