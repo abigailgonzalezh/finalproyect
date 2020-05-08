@@ -28,7 +28,7 @@ function InsertarProductos(props) {
     };  
 
     const postProductos = async () => {
-      const res = await fetch("/producto", {
+      const res = await fetch("/productos", {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({

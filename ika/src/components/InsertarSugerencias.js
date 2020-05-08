@@ -4,9 +4,7 @@ import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentTe
 
 function InsertarSugerencias(props) {
     const [nombre, setNombre] = useState('');
-    const [precioCompra, setPrecioCompra] = useState('');
-    const [precioVenta, setPrecioVenta] = useState('');
-    const [cantidad, setCantidad] = useState('');
+    const [peticion1, setPeticion1] = useState('');
     //console.log("La respuesta es");
 
     const [open, setOpen] = React.useState(false);
@@ -21,31 +19,20 @@ function InsertarSugerencias(props) {
       limpiar.value = " ";
       var comprav = document.getElementById("sugerenci");
       comprav.value = " ";
-      var venti = document.getElementById("extr");
-      venti.value = " ";
     };  
 
     const postSugerencias = async () => {
-      const res = await fetch("/producto", {
+      const res = await fetch("/sugerencias", {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            nombre1: nombre,
-            precioCompra1: precioCompra,
-            precioVenta1: precioVenta,
-            cantidad1: cantidad
+            cliente: nombre,
+            peticion: peticion1,
           })
       })
       //console.log(res);
       const response = await res.json();
       //setSugerencias(response);
-
-      var limpiar = document.getElementById("client");
-      limpiar.value = " ";
-      var comprav = document.getElementById("sugerenci");
-      comprav.value = " ";
-      var venti = document.getElementById("extr");
-      venti.value = " ";
     }
     
     function agregar(){
@@ -93,7 +80,7 @@ function InsertarSugerencias(props) {
         Sugerencias 
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Agregar</DialogTitle>
+        <DialogTitle id="form-dialog-title">Sugerencias</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Llene el formulario para agregar una Sugerencias
@@ -112,17 +99,8 @@ function InsertarSugerencias(props) {
             margin="dense"
             id="sugerenci"
             //value={precioCompra}
-            onChange={(ev) => setPrecioCompra(ev.target.value)}
+            onChange={(ev) => setPeticion1(ev.target.value)}
             label="Sugerencia"
-            variant="outlined"
-            fullWidth
-          />
-          <TextField
-            margin="dense"
-            id="extr"
-            //value={precioVenta}
-            onChange={(ev) => setPrecioVenta(ev.target.value)}
-            label="Comentario extra"
             variant="outlined"
             fullWidth
           />

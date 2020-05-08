@@ -3,15 +3,17 @@ import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Productos from './components/Productos';
 import Sugerencias from './components/Sugerencias';
+import Cliente from './components/ClienteProductos';
 import { Container } from '@material-ui/core';
 
 
 function App() {
   return (
     <Router>
-      <Container>
-        <p/>
         <Switch>
+          <Route path="/cliente">
+            <Cliente/>
+          </Route>
           <Route path="/sug">
            <Sugerencias/>
           </Route>
@@ -19,7 +21,6 @@ function App() {
             <Productos/>
           </Route>
         </Switch>
-      </Container>
     </Router>
   );
 }
