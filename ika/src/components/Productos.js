@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditarProductos from './EditarProductos';
+import InsertarSugerencias from './InsertarSugerencias';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -95,7 +96,9 @@ function Productos(props) {
         <Grid container spacing={3}>
         <Grid item xs={3}></Grid>
         <Grid item xs={3}></Grid>
-        <Grid item xs={3}></Grid>
+        <Grid item xs={3}>
+          <InsertarSugerencias/>
+        </Grid>
         <Grid item xs={3}>
          <InsertarProductos productoInsert="fer"/>
         </Grid>
