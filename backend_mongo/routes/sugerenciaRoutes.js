@@ -24,4 +24,15 @@ app.post('/sugerencias', async (req, res) => {
   }
 });
 
+app.delete('/sugerencias/:id', async (req, res) => {
+  try {
+    const sugerencias = await sugerenciasModel.findByIdAndDelete(req.params.id)
+
+    if (!sugerencias) res.status(404).send("No item found")
+    res.status(200).send()
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
 module.exports = app
