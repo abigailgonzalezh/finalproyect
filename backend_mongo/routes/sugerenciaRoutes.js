@@ -7,7 +7,7 @@ app.get('/sugerencias', async (req, res) => {
 
   try {
     res.send(sugerencias);
-    console.log(sugerencias);
+    //console.log(sugerencias);
   } catch (err) {
     res.status(500).send(err);
   }
@@ -32,6 +32,7 @@ app.delete('/sugerencias/:id', async (req, res) => {
     res.status(200).send()
   } catch (err) {
     res.status(500).send(err)
+    //console.log(err)
   }
 })
 
