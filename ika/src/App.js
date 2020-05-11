@@ -7,11 +7,15 @@ import Cliente from './components/ClienteProductos';
 import Ventas from './components/EmpleadoProductos';
 import Corte from './components/CorteCaja';
 import Balance from './components/Balance';
+import Historial from './components/Historial';
 
 function App() {
   return (
     <Router>
         <Switch>
+          <Route path="/historial">
+            <Historial/>
+          </Route>
           <Route path="/bal">
             <Balance/>
           </Route>
