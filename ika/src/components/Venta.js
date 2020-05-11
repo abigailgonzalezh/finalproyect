@@ -34,7 +34,7 @@ function Venta(props){
     function vender(){
       handleClose();
       venta();
-      window.location.reload();
+      //window.location.reload();
     }
     //console.log(plot);
   

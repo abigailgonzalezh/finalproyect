@@ -55,7 +55,7 @@ function Productos(props) {
       console.log(producto.id);
       id2 = producto.id;
       deleteProductos();
-      window.location.reload();
+      //window.location.reload();
     }
 
     const deleteProductos = async () => {

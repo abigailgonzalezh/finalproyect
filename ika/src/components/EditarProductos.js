@@ -63,7 +63,7 @@ function EditarProductos(props){
     function editar(){
       handleClose();
       editProductos();
-      window.location.reload();
+      //window.location.reload();
     }
     //console.log(plot);
   

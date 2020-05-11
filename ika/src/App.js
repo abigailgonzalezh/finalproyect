@@ -5,13 +5,15 @@ import Productos from './components/Productos';
 import Sugerencias from './components/Sugerencias';
 import Cliente from './components/ClienteProductos';
 import Ventas from './components/EmpleadoProductos';
-import { Container } from '@material-ui/core';
-
+import Corte from './components/CorteCaja';
 
 function App() {
   return (
     <Router>
         <Switch>
+          <Route path="/corte">
+            <Corte/>
+          </Route>
           <Route path="/ventas">
             <Ventas/>
           </Route>
