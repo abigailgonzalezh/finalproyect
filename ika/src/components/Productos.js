@@ -28,6 +28,11 @@ const StyledTableRow = withStyles((theme) => ({
 function Productos(props) {
     const [productos, setProductos] = useState([]);
     const [id, setId] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [precioCompra, setPrecioCompra] = useState('');
+    const [precioVenta, setPrecioVenta] = useState('');
+    const [cantidad, setCantidad] = useState('');
+    const [open, setOpen] = React.useState(false);
     var id2 = '';
 
     useEffect(() => {
@@ -49,6 +54,11 @@ function Productos(props) {
       console.log("entro 1");
       console.log(producto.id);
       setId(producto.id);
+      setNombre(producto.nombre);
+      setPrecioCompra(producto.precio_compra);
+      setPrecioVenta(producto.precio_venta);
+      setCantidad(producto.cantidad);
+      setOpen(true);
     }
 
     function eliminar(producto){
@@ -87,8 +97,9 @@ function Productos(props) {
     const classes = useStyles();
     return (
       <div>
-        {id && 
-         <EditarProductos productoEdit={id} />
+        {id && nombre && precioCompra && precioVenta && cantidad && open &&
+         <EditarProductos productoEdit={id} productoNombre={nombre} productoPrecioCompra ={precioCompra}
+         productoPrecioVenta = {precioVenta} productoCantidad = {cantidad} isOpen = {open}/>
          } 
          {id2}
       <br />

@@ -3,24 +3,19 @@ import React, {useState} from 'react';
 import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 
 function EditarProductos(props){
-    //console.log(props.productoEdit);
-    //console.log("entro 2");
-    //const EditarProductos = ({productoEdit}) => console.log(productoEdit);
-    const [nombre, setNombre] = useState('');
-    const [precioCompra, setPrecioCompra] = useState('');
-    const [precioVenta, setPrecioVenta] = useState('');
-    const [cantidad, setCantidad] = useState('');
-    //const [categoria, setCategoria] = useState('');
-    //console.log("La respuesta es");
-
     const idProducto = props.productoEdit;
-    //console.log(idProducto);
+    const nombreProducto = props.productoNombre;
+    const precioCompraProducto = props.productoPrecioCompra;
+    const precioVentaProducto = props.productoPrecioVenta;
+    const cantidadProducto = props.productoCantidad;
+    const abierto = props.isOpen;
 
-    const [open, setOpen] = React.useState(true);
-
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+    const [id, setId] = useState(idProducto);
+    const [nombre, setNombre] = useState(nombreProducto);
+    const [precioCompra, setPrecioCompra] = useState(precioCompraProducto);
+    const [precioVenta, setPrecioVenta] = useState(precioVentaProducto);
+    const [cantidad, setCantidad] = useState(cantidadProducto);
+    const [open, setOpen] = React.useState(abierto);
   
     const handleClose = () => {
       setOpen(false);
@@ -32,6 +27,7 @@ function EditarProductos(props){
       venti.value = " ";
       var compri = document.getElementById("cant");
       compri.value = " ";
+      setId('');
     };  
 
     const editProductos = async () => {
@@ -58,6 +54,8 @@ function EditarProductos(props){
       venti.value = " ";
       var compri = document.getElementById("cant");
       compri.value = " ";
+      setId('');
+      setOpen(false);
     }
     
     function editar(){
@@ -112,7 +110,7 @@ function EditarProductos(props){
             autoFocus
             margin="dense"
             id="nombr"
-            //value={nombre}
+            value={nombre}
             onChange={(ev) => setNombre(ev.target.value)}
             label="Nombre"
             variant="outlined"
@@ -121,7 +119,7 @@ function EditarProductos(props){
           <TextField
             margin="dense"
             id="compr"
-            //value={precioCompra}
+            value={precioCompra}
             onChange={(ev) => setPrecioCompra(ev.target.value)}
             label="Precio de Compra"
             variant="outlined"
@@ -130,7 +128,7 @@ function EditarProductos(props){
           <TextField
             margin="dense"
             id="vent"
-            //value={precioVenta}
+            value={precioVenta}
             onChange={(ev) => setPrecioVenta(ev.target.value)}
             label="Precio de Venta"
             variant="outlined"
@@ -139,7 +137,7 @@ function EditarProductos(props){
           <TextField
             margin="dense"
             id="cant"
-            //value={cantidad}
+            value={cantidad}
             onChange={(ev) => setCantidad(ev.target.value)}
             label="Cantidad"
             variant="outlined"
