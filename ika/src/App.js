@@ -6,11 +6,15 @@ import Sugerencias from './components/Sugerencias';
 import Cliente from './components/ClienteProductos';
 import Ventas from './components/EmpleadoProductos';
 import Corte from './components/CorteCaja';
+import Balance from './components/Balance';
 
 function App() {
   return (
     <Router>
         <Switch>
+          <Route path="/bal">
+            <Balance/>
+          </Route>
           <Route path="/corte">
             <Corte/>
           </Route>

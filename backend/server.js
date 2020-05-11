@@ -4,6 +4,7 @@ const mysqlConnection = require("./connection");
 
 const ProductosRoutes = require("./routes/productos");
 const ProcedimientosRoutes = require("./routes/procedimientos");
+const BalanceRoutes = require("./routes/balance");
 
 
 var app = express();
@@ -11,6 +12,7 @@ app.use(bodyParser.json());
 
 app.use("/productos", ProductosRoutes);
 app.use("/procedimientos", ProcedimientosRoutes);
+app.use("/balance", BalanceRoutes);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
