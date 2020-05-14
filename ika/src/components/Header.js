@@ -1,17 +1,14 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import { Grommet, Box, Image } from "grommet";
+import { grommet } from "grommet/themes";
+import imagen from './logo.png'
 
 const styles = theme => ({
   '@global': {
@@ -39,8 +36,6 @@ const styles = theme => ({
 });
 
 
-
-
 function Pricing(props) {
   const { classes } = props;
 
@@ -50,7 +45,10 @@ function Pricing(props) {
       <AppBar position="static" color="default" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-            Ika Aquarium
+  <Image
+  margin={{ top: 'small' }}
+    src={imagen}
+  />
           </Typography>
           <Button>Productos</Button>
           <Button>Historial</Button>
