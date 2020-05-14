@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditarProductos from './EditarProductos';
+import Header from './Header.js';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -97,6 +98,7 @@ function Productos(props) {
     const classes = useStyles();
     return (
       <div>
+      <Header/>
         {id && nombre && precioCompra && precioVenta && cantidad && open &&
          <EditarProductos productoEdit={id} productoNombre={nombre} productoPrecioCompra ={precioCompra}
          productoPrecioVenta = {precioVenta} productoCantidad = {cantidad} isOpen = {open}/>
