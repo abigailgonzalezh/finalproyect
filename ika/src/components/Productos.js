@@ -1,12 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {Button, TableHead, TableRow, TableCell, TableBody, Table} from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import InsertarProductos from './InsertarProductos';
 import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditarProductos from './EditarProductos';
-import Header from './Header.js';
+import Header from './Header';
+import {
+  Box,
+  Grommet,
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHeader,
+  TableRow,
+  Text,
+  Button
+} from "grommet";
+import { grommet } from "grommet/themes";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -113,39 +125,43 @@ function Productos(props) {
         <Grid item xs={3}>
          <InsertarProductos productoInsert="fer"/>
         </Grid>
-      </Grid>
-      <br />
-        <Table className={classes.table}>
-          <TableHead>
+      </Grid> 
+      <Grommet theme={grommet}>
+      <Box align="center" pad="large">
+        <Table className={classes.table} >
+          <TableHeader>
             <TableRow>
-              <StyledTableCell>ID</StyledTableCell>
-              <StyledTableCell>Nombre</StyledTableCell>
-              <StyledTableCell>Precio de Compra</StyledTableCell>
-              <StyledTableCell>Precio de Venta</StyledTableCell>
-              <StyledTableCell>Cantidad</StyledTableCell>
-              <StyledTableCell>Categoria</StyledTableCell>
-              <StyledTableCell>Extras</StyledTableCell>
+              <TableCell scope="col" border="bottom"><strong>ID</strong></TableCell>
+              <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
+              <TableCell scope="col" border="bottom"><strong>Precio de Compra</strong></TableCell>
+              <TableCell align="center" size="small" scope="col" border="bottom"><strong>Precio de Venta</strong></TableCell>
+              <TableCell scope="col" border="bottom"><strong>Cantidad</strong></TableCell>
+              <TableCell align="center" size="small" scope="col" border="bottom"><strong>Categoria</strong></TableCell>
+              <TableCell align="end"scope="col" border="bottom"><strong>Extras</strong></TableCell>
+              <TableCell scope="col" border="bottom"><strong></strong></TableCell>
             </TableRow>
-          </TableHead>
+          </TableHeader>
           <TableBody>
             {productos.map((producto) =>
-              <TableRow className="data-row">
-                <StyledTableCell>{producto.id}</StyledTableCell>
-                <StyledTableCell>{producto.nombre}</StyledTableCell>
-                <StyledTableCell>{producto.precio_compra}</StyledTableCell>
-                <StyledTableCell>{producto.precio_venta}</StyledTableCell>
-                <StyledTableCell>{producto.cantidad}</StyledTableCell>
-                <StyledTableCell>{producto.categorias_id}</StyledTableCell>
-                <StyledTableCell> 
-                <Button variant="outlined" onClick={() => editar(producto)}>
-                  <EditIcon />
-                </Button>
-                <Button variant="outlined" onClick={() => eliminar(producto)} ><DeleteIcon /> </Button>
-                </StyledTableCell>
+              <TableRow scope="row">
+                <TableCell >{producto.id}</TableCell>
+                <TableCell align="center" >{producto.nombre}</TableCell>
+                <TableCell align="center">{producto.precio_compra}</TableCell>
+                <TableCell align="center">{producto.precio_venta}</TableCell>
+                <TableCell align="center">{producto.cantidad}</TableCell>
+                <TableCell align="center">{producto.categorias_id}</TableCell>
+                <TableCell> 
+                <Button hoverIndicator="true" onClick={() => editar(producto)}><EditIcon /></Button>
+                </TableCell>
+                <TableCell> 
+                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(producto)} ><DeleteIcon /> </Button>
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
+        </Box>
+        </Grommet>
       </div>
     );
 }

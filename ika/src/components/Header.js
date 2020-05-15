@@ -6,10 +6,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import { Grommet, Box, Image } from "grommet";
 import { grommet } from "grommet/themes";
 import imagen from './logo.png'
-
+import { Anchor, Box, Grommet, Header, Image } from "grommet";
 const styles = theme => ({
   '@global': {
     body: {
@@ -40,31 +39,21 @@ function Pricing(props) {
   const { classes } = props;
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <AppBar position="static" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-  <Image
-  margin={{ top: 'small' }}
+    <Grommet >
+    <Header elevation="medium"  background="light-3" pad="xsmall">
+    <Image
     src={imagen}
   />
-          </Typography>
-          <Button>Productos</Button>
-          <Button>Historial</Button>
-          <Button>Sugerencias</Button>
-          <Button>Corte de caja</Button>
-          <Button>Balance</Button>
-          <Button color="primary" variant="outlined">
-            Iniciar sesion
-          </Button>
-        </Toolbar>
-      </AppBar>
-      <main className={classes.layout}>
-
-      </main>
-     
-    </React.Fragment>
+      <Box direction="row" gap="medium">
+        <Anchor label="Productos" href="#" />
+        <Anchor label="Historial" href="#" />
+        <Anchor label="Corte de caja" href="#" />
+        <Anchor label="Balance" href="#" />
+        <Anchor label="Sugerencias" href="#" />
+        <Button label="Iniciar sesion"></Button>
+      </Box>
+    </Header>
+  </Grommet>
   );
 }
 
