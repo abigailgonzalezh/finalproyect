@@ -8,12 +8,15 @@ import Ventas from './components/EmpleadoProductos';
 import Corte from './components/CorteCaja';
 import Balance from './components/Balance';
 import Historial from './components/Historial';
+import Empleado from './components/Empleados';
 import Index from './components/Index';
-
 function App() {
   return (
     <Router>
         <Switch>
+          <Route path="/personal">
+            <Empleado/>
+          </Route>
           <Route path="/Historial">
             <Historial/>
           </Route>
