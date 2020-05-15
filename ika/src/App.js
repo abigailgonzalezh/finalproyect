@@ -8,12 +8,13 @@ import Ventas from './components/EmpleadoProductos';
 import Corte from './components/CorteCaja';
 import Balance from './components/Balance';
 import Historial from './components/Historial';
+import Index from './components/Index';
 
 function App() {
   return (
     <Router>
         <Switch>
-          <Route path="/historial">
+          <Route path="/Historial">
             <Historial/>
           </Route>
           <Route path="/bal">
@@ -31,8 +32,11 @@ function App() {
           <Route path="/sug">
            <Sugerencias/>
           </Route>
-          <Route path="/">
+          <Route path="/prod">
             <Productos/>
+          </Route>
+          <Route path="/">
+            <Index/>
           </Route>
         </Switch>
     </Router>

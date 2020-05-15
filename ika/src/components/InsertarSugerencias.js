@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-
-import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core'
+import { Grommet, Box, Image, Button } from "grommet";
+import { TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core'
 
 function InsertarSugerencias(props) {
     const [nombre, setNombre] = useState('');
@@ -76,8 +76,7 @@ function InsertarSugerencias(props) {
   
     return (
       <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        Sugerencias 
+      <Button primary size="medium" label="Añadir sugerencias" onClick={handleClickOpen}>
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Sugerencias</DialogTitle>
@@ -106,15 +105,13 @@ function InsertarSugerencias(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancelar
+          <Button   size="medium" label="Cancelar" onClick={handleClose} >
           </Button>
           <Button id="submit-button"
               onClick={() => agregar()}
               variant="outlined"
               size="large"
-              color="primary"color="primary">
-            Aceptar
+              size="medium" label="Agregar">
           </Button>
         </DialogActions>
       </Dialog>

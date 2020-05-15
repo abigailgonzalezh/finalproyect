@@ -45,11 +45,11 @@ function Pricing(props) {
     src={imagen}
   />
       <Box direction="row" gap="medium">
-        <Anchor label="Productos" href="#" />
-        <Anchor label="Historial" href="#" />
-        <Anchor label="Corte de caja" href="#" />
-        <Anchor label="Balance" href="#" />
-        <Anchor label="Sugerencias" href="#" />
+        <Anchor label="Productos" href="/prod" />
+        <Anchor label="Historial" href="/Historial"/>
+        <Anchor label="Corte de caja" href="/corte"/>
+        <Anchor label="Balance" href="/bal" />
+        <Anchor label="Sugerencias" href="/sug" />
         <Button label="Iniciar sesion"></Button>
       </Box>
     </Header>

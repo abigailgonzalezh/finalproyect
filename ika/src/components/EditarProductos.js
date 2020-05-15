@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-
-import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
+import { Grommet, Box, Image, Button } from "grommet";
+import {TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 
 function EditarProductos(props){
     const idProducto = props.productoEdit;
@@ -145,15 +145,12 @@ function EditarProductos(props){
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancelar
+          <Button  size="medium" label="Cancelar" onClick={handleClose} >
           </Button>
           <Button id="submit-button"
               onClick={() => editar()}
-              variant="outlined"
               size="large"
-              color="primary"color="primary">
-            Editar Producto
+              size="medium" label="Editar">
           </Button>
         </DialogActions>
       </Dialog>

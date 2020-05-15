@@ -1,9 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {Button, TableHead, TableRow, TableCell, TableBody, Table, Dialog, DialogTitle,
-DialogContent, DialogContentText, DialogActions} from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
+import Header from './Header';
+import {
+  Box,
+  Grommet,
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHeader,
+  TableRow,
+  Text,
+  Button
+} from "grommet";
+import { grommet } from "grommet/themes";
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -54,6 +65,7 @@ const [productos, setProductos] = useState([]);
   const classes = useStyles();
   return (
     <div>
+       <Header/>
         <br />
       <Grid container spacing={3}>
       <Grid item xs={3}></Grid>
@@ -63,31 +75,34 @@ const [productos, setProductos] = useState([]);
       <Grid item xs={3}>
       </Grid>
     </Grid>
-    <br />
+    <Grommet theme={grommet}>
+      <Box align="center" pad="large">
       <Table className={classes.table}>
-        <TableHead>
+        <TableHeader>
           <TableRow>
-            <StyledTableCell>Producto</StyledTableCell>
-            <StyledTableCell>Compra</StyledTableCell>
-            <StyledTableCell>Venta</StyledTableCell>
-            <StyledTableCell>Cantidad</StyledTableCell>
-            <StyledTableCell>Accion</StyledTableCell>
-            <StyledTableCell>Fecha</StyledTableCell>
+          <TableCell scope="col" border="bottom"><strong>Producto</strong></TableCell>
+          <TableCell scope="col" border="bottom"><strong>Compra</strong></TableCell>
+          <TableCell scope="col" border="bottom"><strong>Venta</strong></TableCell>
+          <TableCell scope="col" border="bottom"><strong>Cantidad</strong></TableCell>
+          <TableCell scope="col" border="bottom"><strong>Accion</strong></TableCell>
+          <TableCell scope="col" border="bottom"><strong>Fecha</strong></TableCell>
           </TableRow>
-        </TableHead>
+        </TableHeader>
         <TableBody>
           {productos.map((producto) =>
             <TableRow className="data-row">
-              <StyledTableCell>{producto.producto}</StyledTableCell>
-              <StyledTableCell>{producto.precio_compra}</StyledTableCell>
-              <StyledTableCell>{producto.precio_venta}</StyledTableCell>
-              <StyledTableCell>{producto.cantidad}</StyledTableCell>
-              <StyledTableCell>{producto.action}</StyledTableCell>
-              <StyledTableCell>{producto.changedate}</StyledTableCell>
+              <TableCell align="center" >{producto.producto}</TableCell>
+              <TableCell align="center" >{producto.precio_compra}</TableCell>
+              <TableCell align="center" >{producto.precio_venta}</TableCell>
+              <TableCell align="center" >{producto.cantidad}</TableCell>
+              <TableCell align="center" >{producto.action}</TableCell>
+              <TableCell align="center" >{producto.changedate}</TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
+      </Box>
+        </Grommet>
     </div>
   );
 }

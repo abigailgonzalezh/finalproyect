@@ -1,9 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {Button, TableHead, TableRow, TableCell, TableBody, Table, Dialog, DialogTitle,
-DialogContent, DialogContentText, DialogActions} from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
+import Header from './Header';
+import {
+  Box,
+  Grommet,
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHeader,
+  TableRow,
+  Text,
+  Button
+} from "grommet";
+import { grommet } from "grommet/themes";
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -54,6 +65,7 @@ const [productos, setProductos] = useState([]);
   const classes = useStyles();
   return (
     <div>
+      <Header/>
         <br />
       <Grid container spacing={3}>
       <Grid item xs={3}></Grid>
@@ -64,26 +76,30 @@ const [productos, setProductos] = useState([]);
       </Grid>
     </Grid>
     <br />
+    <Grommet theme={grommet}>
+      <Box align="center" pad="large">
       <Table className={classes.table}>
-        <TableHead>
+        <TableHeader>
           <TableRow>
-            <StyledTableCell>Fecha</StyledTableCell>
-            <StyledTableCell>Nombre</StyledTableCell>
-            <StyledTableCell>Cantidad</StyledTableCell>
-            <StyledTableCell>Total Venta</StyledTableCell>
+          <TableCell scope="col" border="bottom"><strong>Fecha</strong></TableCell>
+          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
+          <TableCell scope="col" border="bottom"><strong>Cantidad</strong></TableCell>
+          <TableCell scope="col" border="bottom"><strong>Total Venta</strong></TableCell>
           </TableRow>
-        </TableHead>
+        </TableHeader>
         <TableBody>
           {productos.map((producto) =>
-            <TableRow className="data-row">
-              <StyledTableCell>{producto.fecha}</StyledTableCell>
-              <StyledTableCell>{producto.nombre}</StyledTableCell>
-              <StyledTableCell>{producto.cantidad}</StyledTableCell>
-              <StyledTableCell>{producto.totalVenta}</StyledTableCell>
+            <TableRow className="row">
+               <TableCell align="center" >{producto.fecha}</TableCell>
+               <TableCell align="center" >{producto.nombre}</TableCell>
+               <TableCell align="center" >{producto.cantidad}</TableCell>
+               <TableCell align="center" >{producto.totalVenta}</TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
+      </Box>
+        </Grommet>
     </div>
   );
 }

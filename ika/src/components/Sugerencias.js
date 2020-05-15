@@ -1,8 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {Button, TableHead, TableRow, TableCell, TableBody, Table} from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';  
 import CheckIcon from '@material-ui/icons/CheckBox';
-
+import Header from './Header';
+import {
+  Box,
+  Grommet,
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHeader,
+  TableRow,
+  Text,
+  Button
+} from "grommet";
+import { grommet } from "grommet/themes";
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -72,26 +84,32 @@ function Sugerencias(props) {
     const classes = useStyles();
     return (
       <div>
+        <Header/>
+        <br/>
+        <Grommet theme={grommet}>
+      <Box align="center" pad="large">
         <Table className={classes.table}>
-          <TableHead>
+          <TableHeader>
             <TableRow>
-              <StyledTableCell>Cliente</StyledTableCell>
-              <StyledTableCell>Sugerencia</StyledTableCell>
-              <StyledTableCell size="small">Extras</StyledTableCell>
-            </TableRow>
-          </TableHead>
+            <TableCell scope="col" border="bottom"><strong>Cliente</strong></TableCell>
+            <TableCell align="center" size="small" scope="col" border="bottom"><strong>Sugerencias</strong></TableCell>
+            <TableCell align="end" scope="col" border="bottom"><strong>Extras</strong></TableCell>
+              </TableRow>
+          </TableHeader>
           <TableBody>
             {sugerencias.map((sugerencia) =>
               <TableRow className="data-row">
-                <StyledTableCell>{sugerencia.cliente}</StyledTableCell>
-                <StyledTableCell>{sugerencia.peticion}</StyledTableCell>
-                <StyledTableCell size="small"> 
-                <Button variant="outlined" onClick={() => eliminar(sugerencia)}><CheckIcon /> </Button>
-                </StyledTableCell>
+                <TableCell align="center" >{sugerencia.cliente}</TableCell>
+                <TableCell align="center" >{sugerencia.peticion}</TableCell>
+                <TableCell> 
+                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(sugerencia)} ><CheckIcon /> </Button>
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
+        </Box>
+        </Grommet>
       </div>
     );
 }

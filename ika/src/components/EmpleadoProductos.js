@@ -1,10 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {Button, TableHead, TableRow, TableCell, TableBody, Table, Dialog, DialogTitle,
-DialogContent, DialogContentText, DialogActions} from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Venta from './Venta';
-
+import Header from './Header';
+import {
+  Box,
+  Grommet,
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHeader,
+  TableRow,
+  Text,
+  Button
+} from "grommet";
+import { grommet } from "grommet/themes";
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -69,6 +80,7 @@ function Ventas(props) {
   const classes = useStyles();
   return (
     <div>
+      <Header/>
          {id && 
          <Venta venta={id} />
          }
@@ -81,33 +93,34 @@ function Ventas(props) {
       <Grid item xs={3}>
       </Grid>
     </Grid>
-    <br />
-      <Table className={classes.table}>
-        <TableHead>
+    <Grommet theme={grommet}>
+      <Box align="center" pad="large">
+        <Table className={classes.table} >
+        <TableHeader>
           <TableRow>
-            <StyledTableCell>Nombre</StyledTableCell>
-            <StyledTableCell>Precio</StyledTableCell>
-            <StyledTableCell>Categoria</StyledTableCell>
-            <StyledTableCell>Cantidad</StyledTableCell>
-            <StyledTableCell>Ventas</StyledTableCell>
+          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
+          <TableCell scope="col" border="bottom"><strong>Precio</strong></TableCell>
+          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Categoria</strong></TableCell>
+          <TableCell align="center" scope="col" border="bottom"><strong>Cantidad</strong></TableCell>
+          <TableCell align="center" scope="col" border="bottom"><strong>Ventas</strong></TableCell>
           </TableRow>
-        </TableHead>
+        </TableHeader>
         <TableBody>
           {productos.map((producto) =>
-            <TableRow className="data-row">
-              <StyledTableCell>{producto.nombre}</StyledTableCell>
-              <StyledTableCell>{producto.precio_venta}</StyledTableCell>
-              <StyledTableCell>{producto.categorias_id}</StyledTableCell>
-              <StyledTableCell>{producto.cantidad}</StyledTableCell>
-              <StyledTableCell>
-                  <Button variant="contained" color="primary" onClick={() => vender(producto)}>
-                    Vender
-                  </Button>
-              </StyledTableCell>
+            <TableRow className="row">
+              <TableCell align="center" >{producto.nombre}</TableCell>
+              <TableCell align="center" >{producto.precio_venta}</TableCell>
+              <TableCell align="center" >{producto.categorias_id}</TableCell>
+              <TableCell align="center" >{producto.cantidad}</TableCell>
+              <TableCell> 
+                <Button label="vender" hoverIndicator="true" onClick={() => vender(producto)}></Button>
+                </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
+      </Box>
+        </Grommet>
     </div>
   );
 }

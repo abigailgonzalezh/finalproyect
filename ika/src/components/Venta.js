@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-
-import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
+import { Grommet, Box, Image, Button } from "grommet";
+import {TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 
 function Venta(props){
     const [cantidad, setCantidad] = useState('');
@@ -91,15 +91,12 @@ function Venta(props){
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancelar
+          <Button  size="medium" label="Cancelar" onClick={handleClose} >
           </Button>
           <Button id="submit-button"
               onClick={() => vender()}
-              variant="outlined"
               size="large"
-              color="primary"color="primary">
-            Vender
+              size="medium" label="Vender">
           </Button>
         </DialogActions>
       </Dialog>
