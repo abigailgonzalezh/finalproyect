@@ -39,7 +39,7 @@ function Sugerencias(props) {
 
     useEffect(() => {
       const getSugerencias = async () => {
-        const res = await fetch("/sugerencias", {
+        const res = await fetch("/suggestions", {
             method: 'GET',
             headers: {'Content-Type': 'application/json'},
         })
@@ -62,7 +62,7 @@ function Sugerencias(props) {
     const deleteSugerencias = async () => {
       console.log("entro");
       console.log(id2);
-      const res = await fetch("/sugerencias/"+id2+"", {
+      const res = await fetch("/suggestions/"+id2+"", {
           method: 'DELETE',
           headers: {'Content-Type': 'application/json'},
       })

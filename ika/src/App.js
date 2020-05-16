@@ -20,7 +20,7 @@ function App() {
           <Route path="/Historial">
             <Historial/>
           </Route>
-          <Route path="/bal">
+          <Route path="/Balance">
             <Balance/>
           </Route>
           <Route path="/corte">
@@ -32,10 +32,10 @@ function App() {
           <Route path="/cliente">
             <Cliente/>
           </Route>
-          <Route path="/sug">
+          <Route path="/sugerencias">
            <Sugerencias/>
           </Route>
-          <Route path="/prod">
+          <Route path="/productos">
             <Productos/>
           </Route>
           <Route path="/">

@@ -10,9 +10,9 @@ const HistorialRoutes = require("./routes/historial");
 var app = express();
 app.use(bodyParser.json());
 
-app.use("/productos", ProductosRoutes);
+app.use("/products", ProductosRoutes);
 app.use("/procedimientos", ProcedimientosRoutes);
-app.use("/balance", BalanceRoutes);
+app.use("/bal", BalanceRoutes);
 app.use("/his", HistorialRoutes);
 
 app.use(function(req, res, next) {

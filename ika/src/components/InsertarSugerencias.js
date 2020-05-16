@@ -22,7 +22,7 @@ function InsertarSugerencias(props) {
     };  
 
     const postSugerencias = async () => {
-      const res = await fetch("/sugerencias", {
+      const res = await fetch("/suggestions", {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({

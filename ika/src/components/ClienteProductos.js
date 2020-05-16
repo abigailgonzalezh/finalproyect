@@ -43,7 +43,7 @@ function Productos(props) {
       
 
       const getProductos = async () => {
-        const res = await fetch("/productos", {
+        const res = await fetch("/products", {
             method: 'GET',
             headers: {'Content-Type': 'application/json'},
         })

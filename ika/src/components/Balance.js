@@ -38,7 +38,7 @@ const [productos, setProductos] = useState([]);
 
   useEffect(() => {
     const getProductos = async () => {
-      const res = await fetch("/balance", {
+      const res = await fetch("/bal", {
           method: 'GET',
           headers: {'Content-Type': 'application/json'},
       })

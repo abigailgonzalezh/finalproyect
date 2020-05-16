@@ -2,7 +2,7 @@ const express = require('express');
 const sugerenciasModel = require('../models/sugerencias');
 const app = express();
 
-app.get('/sugerencias', async (req, res) => {
+app.get('/suggestions', async (req, res) => {
   const sugerencias = await sugerenciasModel.find({});
 
   try {
@@ -13,7 +13,7 @@ app.get('/sugerencias', async (req, res) => {
   }
 });
 
-app.post('/sugerencias', async (req, res) => {
+app.post('/suggestions', async (req, res) => {
   const sugerencias = new sugerenciasModel(req.body);
 
   try {
@@ -24,7 +24,7 @@ app.post('/sugerencias', async (req, res) => {
   }
 });
 
-app.delete('/sugerencias/:id', async (req, res) => {
+app.delete('/suggestions/:id', async (req, res) => {
   try {
     const sugerencias = await sugerenciasModel.findByIdAndDelete(req.params.id)
 

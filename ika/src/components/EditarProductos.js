@@ -31,7 +31,7 @@ function EditarProductos(props){
     };  
 
     const editProductos = async () => {
-      const res = await fetch("/productos", {
+      const res = await fetch("/products", {
           method: 'PUT',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
