@@ -16,7 +16,8 @@ app.get('/', (request, response) => {
 })
 
 app.get('/empleados', db.getEmpleados)
-
+app.delete('/empleados/:id', db.deleteEmpleados)
+app.get('/empleados/:id', db.getEmpleadosById)
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)

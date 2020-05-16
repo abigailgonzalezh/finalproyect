@@ -3,6 +3,7 @@ import {Button, TableHead, TableRow, TableCell, TableBody, Table, Dialog, Dialog
 DialogContent, DialogContentText, DialogActions} from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -24,7 +25,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 function Empleados (props) {
 const [empleados, setEmpleados] = useState([]);
-
+var id2 = '';
   useEffect(() => {
     const getEmpleados = async () => {
       const res = await fetch("/empleados", {
@@ -37,6 +38,23 @@ const [empleados, setEmpleados] = useState([]);
     }
     getEmpleados();
   })
+
+  function eliminar(empleado){
+    console.log(empleado.id);
+    id2 = empleado.id;
+    deleteEmpleado();
+  }
+
+  const deleteEmpleado = async () => {
+    console.log("aqui");
+    console.log(id2);
+    const res = await fetch("/empleados/"+id2+"", {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+    })
+    const response = await res.json();
+  }
+
 
   const useStyles = makeStyles({
     table: {
@@ -80,6 +98,9 @@ const [empleados, setEmpleados] = useState([]);
               <StyledTableCell>{empleado.nombre}</StyledTableCell>
               <StyledTableCell>{empleado.apellido}</StyledTableCell>
               <StyledTableCell>{empleado.salario}</StyledTableCell>
+              <StyledTableCell> 
+                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(empleado)} ><DeleteIcon /> </Button>
+                </StyledTableCell>
             </TableRow>
           )}
         </TableBody>
