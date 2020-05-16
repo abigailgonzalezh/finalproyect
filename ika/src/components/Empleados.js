@@ -1,10 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {Button, TableHead, TableRow, TableCell, TableBody, Table, Dialog, DialogTitle,
-DialogContent, DialogContentText, DialogActions} from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
-
+import Header from './Header';
+import {
+  Box,
+  Grommet,
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHeader,
+  TableRow,
+  Text,
+  Button
+} from "grommet";
+import { grommet } from "grommet/themes";
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -72,6 +83,7 @@ var id2 = '';
   const classes = useStyles();
   return (
     <div>
+      <Header/>
         <br />
       <Grid container spacing={3}>
       <Grid item xs={3}></Grid>
@@ -81,30 +93,33 @@ var id2 = '';
       <Grid item xs={3}>
       </Grid>
     </Grid>
-    <br />
-      <Table className={classes.table}>
-        <TableHead>
+    <Grommet theme={grommet}>
+      <Box align="center" pad="large">
+        <Table className={classes.table} >
+        <TableHeader>
           <TableRow>
-            <StyledTableCell>id</StyledTableCell>
-            <StyledTableCell>Nombre</StyledTableCell>
-            <StyledTableCell>Apellido</StyledTableCell>
-            <StyledTableCell>Salario</StyledTableCell>
+          <TableCell scope="col" border="bottom"><strong>ID</strong></TableCell>
+          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
+          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Apellido</strong></TableCell>
+          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Salario</strong></TableCell>
           </TableRow>
-        </TableHead>
+        </TableHeader>
         <TableBody>
           {empleados.map((empleado) =>
             <TableRow className="data-row">
-              <StyledTableCell>{empleado.id}</StyledTableCell>
-              <StyledTableCell>{empleado.nombre}</StyledTableCell>
-              <StyledTableCell>{empleado.apellido}</StyledTableCell>
-              <StyledTableCell>{empleado.salario}</StyledTableCell>
-              <StyledTableCell> 
+              <TableCell align="center" >{empleado.id}</TableCell>
+              <TableCell align="center" >{empleado.nombre}</TableCell>
+              <TableCell align="center" >{empleado.apellido}</TableCell>
+              <TableCell align="center" >{empleado.salario}</TableCell>
+              <TableCell align="center" > 
                 <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(empleado)} ><DeleteIcon /> </Button>
-                </StyledTableCell>
+                </TableCell>
             </TableRow>
           )}
         </TableBody>
-      </Table>
+        </Table>
+        </Box>
+        </Grommet>
     </div>
   );
 }
