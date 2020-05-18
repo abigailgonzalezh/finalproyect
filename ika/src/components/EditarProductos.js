@@ -8,17 +8,16 @@ function EditarProductos(props){
     const precioCompraProducto = props.productoPrecioCompra;
     const precioVentaProducto = props.productoPrecioVenta;
     const cantidadProducto = props.productoCantidad;
-    const abierto = props.isOpen;
 
     const [id, setId] = useState(idProducto);
     const [nombre, setNombre] = useState(nombreProducto);
     const [precioCompra, setPrecioCompra] = useState(precioCompraProducto);
     const [precioVenta, setPrecioVenta] = useState(precioVentaProducto);
     const [cantidad, setCantidad] = useState(cantidadProducto);
-    const [open, setOpen] = React.useState(abierto);
+    const [open, setOpen] = React.useState(props.isOpen);
   
     const handleClose = () => {
-      setOpen(false);
+      setOpen(props.isClose);
       var limpiar = document.getElementById("nombr");
       limpiar.value = " ";
       var comprav = document.getElementById("compr");
@@ -100,7 +99,7 @@ function EditarProductos(props){
   
     return (
       <div>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={props.isOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Editar</DialogTitle>
         <DialogContent>
           <DialogContentText>

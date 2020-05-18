@@ -55,19 +55,24 @@ const postEmpleados = (request, response) =>{
 }
 
 const putEmpleados = (request, response) => {
-  const nombre = request.params.nombre2;
-  const apellido = request.params.apellido2;
-  const salario =request.params.salario2;
-  const id = parseInt(request.params.id);
+  //const nombre = request.body;
+  //const apellido = request.body;
+  //const salario = request.body;
+  //const id = request.body;
+  const { nombre, apellido, salario, id} = request.body;
+  //const id = parseInt(request.params.id);
   console.log("------PUT--------");
   console.log(nombre);
+  console.log(apellido);
+  console.log(salario);
+  console.log(id);
 
-  pool.query("UPDATE empleado nombre = $1, apellido = $2, salario = $3 WHERE id = $4", [nombre, apellido, salario, id], (error, results) =>{
+  pool.query("UPDATE empleado SET nombre = $1, apellido = $2, salario = $3 WHERE id = $4", [nombre, apellido, salario, id], (error, results) =>{
     if (error){
       throw error;
       console.log(error);
     }
-    response.status(200).json(`User edited with ID: ${id}`)
+    response.status(200).json(`User edited with ID: ${results.editId}`)
   })
 }
 

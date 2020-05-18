@@ -93,6 +93,10 @@ function Productos(props) {
       })
       const response = await res.json();
     }
+
+    const handleClose = () => {
+      setOpen(false);
+    };
     
     const useStyles = makeStyles({
       table: {
@@ -113,7 +117,7 @@ function Productos(props) {
       <Header/>
         {id && nombre && precioCompra && precioVenta && cantidad && open &&
          <EditarProductos productoEdit={id} productoNombre={nombre} productoPrecioCompra ={precioCompra}
-         productoPrecioVenta = {precioVenta} productoCantidad = {cantidad} isOpen = {open}/>
+         productoPrecioVenta = {precioVenta} productoCantidad = {cantidad} isOpen = {open} isClose = {handleClose}/>
          } 
          {id2}
       <br />

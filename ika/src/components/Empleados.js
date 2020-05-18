@@ -4,6 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Header from './Header';
 import EmpleadoInsert from './InsertarEmpleado';
+import EditarEmpleados from './EditarEmpleados';
+import EditIcon from '@material-ui/icons/Edit';
 import {
   Box,
   Grommet,
@@ -37,7 +39,14 @@ const StyledTableRow = withStyles((theme) => ({
 
 function Empleados (props) {
 const [empleados, setEmpleados] = useState([]);
+const [id, setId] = useState('');
+const [nombre, setNombre] = useState('');
+const [apellido, setApellido] = useState('');
+const [salario, setSalario] = useState('');
+const [open, setOpen] = React.useState(false);
+
 var id2 = '';
+
   useEffect(() => {
     const getEmpleados = async () => {
       const res = await fetch("/empleados", {
@@ -57,6 +66,16 @@ var id2 = '';
     deleteEmpleado();
   }
 
+  function editar(empleado){
+    console.log("entro 1");
+    console.log(empleado.id);
+    setId(empleado.id);
+    setNombre(empleado.nombre);
+    setApellido(empleado.apellido);
+    setSalario(empleado.salario);
+    setOpen(true);
+  }
+
   const deleteEmpleado = async () => {
     console.log("aqui");
     console.log(id2);
@@ -67,6 +86,9 @@ var id2 = '';
     const response = await res.json();
   }
 
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const useStyles = makeStyles({
     table: {
@@ -85,6 +107,9 @@ var id2 = '';
   return (
     <div>
       <Header/>
+      {id && nombre && apellido && salario && open &&
+      <EditarEmpleados empleadoEdit={id} empleadoNombre = {nombre} empleadoApellido = {apellido} empleadoSalario = {salario} isOpen = {open} isClose = {handleClose}/>
+      }   
         <br />
       <Grid container spacing={3}>
       <Grid item xs={3}></Grid>
@@ -104,6 +129,8 @@ var id2 = '';
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Apellido</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Salario</strong></TableCell>
+          <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
+          <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -113,6 +140,9 @@ var id2 = '';
               <TableCell align="center" >{empleado.nombre}</TableCell>
               <TableCell align="center" >{empleado.apellido}</TableCell>
               <TableCell align="center" >{empleado.salario}</TableCell>
+              <TableCell align="center"> 
+                <Button hoverIndicator="true" onClick={() => editar(empleado)}><EditIcon /></Button>
+              </TableCell>
               <TableCell align="center" >
                 <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(empleado)} ><DeleteIcon /> </Button>
                 </TableCell>
