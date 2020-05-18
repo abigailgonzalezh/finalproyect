@@ -39,17 +39,18 @@ const deleteEmpleados = (request, response) => {
 }
 
 const postEmpleados = (request, response) =>{
-  const nombre = request.params.nombre1;
-  const apellido = request.params.apellido1;
-  const salario =request.params.salario1;
+  //const nombre = request.params.nombre;
+  //const apellido = request.params.apellido;
+  //const salario =request.params.salario;
+  const { nombre, apellido, salario } = request.body
   console.log("------POST--------");
   console.log(nombre);
-  
+
   pool.query("INSERT INTO empleado (nombre, apellido, salario) VALUES ($1, $2, $3)", [nombre, apellido, salario], (error, results) =>{
     if (error){
       throw error;
     }
-    response.status(200).json(`User added with name: ${nombre}`)
+    response.status(201).send(`User added with Id: ${results.insertId}`)
   })
 }
 
@@ -64,6 +65,7 @@ const putEmpleados = (request, response) => {
   pool.query("UPDATE empleado nombre = $1, apellido = $2, salario = $3 WHERE id = $4", [nombre, apellido, salario, id], (error, results) =>{
     if (error){
       throw error;
+      console.log(error);
     }
     response.status(200).json(`User edited with ID: ${id}`)
   })

@@ -3,6 +3,7 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Header from './Header';
+import EmpleadoInsert from './InsertarEmpleado';
 import {
   Box,
   Grommet,
@@ -91,6 +92,7 @@ var id2 = '';
       <Grid item xs={3}>
       </Grid>
       <Grid item xs={3}>
+      < EmpleadoInsert InsertarEmpleado/>
       </Grid>
     </Grid>
     <Grommet theme={grommet}>
@@ -111,7 +113,7 @@ var id2 = '';
               <TableCell align="center" >{empleado.nombre}</TableCell>
               <TableCell align="center" >{empleado.apellido}</TableCell>
               <TableCell align="center" >{empleado.salario}</TableCell>
-              <TableCell align="center" > 
+              <TableCell align="center" >
                 <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(empleado)} ><DeleteIcon /> </Button>
                 </TableCell>
             </TableRow>
