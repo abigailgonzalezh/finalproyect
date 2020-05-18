@@ -137,7 +137,7 @@ function Productos(props) {
               <TableCell align="center" size="small" scope="col" border="bottom"><strong>Precio de Venta</strong></TableCell>
               <TableCell scope="col" border="bottom"><strong>Cantidad</strong></TableCell>
               <TableCell align="center" size="small" scope="col" border="bottom"><strong>Categoria</strong></TableCell>
-              <TableCell align="end"scope="col" border="bottom"><strong>Extras</strong></TableCell>
+              <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
               <TableCell scope="col" border="bottom"><strong></strong></TableCell>
             </TableRow>
           </TableHeader>
