@@ -1,50 +1,46 @@
 import React, {useEffect, useState} from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import InsertarProductos from './InsertarProductos';
-import Grid from '@material-ui/core/Grid';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditarProductos from './EditarProductos';
-import Header from './Header';
-import {
-  Box,
-  Grommet,
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHeader,
-  TableRow,
-  Text,
-  Button
-} from "grommet";
-import { grommet } from "grommet/themes";
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
-  },
-}))(TableRow);
+import { Hide, View } from "grommet-icons";
+import {grommet, Image, Box, Form, FormField, TextInput, Grommet,Button, Clock} from "grommet";
+import imagen from "./logo3.png"
 
 function Index(props) {
 
-    return (
-      <div>
 
-      </div>
+    return (
+      <Grommet theme={grommet} >
+      <Box align="end" justify="start" pad="small">
+  <Clock type="digital" />
+</Box>
+<Box align="center">
+<Image
+src={imagen}
+/>
+</Box>
+    <Box align="center" pad="medium">
+      <Form>
+        <Box border gap="medium" pad="large" width="medium">
+          <FormField htmlFor="enabled-id" name="enabled" label="Usuario">
+            <TextInput
+              id="enabled-id"
+              placeholder="Ingrese usuario"
+            />
+          </FormField>
+
+          <FormField htmlFor="focus-id" name="focus" label="Constraseña">
+            <TextInput
+              id="focus-id"
+              placeholder="Ingrese contraseña"
+               type="password"
+            />
+          </FormField>
+          <Button
+            primary
+            label="Iniciar sesion"
+            />
+        </Box>
+      </Form>
+    </Box>
+  </Grommet>
     );
 }
-
 export default Index;
