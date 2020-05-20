@@ -13,9 +13,7 @@ const ReviewSchema = new mongoose.Schema({
      type: String
       },
 
-      imagen: {
-      type: Buffer
-       },
+      
 });
 
 const Review = mongoose.model("review", ReviewSchema);
