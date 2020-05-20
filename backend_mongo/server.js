@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const sugerenciaRouter = require('./routes/sugerenciaRoutes.js');
+const reviewRouter = require('./routes/reviewRoutes.js');
 
 
 const MONGO_USERNAME = 'user';
@@ -18,6 +18,6 @@ mongoose.connect(url, {
   useNewUrlParser: true
 });
 
-app.use(sugerenciaRouter);
+app.use(reviewRouter);
 
 app.listen(3001, () => { console.log('Server is running...') });

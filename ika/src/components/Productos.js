@@ -49,7 +49,7 @@ function Productos(props) {
     var id2 = '';
 
     useEffect(() => {
-      
+
 
       const getProductos = async () => {
         const res = await fetch("/products", {
@@ -84,7 +84,7 @@ function Productos(props) {
     const deleteProductos = async () => {
       console.log("entro");
       console.log(id2);
-      const res = await fetch("/productos", {
+      const res = await fetch("/products", {
           method: 'DELETE',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -97,14 +97,14 @@ function Productos(props) {
     const handleClose = () => {
       setOpen(false);
     };
-    
+
     const useStyles = makeStyles({
       table: {
         minWidth: 700,
       },
     });
     //console.log(plot);
-  
+
     const mystlye = {
       minWidth: "50%",
       minHeight: 50
@@ -118,7 +118,7 @@ function Productos(props) {
         {id && nombre && precioCompra && precioVenta && cantidad && open &&
          <EditarProductos productoEdit={id} productoNombre={nombre} productoPrecioCompra ={precioCompra}
          productoPrecioVenta = {precioVenta} productoCantidad = {cantidad} isOpen = {open} isClose = {handleClose}/>
-         } 
+         }
          {id2}
       <br />
         <Grid container spacing={3}>
@@ -129,7 +129,7 @@ function Productos(props) {
         <Grid item xs={3}>
          <InsertarProductos productoInsert="fer"/>
         </Grid>
-      </Grid> 
+      </Grid>
       <Grommet theme={grommet}>
       <Box align="center" pad="large">
         <Table className={classes.table} >
@@ -154,10 +154,10 @@ function Productos(props) {
                 <TableCell align="center">{producto.precio_venta}</TableCell>
                 <TableCell align="center">{producto.cantidad}</TableCell>
                 <TableCell align="center">{producto.categorias_id}</TableCell>
-                <TableCell> 
+                <TableCell>
                 <Button hoverIndicator="true" onClick={() => editar(producto)}><EditIcon /></Button>
                 </TableCell>
-                <TableCell> 
+                <TableCell>
                 <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(producto)} ><DeleteIcon /> </Button>
                 </TableCell>
               </TableRow>
