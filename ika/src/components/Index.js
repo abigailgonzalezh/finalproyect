@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import { Hide, View } from "grommet-icons";
 import {grommet, Image, Box, Form, FormField, TextInput, Grommet,Button, Clock} from "grommet";
+import Carrousel from './Carrousel.js'
 import imagen from "./logo3.png"
+import imagen1 from "./globo.gif"
 
 function Index(props) {
 
 
     return (
-      <Grommet theme={grommet} >
+      <Grommet theme={grommet}>
+
       <Box align="end" justify="start" pad="small">
   <Clock type="digital" />
 </Box>
@@ -16,6 +19,7 @@ function Index(props) {
 src={imagen}
 />
 </Box>
+<Carrousel/>
     <Box align="center" pad="medium">
       <Form>
         <Box border gap="medium" pad="large" width="medium">
