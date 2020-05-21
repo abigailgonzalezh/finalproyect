@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import InsertarSugerencias from './InsertarSugerencias';
+import InsertarReview from './InsertarReview';
 import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
 import Header from './Header';
@@ -40,7 +40,7 @@ function Productos(props) {
     var id2 = '';
 
     useEffect(() => {
-      
+
 
       const getProductos = async () => {
         const res = await fetch("/products", {
@@ -53,14 +53,14 @@ function Productos(props) {
       }
       getProductos();
     })
-    
+
     const useStyles = makeStyles({
       table: {
         minWidth: 700,
       },
     });
     //console.log(plot);
-  
+
     const mystlye = {
       minWidth: "50%",
       minHeight: 50
@@ -78,7 +78,7 @@ function Productos(props) {
         <Grid item xs={3}>
         </Grid>
         <Grid item xs={3}>
-         <InsertarSugerencias/>
+         <InsertarReview/>
         </Grid>
       </Grid>
       <Grommet theme={grommet}>

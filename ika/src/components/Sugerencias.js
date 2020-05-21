@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';  
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import CheckIcon from '@material-ui/icons/CheckBox';
 import Header from './Header';
 import {
@@ -50,7 +50,7 @@ function Sugerencias(props) {
       }
       getSugerencias();
     })
-    
+
     function eliminar(sugerencia){
       console.log("EL id de sugerencia es: ");
       console.log(sugerencia.cliente);
@@ -74,7 +74,7 @@ function Sugerencias(props) {
       },
     });
     //console.log(plot);
-  
+
     const mystlye = {
       minWidth: "50%",
       minHeight: 50
@@ -101,7 +101,7 @@ function Sugerencias(props) {
               <TableRow className="data-row">
                 <TableCell align="center" >{sugerencia.cliente}</TableCell>
                 <TableCell align="center" >{sugerencia.peticion}</TableCell>
-                <TableCell> 
+                <TableCell>
                 <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(sugerencia)} ><CheckIcon /> </Button>
                 </TableCell>
               </TableRow>
