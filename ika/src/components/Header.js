@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { grommet } from "grommet/themes";
-import imagen from './logo.png'
+import imagen from "./Imagenes/logo.png"
 import { Anchor, Box, Grommet, Header, Image } from "grommet";
 import { hp } from "grommet-theme-hp"
 const styles = theme => ({

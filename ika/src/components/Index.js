@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Hide, View } from "grommet-icons";
 import {grommet, Image, Box, Form, FormField, TextInput, Grommet,Button, Clock} from "grommet";
 import Carrousel from './Carrousel.js'
-import imagen from "./logo3.png"
-import imagen1 from "./globo.gif"
+import imagen from "./Imagenes/logo3.png"
 import { hp } from "grommet-theme-hp"
 
 function Index(props) {

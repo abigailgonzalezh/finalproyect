@@ -1,8 +1,8 @@
 import React from 'react';
 import { Grommet,Image, Box, Carousel } from "grommet";
-import imagen from './globo.gif'
-import imagen1 from './pez.gif'
-import imagen2 from './solo.gif'
+import imagen from "./Imagenes/globo.gif"
+import imagen1 from './Imagenes/pez.gif'
+import imagen2 from './Imagenes/solo.gif'
 function Carrousel() {
 
   return (
