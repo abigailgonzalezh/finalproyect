@@ -1,42 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import { grommet } from "grommet/themes";
 import imagen from "./Imagenes/logo.png"
 import { Anchor, Box, Grommet, Header, Image } from "grommet";
 import { hp } from "grommet-theme-hp"
-const styles = theme => ({
-  '@global': {
-    body: {
-      backgroundColor: theme.palette.common.white,
-    },
-  },
-  appBar: {
-    position: 'relative',
-  },
-  toolbarTitle: {
-    flex: 1,
-  },
-  layout: {
-    width: 'auto',
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(900 + theme.spacing.unit * 3 * 2)]: {
-      width: 900,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-  },
-
-});
 
 
-function Pricing(props) {
+
+function Headers(props) {
   const { classes } = props;
 
   return (
@@ -58,8 +29,5 @@ function Pricing(props) {
   );
 }
 
-Pricing.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(Pricing);
+export default Headers;

@@ -4,6 +4,7 @@ import InsertarReview from './InsertarReview';
 import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
 import Header from './Header';
+import Footer from './Footer';
 import { hp } from "grommet-theme-hp"
 import {
   Box,
@@ -70,7 +71,7 @@ function Productos(props) {
     //
     const classes = useStyles();
     return (
-      <Grommet theme={hp}>
+      <Grommet theme={hp} full>
         <Header/>
           <br />
         <Grid container spacing={3}>
@@ -86,9 +87,9 @@ function Productos(props) {
         <Table className={classes.table}>
           <TableHeader>
             <TableRow>
-              <TableCell scope="col" border="bottom"><strong>Nombre</strong></TableCell>
-              <TableCell scope="col" border="bottom"><strong>Precio</strong></TableCell>
-              <TableCell scope="col" border="bottom"><strong>Categoria</strong></TableCell>
+              <TableCell align="center" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
+              <TableCell align="center" scope="col" border="bottom"><strong>Precio</strong></TableCell>
+              <TableCell align="center" scope="col" border="bottom"><strong>Categoria</strong></TableCell>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -102,6 +103,7 @@ function Productos(props) {
           </TableBody>
         </Table>
         </Box>
+        <Footer/>
         </Grommet>
     );
 }
