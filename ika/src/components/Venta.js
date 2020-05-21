@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Grommet, Box, Image, Button } from "grommet";
 import {TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
-
+import { hp } from "grommet-theme-hp";
 function Venta(props){
     const [cantidad, setCantidad] = useState('');
     const idProducto = props.venta;
@@ -11,13 +11,13 @@ function Venta(props){
     const handleClickOpen = () => {
       setOpen(true);
     };
-  
+
     const handleClose = () => {
       setOpen(false);
       var compri = document.getElementById("cant");
       compri.value = " ";
     };
-    
+
     const venta = async () => {
         const res = await fetch("/procedimientos", {
             method: 'POST',
@@ -37,7 +37,7 @@ function Venta(props){
       //window.location.reload();
     }
     //console.log(plot);
-  
+
     const mystlye = {
       minWidth: "50%",
       minHeight: 50
@@ -54,25 +54,25 @@ function Venta(props){
         minWidth: "30%",
         minHeight: 50,
         top: 20
-        
+
       };
-    
+
       const mystlye3 = {
         minWidth: "30%",
         minHeight: 50,
         marginTop: 40,
         right: 30
       };
-    
+
       const styletable = {
          width: "100%",
          marginTop:20
       };
 
     // getProductos();
-  
+
     return (
-      <div>
+      <Grommet theme={hp}>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Vender</DialogTitle>
         <DialogContent>
@@ -100,7 +100,7 @@ function Venta(props){
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Grommet>
     );
 }
 

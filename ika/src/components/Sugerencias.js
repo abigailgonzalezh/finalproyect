@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import CheckIcon from '@material-ui/icons/CheckBox';
 import Header from './Header';
+import { hp } from "grommet-theme-hp";
 import {
   Box,
   Grommet,
@@ -83,10 +84,9 @@ function Sugerencias(props) {
     //
     const classes = useStyles();
     return (
-      <div>
+      <Grommet theme={grommet}>
         <Header/>
         <br/>
-        <Grommet theme={grommet}>
       <Box align="center" pad="large">
         <Table className={classes.table}>
           <TableHeader>
@@ -110,7 +110,6 @@ function Sugerencias(props) {
         </Table>
         </Box>
         </Grommet>
-      </div>
     );
 }
 

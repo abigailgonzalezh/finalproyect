@@ -4,12 +4,13 @@ import {grommet, Image, Box, Form, FormField, TextInput, Grommet,Button, Clock} 
 import Carrousel from './Carrousel.js'
 import imagen from "./logo3.png"
 import imagen1 from "./globo.gif"
+import { hp } from "grommet-theme-hp"
 
 function Index(props) {
 
 
     return (
-      <Grommet theme={grommet}>
+      <Grommet theme={hp}>
 
       <Box align="end" justify="start" pad="small">
   <Clock type="digital" />

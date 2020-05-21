@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditarProductos from './EditarProductos';
 import Header from './Header';
+import { hp } from "grommet-theme-hp";
 import {
   Box,
   Grommet,
@@ -113,7 +114,7 @@ function Productos(props) {
     //
     const classes = useStyles();
     return (
-      <div>
+      <Grommet theme={hp} >
       <Header/>
         {id && nombre && precioCompra && precioVenta && cantidad && open &&
          <EditarProductos productoEdit={id} productoNombre={nombre} productoPrecioCompra ={precioCompra}
@@ -130,7 +131,6 @@ function Productos(props) {
          <InsertarProductos productoInsert="fer"/>
         </Grid>
       </Grid>
-      <Grommet theme={grommet}>
       <Box align="center" pad="large">
         <Table className={classes.table} >
           <TableHeader>
@@ -166,7 +166,6 @@ function Productos(props) {
         </Table>
         </Box>
         </Grommet>
-      </div>
     );
 }
 
