@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Grommet, Box, Image, Button } from "grommet";
 import {TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
-
+import { hp } from "grommet-theme-hp";
 function EditarProductos(props){
     const idProducto = props.productoEdit;
     const nombreProducto = props.productoNombre;
@@ -15,7 +15,7 @@ function EditarProductos(props){
     const [precioVenta, setPrecioVenta] = useState(precioVentaProducto);
     const [cantidad, setCantidad] = useState(cantidadProducto);
     const [open, setOpen] = React.useState(props.isOpen);
-  
+
     const handleClose = () => {
       setOpen(props.isClose);
       var limpiar = document.getElementById("nombr");
@@ -27,7 +27,7 @@ function EditarProductos(props){
       var compri = document.getElementById("cant");
       compri.value = " ";
       setId('');
-    };  
+    };
 
     const editProductos = async () => {
       const res = await fetch("/products", {
@@ -56,14 +56,14 @@ function EditarProductos(props){
       setId('');
       setOpen(false);
     }
-    
+
     function editar(){
       handleClose();
       editProductos();
       //window.location.reload();
     }
     //console.log(plot);
-  
+
     const mystlye = {
       minWidth: "50%",
       minHeight: 50
@@ -80,25 +80,25 @@ function EditarProductos(props){
         minWidth: "30%",
         minHeight: 50,
         top: 20
-        
+
       };
-    
+
       const mystlye3 = {
         minWidth: "30%",
         minHeight: 50,
         marginTop: 40,
         right: 30
       };
-    
+
       const styletable = {
          width: "100%",
          marginTop:20
       };
 
     // getProductos();
-  
+
     return (
-      <div>
+      <Grommet theme={hp} >
       <Dialog open={props.isOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Editar</DialogTitle>
         <DialogContent>
@@ -153,7 +153,7 @@ function EditarProductos(props){
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Grommet>
     );
 }
 

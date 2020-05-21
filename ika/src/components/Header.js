@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { grommet } from "grommet/themes";
 import imagen from './logo.png'
 import { Anchor, Box, Grommet, Header, Image } from "grommet";
+import { hp } from "grommet-theme-hp"
 const styles = theme => ({
   '@global': {
     body: {
@@ -39,8 +40,8 @@ function Pricing(props) {
   const { classes } = props;
 
   return (
-    <Grommet >
-    <Header elevation="medium"  background="light-3" pad="xsmall">
+    <Grommet theme={hp}>
+    <Header elevation="medium"  background="light-2" pad="xsmall">
     <Image
     src={imagen}
   />

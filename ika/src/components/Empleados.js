@@ -6,6 +6,7 @@ import Header from './Header';
 import EmpleadoInsert from './InsertarEmpleado';
 import EditarEmpleados from './EditarEmpleados';
 import EditIcon from '@material-ui/icons/Edit';
+import { hp } from "grommet-theme-hp";
 import {
   Box,
   Grommet,
@@ -105,11 +106,11 @@ var id2 = '';
   //
   const classes = useStyles();
   return (
-    <div>
+    <Grommet theme={grommet}>
       <Header/>
       {id && nombre && apellido && salario && open &&
       <EditarEmpleados empleadoEdit={id} empleadoNombre = {nombre} empleadoApellido = {apellido} empleadoSalario = {salario} isOpen = {open} isClose = {handleClose}/>
-      }   
+      }
         <br />
       <Grid container spacing={3}>
       <Grid item xs={3}></Grid>
@@ -120,7 +121,6 @@ var id2 = '';
       < EmpleadoInsert InsertarEmpleado/>
       </Grid>
     </Grid>
-    <Grommet theme={grommet}>
       <Box align="center" pad="large">
         <Table className={classes.table} >
         <TableHeader>
@@ -140,7 +140,7 @@ var id2 = '';
               <TableCell align="center" >{empleado.nombre}</TableCell>
               <TableCell align="center" >{empleado.apellido}</TableCell>
               <TableCell align="center" >{empleado.salario}</TableCell>
-              <TableCell align="center"> 
+              <TableCell align="center">
                 <Button hoverIndicator="true" onClick={() => editar(empleado)}><EditIcon /></Button>
               </TableCell>
               <TableCell align="center" >
@@ -152,7 +152,6 @@ var id2 = '';
         </Table>
         </Box>
         </Grommet>
-    </div>
   );
 }
 

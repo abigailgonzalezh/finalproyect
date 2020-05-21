@@ -4,6 +4,7 @@ import InsertarReview from './InsertarReview';
 import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
 import Header from './Header';
+import { hp } from "grommet-theme-hp"
 import {
   Box,
   Grommet,
@@ -69,7 +70,7 @@ function Productos(props) {
     //
     const classes = useStyles();
     return (
-      <div>
+      <Grommet theme={hp}>
         <Header/>
           <br />
         <Grid container spacing={3}>
@@ -81,7 +82,6 @@ function Productos(props) {
          <InsertarReview/>
         </Grid>
       </Grid>
-      <Grommet theme={grommet}>
       <Box align="center" pad="large">
         <Table className={classes.table}>
           <TableHeader>
@@ -103,7 +103,6 @@ function Productos(props) {
         </Table>
         </Box>
         </Grommet>
-      </div>
     );
 }
 

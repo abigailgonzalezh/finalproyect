@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Grommet, Box, Image, Button } from "grommet";
 import {TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
-
+import { hp } from "grommet-theme-hp";
 function EditarEmpleados(props){
     const idEmpleado = props.empleadoEdit;
     const nombreEmpleado = props.empleadoNombre;
@@ -29,7 +29,7 @@ function EditarEmpleados(props){
         const response = await res.json();
         console.log(response);
     }
-    
+
     function editar(){
       handleClose();
       editEmpleados();
@@ -47,8 +47,8 @@ function EditarEmpleados(props){
       var salariov = document.getElementById("sal");
       salariov.value = " ";
       setId('');
-    }; 
-  
+    };
+
     const mystlye = {
       minWidth: "50%",
       minHeight: 50
@@ -65,25 +65,25 @@ function EditarEmpleados(props){
         minWidth: "30%",
         minHeight: 50,
         top: 20
-        
+
       };
-    
+
       const mystlye3 = {
         minWidth: "30%",
         minHeight: 50,
         marginTop: 40,
         right: 30
       };
-    
+
       const styletable = {
          width: "100%",
          marginTop:20
       };
 
     // getProductos();
-  
+
     return (
-      <div>
+      <Grommet theme={hp} >
       <Dialog open={props.isOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Agregar</DialogTitle>
         <DialogContent>
@@ -129,7 +129,7 @@ function EditarEmpleados(props){
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Grommet>
     );
 }
 

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Header from './Header';
+import { hp } from "grommet-theme-hp"
 import {
   Box,
   Grommet,
@@ -64,7 +65,7 @@ const [productos, setProductos] = useState([]);
   //
   const classes = useStyles();
   return (
-    <div>
+    <Grommet theme={hp}>
       <Header/>
         <br />
       <Grid container spacing={3}>
@@ -76,7 +77,7 @@ const [productos, setProductos] = useState([]);
       </Grid>
     </Grid>
     <br />
-    <Grommet theme={grommet}>
+
       <Box align="center" pad="large">
       <Table className={classes.table}>
         <TableHeader>
@@ -100,7 +101,6 @@ const [productos, setProductos] = useState([]);
       </Table>
       </Box>
         </Grommet>
-    </div>
   );
 }
 

@@ -3,6 +3,7 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Venta from './Venta';
 import Header from './Header';
+import { hp } from "grommet-theme-hp";
 import {
   Box,
   Grommet,
@@ -39,12 +40,12 @@ function Ventas(props) {
   const [cantidad, setCantidad] = useState('');
   const [id, setId] = useState('');
   const [open, setOpen] = React.useState(false);
-  
+
     const handleClose = () => {
       setOpen(false);
       var compri = document.getElementById("cant");
       compri.value = " ";
-    };  
+    };
 
   useEffect(() => {
     const getProductos = async () => {
@@ -79,9 +80,9 @@ function Ventas(props) {
   //
   const classes = useStyles();
   return (
-    <div>
+    <Grommet theme={grommet}>
       <Header/>
-         {id && 
+         {id &&
          <Venta venta={id} />
          }
         <br />
@@ -93,7 +94,6 @@ function Ventas(props) {
       <Grid item xs={3}>
       </Grid>
     </Grid>
-    <Grommet theme={grommet}>
       <Box align="center" pad="large">
         <Table className={classes.table} >
         <TableHeader>
@@ -112,7 +112,7 @@ function Ventas(props) {
               <TableCell align="center" >{producto.precio_venta}</TableCell>
               <TableCell align="center" >{producto.categorias_id}</TableCell>
               <TableCell align="center" >{producto.cantidad}</TableCell>
-              <TableCell> 
+              <TableCell>
                 <Button label="vender" hoverIndicator="true" onClick={() => vender(producto)}></Button>
                 </TableCell>
             </TableRow>
@@ -121,7 +121,6 @@ function Ventas(props) {
       </Table>
       </Box>
         </Grommet>
-    </div>
   );
 }
 
