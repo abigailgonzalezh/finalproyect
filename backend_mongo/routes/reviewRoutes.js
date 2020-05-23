@@ -14,7 +14,7 @@ app.get('/reviews', async (req, res) => {
 });
 
 app.get('/reviews/:id', async (req, res) => {
-  const reviews = await ReviewModel.findById({});
+  const reviews = await ReviewModel.find({id: req.params.id});
 
   try {
     res.send(reviews);

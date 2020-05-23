@@ -1,33 +1,72 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Grommet, Box, Image, Button } from "grommet";
-import { TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core'
+import { TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,TableHead,TableRow, TableCell, TableBody} from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
+import ImageUploader from 'react-images-upload';
+
+var imagen1;
+
+class Upload extends React.Component {
+
+    constructor(props) {
+        super(props);
+         this.state = { pictures: [] };
+         this.onDrop = this.onDrop.bind(this);
+    }
+
+    onDrop(picture) {
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
+        imagen1 = this.state.pictures.concat(picture);
+    }
+
+    render() {
+        return (
+            <ImageUploader
+                withIcon={true}
+                buttonText='Choose images'
+                //onChange={this.onDrop}
+                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                maxFileSize={5242880}
+            />
+        );
+    }
+}
+
 
 function InsertarSugerencias(props) {
+
     const [nombre, setNombre] = useState('');
     const [peticion1, setPeticion1] = useState('');
-    const [value, setValue] = React.useState(2);
-    const [open, setOpen] = React.useState(false);
+
+    const [value, setValue] = React.useState(5);
+    const [open, setOpen] = React.useState(true);
     const [hover, setHover] = React.useState(-1);
+    const [id1, setId] = useState(props.rev);
+    const [allreviews, setAllreviews] = useState([]);
 
     const handleClickOpen = () => {
       setOpen(true);
     };
 
     const handleClose = () => {
-      setOpen(false);
+      setOpen(props.isClose);
       var comprav = document.getElementById("sugerenci");
       comprav.value = " ";
     };
 
-    const postSugerencias = async () => {
-      const res = await fetch("/suggestions", {
+    const postReview = async () => {
+      console.log(imagen1);
+      const res = await fetch("/reviews", {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            cliente: nombre,
-            peticion: peticion1,
+            id: id1,
+            estrellas: value,
+            review: peticion1,
+            imagen: imagen1,
           })
       })
       //console.log(res);
@@ -35,9 +74,22 @@ function InsertarSugerencias(props) {
       //setSugerencias(response);
     }
 
+    useEffect(() => {
+    const getReviews = async() => {
+      const res = await fetch("/reviews/"+id1+"", {
+          method: 'GET',
+          headers: {'Content-Type': 'application/json'},
+      })
+      const response = await res.json();
+      //console.log(response);
+      setAllreviews(response);
+    }
+    getReviews();
+  })
+
     function agregar(){
       handleClose();
-      postSugerencias();
+      postReview();
     }
     //console.log(plot);
 
@@ -80,13 +132,12 @@ function InsertarSugerencias(props) {
         5: 'Excelente',
       };
 
+    //<TableCell>{btoa(String.fromCharCode.apply(null, new Uint8Array(allreview.imagen.data)))}</TableCell>  
     // getSugerencias();
 
     return (
       <div>
-      <Button primary size="medium" label="Añadir Reseña" onClick={handleClickOpen}>
-      </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
         <DialogTitle id="form-dialog-title">Reseñas</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -117,7 +168,29 @@ function InsertarSugerencias(props) {
             fullWidth
           />
 
-          <input id="file-upload" type="file" accept="image/*" />
+          <Upload productoInsert="fer"/>
+
+           <div>
+              <table style={styletable}>
+                <TableHead>
+                  <TableRow>
+                      <TableCell>Imagen</TableCell>
+                      <TableCell>Reseña</TableCell>
+                      <TableCell>Estrellas</TableCell>
+                  </TableRow>
+                </TableHead>
+
+                <TableBody>
+                  {allreviews.map((allreview) =>
+                    <TableRow className="data-row2">
+                      <TableCell><img src={"data:image/jpg;base64," +  Buffer.from(allreview.imagen.data).toString('base64')} /></TableCell>
+                      <TableCell>{allreview.review}</TableCell>
+                      <TableCell>{allreview.estrellas}</TableCell>
+                   </TableRow>
+                 )}
+               </TableBody>
+             </table>
+          </div>
 
         </DialogContent>
         <DialogActions>

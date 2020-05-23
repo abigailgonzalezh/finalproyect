@@ -14,7 +14,7 @@ function EditarProductos(props){
     const [precioCompra, setPrecioCompra] = useState(precioCompraProducto);
     const [precioVenta, setPrecioVenta] = useState(precioVentaProducto);
     const [cantidad, setCantidad] = useState(cantidadProducto);
-    const [open, setOpen] = React.useState(props.isOpen);
+    const [open, setOpen] = React.useState(true);
 
     const handleClose = () => {
       setOpen(props.isClose);
@@ -99,7 +99,7 @@ function EditarProductos(props){
 
     return (
       <Grommet theme={hp} >
-      <Dialog open={props.isOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
         <DialogTitle id="form-dialog-title">Editar</DialogTitle>
         <DialogContent>
           <DialogContentText>

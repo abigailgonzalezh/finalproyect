@@ -39,6 +39,8 @@ const StyledTableRow = withStyles((theme) => ({
 function Productos(props) {
     const [productos, setProductos] = useState([]);
     const [id, setId] = useState('');
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {setOpen(false);};
     var id2 = '';
 
     useEffect(() => {
@@ -68,19 +70,23 @@ function Productos(props) {
       minHeight: 50
     };
 
+    function review(producto){
+      console.log(producto.id);
+      setId(producto.id);
+      setOpen(true);
+    }
+
     //
     const classes = useStyles();
     return (
       <Grommet theme={hp} full>
+        {id && open && <InsertarReview rev={id} isOpen = {open} isClose = {handleClose} /> }
         <Header/>
           <br />
         <Grid container spacing={3}>
         <Grid item xs={3}></Grid>
         <Grid item xs={3}></Grid>
         <Grid item xs={3}>
-        </Grid>
-        <Grid item xs={3}>
-         <InsertarReview/>
         </Grid>
       </Grid>
       <Box align="center" pad="large">
@@ -90,6 +96,7 @@ function Productos(props) {
               <TableCell align="center" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
               <TableCell align="center" scope="col" border="bottom"><strong>Precio</strong></TableCell>
               <TableCell align="center" scope="col" border="bottom"><strong>Categoria</strong></TableCell>
+              <TableCell align="center" scope="col" border="bottom"><strong>Reseñas</strong></TableCell>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -98,6 +105,9 @@ function Productos(props) {
                 <TableCell align="center" >{producto.nombre}</TableCell>
                 <TableCell align="center" >{producto.precio_venta}</TableCell>
                 <TableCell align="center" >{producto.categorias_id}</TableCell>
+                <TableCell align="center" >
+                  <Button variant="outlined" onClick={() => review(producto)} > <EditIcon/> </Button>
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
