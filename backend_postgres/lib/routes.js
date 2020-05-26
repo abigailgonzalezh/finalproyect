@@ -1,4 +1,4 @@
-var util = require('util');
+  var util = require('util');
 var express = require('express');
 var app = express();
 var passport = require("passport");
@@ -105,8 +105,8 @@ module.exports = function (app) {
 	});
 
 	app.post('/login',	passport.authenticate('local', {
-		successRedirect: '/account',
-		failureRedirect: '/login',
+		successRedirect: '/productos',
+		failureRedirect: '/',
 		failureFlash: true
 		}), function(req, res) {
 		if (req.body.remember) {
@@ -146,7 +146,7 @@ passport.use('local', new  LocalStrategy({passReqToCallback : true}, (req, usern
 							return done();
 						}
 						else if (check){
-							return done(null, [{mail: result.rows[0].email, nombre: result.rows[0].nombre}]);
+							return done(null, [{mail: result.rows[0].mail, nombre: result.rows[0].nombre}]);
 						}
 						else{
 							req.flash('danger', "Oops. Incorrect login details.");
