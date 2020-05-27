@@ -2,12 +2,17 @@ import React, {useState} from 'react';
 import { Grommet, Box, Image, Button } from "grommet";
 import {TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 import { hp } from "grommet-theme-hp";
+import { makeStyles } from '@material-ui/core/styles';
+import {storage} from "../firebase/index";
+
+
 function EditarProductos(props){
     const idProducto = props.productoEdit;
     const nombreProducto = props.productoNombre;
     const precioCompraProducto = props.productoPrecioCompra;
     const precioVentaProducto = props.productoPrecioVenta;
     const cantidadProducto = props.productoCantidad;
+    const urlProducto = props.productoUrl;
 
     const [id, setId] = useState(idProducto);
     const [nombre, setNombre] = useState(nombreProducto);
@@ -15,6 +20,9 @@ function EditarProductos(props){
     const [precioVenta, setPrecioVenta] = useState(precioVentaProducto);
     const [cantidad, setCantidad] = useState(cantidadProducto);
     const [open, setOpen] = React.useState(true);
+    const allInputs = {imgUrl: urlProducto};
+    const [imageAsFile, setImageAsFile] = useState('');
+    const [imageAsUrl, setImageAsUrl] = useState(allInputs);
 
     const handleClose = () => {
       setOpen(props.isClose);
@@ -29,6 +37,42 @@ function EditarProductos(props){
       setId('');
     };
 
+    console.log(imageAsFile)
+    const handleImageAsFile = (e) => {
+      const image = e.target.files[0]
+      setImageAsFile(imageFile => (image))
+    }
+
+    const handleFireBaseUpload = e => {
+      e.preventDefault()
+      console.log('start of upload')
+      // async magic goes here...
+      if(imageAsFile === '') {
+        console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
+      }
+      const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile)
+      //initiates the firebase side uploading 
+      uploadTask.on('state_changed', 
+      (snapShot) => {
+        //takes a snap shot of the process as it is happening
+        console.log(snapShot)
+      }, (err) => {
+        //catches the errors
+        console.log(err)
+      }, () => {
+        // gets the functions from storage refences the image storage in firebase by the children
+        // gets the download url then sets the image from firebase as the value for the imgUrl key:
+        storage.ref('images').child(imageAsFile.name).getDownloadURL()
+        .then(fireBaseUrl => {
+          setImageAsUrl(prevObject => ({...prevObject, imgUrl: fireBaseUrl}))
+        })
+      })
+    }
+
+    console.log(imageAsUrl.imgUrl);
+
+    const finalUrl = imageAsUrl.imgUrl;
+
     const editProductos = async () => {
       const res = await fetch("/products", {
           method: 'PUT',
@@ -38,7 +82,8 @@ function EditarProductos(props){
             nombre1: nombre,
             precioCompra1: precioCompra,
             precioVenta1: precioVenta,
-            cantidad1: cantidad
+            cantidad1: cantidad,
+            imagen1: finalUrl
           })
       })
       //console.log(res);
@@ -142,6 +187,14 @@ function EditarProductos(props){
             variant="outlined"
             fullWidth
           />
+          <form onSubmit={handleFireBaseUpload}>
+            <input 
+              type="file"
+              id="i"
+              onChange={handleImageAsFile}
+            />
+            <button>Subir</button>
+          </form>
         </DialogContent>
         <DialogActions>
           <Button  size="medium" label="Cancelar" onClick={handleClose} >

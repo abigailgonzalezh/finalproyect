@@ -5,7 +5,7 @@ const mysqlConnection = require("../connection");
 Router.get("/", (req, res) =>{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    mysqlConnection.query("x|", (err, rows, fields) =>{
+    mysqlConnection.query("SELECT productos.id as id, productos.nombre as nombre, precio_compra, precio_venta, cantidad, imagen, categorias.nombre as categorias_id FROM productos INNER JOIN categorias ON categorias_id = categorias.id;", (err, rows, fields) =>{
         if(!err){
             res.send(rows);
         }else{
@@ -21,11 +21,12 @@ Router.post("/", (req, res) =>{
     const compra = req.body.precioCompra1;
     const venta = req.body.precioVenta1;
     const cantidad = req.body.cantidad1;
+    const imagen = req.body.imagen1;
     const categoria = 1;
     var values = [
         nombre, compra, venta, cantidad, categoria
     ];
-    mysqlConnection.query("INSERT INTO productos (nombre, precio_compra, precio_venta, cantidad, categorias_id) VALUES ('" + nombre + "', "+ compra +", " + venta +",  "+ cantidad + ",  "+categoria+" );", (err, rows, fields) =>{
+    mysqlConnection.query("INSERT INTO productos (nombre, precio_compra, precio_venta, cantidad, imagen, categorias_id) VALUES ('" + nombre + "', "+ compra +", " + venta +",  "+ cantidad + ", '"+ imagen + "', "+categoria+" );", (err, rows, fields) =>{
         if(!err){
             //res.send(rows);
         }else{
@@ -57,9 +58,10 @@ Router.put("/", (req, res) => {
     const compra = req.body.precioCompra1;
     const venta = req.body.precioVenta1;
     const cantidad = req.body.cantidad1;
+    const imagen = req.body.imagen1;
     const categoria = 1;
 
-    mysqlConnection.query("UPDATE productos SET nombre = '"+nombre+"', precio_compra = "+compra+", precio_venta = "+venta+", cantidad = "+cantidad+", categorias_id = "+categoria+" WHERE id = "+id+";", (err, rows, fields) => {
+    mysqlConnection.query("UPDATE productos SET nombre = '"+nombre+"', precio_compra = "+compra+", precio_venta = "+venta+", cantidad = "+cantidad+", imagen = '"+ imagen + "', categorias_id = "+categoria+" WHERE id = "+id+";", (err, rows, fields) => {
         if(!err){
             console.log("Edit");
         }else{
@@ -68,4 +70,4 @@ Router.put("/", (req, res) => {
     })
 })
 
-module.exports = Router;
+module.exports = Router;    

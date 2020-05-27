@@ -47,6 +47,7 @@ function Productos(props) {
     const [precioVenta, setPrecioVenta] = useState('');
     const [cantidad, setCantidad] = useState('');
     const [open, setOpen] = React.useState(false);
+    const [url, setUrl] = useState('');
     var id2 = '';
 
     useEffect(() => {
@@ -72,6 +73,7 @@ function Productos(props) {
       setPrecioCompra(producto.precio_compra);
       setPrecioVenta(producto.precio_venta);
       setCantidad(producto.cantidad);
+      setUrl(producto.imagen);
       setOpen(true);
     }
 
@@ -116,9 +118,9 @@ function Productos(props) {
     return (
       <Grommet theme={hp} >
       <Header/>
-        {id && nombre && precioCompra && precioVenta && cantidad && open &&
+        {id && nombre && precioCompra && precioVenta && cantidad && open && url &&
          <EditarProductos productoEdit={id} productoNombre={nombre} productoPrecioCompra ={precioCompra}
-         productoPrecioVenta = {precioVenta} productoCantidad = {cantidad} isOpen = {open} isClose = {handleClose}/>
+         productoPrecioVenta = {precioVenta} productoCantidad = {cantidad} isOpen = {open} isClose = {handleClose} productoUrl = {url}/>
          }
          {id2}
       <br />
@@ -140,6 +142,7 @@ function Productos(props) {
               <TableCell scope="col" border="bottom"><strong>Precio de Compra</strong></TableCell>
               <TableCell align="center" size="small" scope="col" border="bottom"><strong>Precio de Venta</strong></TableCell>
               <TableCell scope="col" border="bottom"><strong>Cantidad</strong></TableCell>
+              <TableCell align="center" size="small" scope="col" border="bottom"><strong>Imagen</strong></TableCell>
               <TableCell align="center" size="small" scope="col" border="bottom"><strong>Categoria</strong></TableCell>
               <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
               <TableCell scope="col" border="bottom"><strong></strong></TableCell>
@@ -153,6 +156,9 @@ function Productos(props) {
                 <TableCell align="center">{producto.precio_compra}</TableCell>
                 <TableCell align="center">{producto.precio_venta}</TableCell>
                 <TableCell align="center">{producto.cantidad}</TableCell>
+                <TableCell align="center">
+                  <img src={producto.imagen} width="100" height="100"/>
+                </TableCell>
                 <TableCell align="center">{producto.categorias_id}</TableCell>
                 <TableCell>
                 <Button hoverIndicator="true" onClick={() => editar(producto)}><EditIcon /></Button>

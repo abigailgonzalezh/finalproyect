@@ -17,24 +17,12 @@ import {
   Button
 } from "grommet";
 import { grommet } from "grommet/themes";
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
-  },
-}))(TableRow);
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
 
 function Productos(props) {
     const [productos, setProductos] = useState([]);
@@ -42,6 +30,24 @@ function Productos(props) {
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {setOpen(false);};
     var id2 = '';
+
+    const useStyles = makeStyles({
+      root: {
+        maxWidth: 345,
+      },
+      media: {
+        width: 140,
+        height: 140,
+      },
+    });
+  
+  function review(producto){
+      console.log(producto.id);
+      setId(producto.id);
+      setOpen(true);
+  }
+  
+  const classes = useStyles();
 
     useEffect(() => {
 
@@ -58,26 +64,6 @@ function Productos(props) {
       getProductos();
     })
 
-    const useStyles = makeStyles({
-      table: {
-        minWidth: 700,
-      },
-    });
-    //console.log(plot);
-
-    const mystlye = {
-      minWidth: "50%",
-      minHeight: 50
-    };
-
-    function review(producto){
-      console.log(producto.id);
-      setId(producto.id);
-      setOpen(true);
-    }
-
-    //
-    const classes = useStyles();
     return (
       <Grommet theme={hp} full>
         {id && open && <InsertarReview rev={id} isOpen = {open} isClose = {handleClose} /> }
@@ -89,32 +75,39 @@ function Productos(props) {
         <Grid item xs={3}>
         </Grid>
       </Grid>
+      <Grid
+        container
+        spacing={2}
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
       <Box align="center" pad="large">
-        <Table className={classes.table}>
-          <TableHeader>
-            <TableRow>
-              <TableCell align="center" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
-              <TableCell align="center" scope="col" border="bottom"><strong>Precio</strong></TableCell>
-              <TableCell align="center" scope="col" border="bottom"><strong>Categoria</strong></TableCell>
-              <TableCell align="center" scope="col" border="bottom"><strong>Reseñas</strong></TableCell>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {productos.map((producto) =>
-              <TableRow className="data-row">
-                <TableCell align="center" >{producto.nombre}</TableCell>
-                <TableCell align="center" >{producto.precio_venta}</TableCell>
-                <TableCell align="center" >{producto.categorias_id}</TableCell>
-                <TableCell align="center" >
-                  <Button variant="outlined" onClick={() => review(producto)} > <EditIcon/> </Button>
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-        </Box>
-        <Footer/>
-        </Grommet>
+        {productos.map((producto) =>
+          <Card className={classes.root}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image={producto.imagen}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {producto.nombre}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                PRECIO: ${producto.precio_venta}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button variant="outlined" onClick={() => review(producto)} > <EditIcon/> </Button>
+          </CardActions>
+          </Card>
+        )}
+      </Box>
+      </Grid>
+      <Footer/>
+      </Grommet>
     );
 }
 

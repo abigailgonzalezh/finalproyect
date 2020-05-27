@@ -101,6 +101,8 @@ CREATE TABLE `productos` (
   `categorias_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+ALTER TABLE `productos` ADD `imagen` VARCHAR(75) NOT NULL AFTER `cantidad`;
+
 --
 -- Volcado de datos para la tabla `productos`
 --
