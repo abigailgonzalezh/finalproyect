@@ -14,7 +14,7 @@ const ReviewSchema = new mongoose.Schema({
       },
 
       imagen: {
-      type: Buffer
+      type: String
        },
 });
 
