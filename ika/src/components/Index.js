@@ -39,7 +39,7 @@ function Index(props) {
       height: '100vh',
     },
     image: {
-      background: 'url(https://drive.google.com/uc?export=download&id=1kDsOopsNwwkQOdMVC9zlvzvYI5RbYMzs)',
+      background: 'url(https://drive.google.com/uc?export=download&id=1IKA6dvi6p9FGqhHZq8b4nMvVCJefwCJ8)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     },
