@@ -4,7 +4,12 @@ import Carrousel from './Carrousel.js'
 import imagen from "./Imagenes/logo3.png"
 import { hp } from "grommet-theme-hp"
 import { useHistory } from "react-router-dom";
-
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+//import Images from src="https://drive.google.com/file/d/1KzbF8eiyXl_ilicnuWKMd9_cSfPWl-Vy/view?usp=sharing";
 function Index(props) {
   const [correo, setCorreo] = useState('');
   const [contraseña, setContraseña] = useState('');
@@ -29,48 +34,76 @@ function Index(props) {
       //const response = await res.json();
       //console.log(res);
   }
-
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      height: '100vh',
+    },
+    image: {
+      background: 'url(https://drive.google.com/uc?export=download&id=1IKA6dvi6p9FGqhHZq8b4nMvVCJefwCJ8)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    },
+    paper: {
+      margin: theme.spacing(8, 4),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+  }));
+    const classes = useStyles();
     return (
+
       <Grommet theme={hp}>
-
-      <Box align="end" justify="start" pad="small">
-  <Clock type="digital" />
-</Box>
-<Box align="center">
-<Image
-src={imagen}
-/>
-</Box>
-<Carrousel/>
-    <Box align="center" pad="medium">
-      <Form>
-        <Box border gap="medium" pad="large" width="medium">
-          <FormField htmlFor="enabled-id" name="enabled" label="Usuario">
-            <TextInput
-              id="corr"
-              name="correo"
-              placeholder="Ingrese su correo"
-              onChange={(ev) => setCorreo(ev.target.value)}
-            />
-          </FormField>
-
-          <FormField htmlFor="focus-id" name="focus" label="Contraseña">
-            <TextInput
-              id="contras"
-              name="contraseña"
-              placeholder="Ingrese contraseña"
-               type="password"
-               onChange={(ev) => setContraseña(ev.target.value)}
-            />
-          </FormField>
-          <Button
-            primary
-            label="Iniciar sesion"
-            onClick={iniciarSesion}
-            />
-        </Box>
-      </Form>
-    </Box>
+      <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+                <Image
+                src={imagen}
+                />
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                label="Correo"
+                id="corr"
+                name="correo"
+                onChange={(ev) => setCorreo(ev.target.value)}
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                label="Contraseña"
+                type="password"
+                id="contras"
+                name="contraseña"
+                autoComplete="current-password"
+                onChange={(ev) => setContraseña(ev.target.value)}
+              />
+                <Box align="center" pad="medium">
+              <Button
+                primary
+                label="Iniciar sesion"
+                onClick={iniciarSesion}
+                />
+                </Box>
+              <Grid container>
+              </Grid>
+            </form>
+          </div>
+        </Grid>
+      </Grid>
   </Grommet>
     );
 }
