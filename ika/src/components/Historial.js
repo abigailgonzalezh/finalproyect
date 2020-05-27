@@ -15,6 +15,9 @@ import {
   Button
 } from "grommet";
 import { grommet } from "grommet/themes";
+import Moment from 'react-moment';
+import * as moment from 'moment';
+
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -96,7 +99,7 @@ const [productos, setProductos] = useState([]);
               <TableCell align="center" >{producto.precio_venta}</TableCell>
               <TableCell align="center" >{producto.cantidad}</TableCell>
               <TableCell align="center" >{producto.action}</TableCell>
-              <TableCell align="center" >{producto.changedate}</TableCell>
+              <TableCell align="center" ><Moment format="DD-MM-YYYY">{producto.changedate}</Moment></TableCell>
             </TableRow>
           )}
         </TableBody>

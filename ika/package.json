@@ -12,11 +12,13 @@
     "grommet": "^2.13.0",
     "grommet-theme-hp": "^0.1.2",
     "material-ui-icons": "^1.0.0-beta.36",
+    "moment": "^2.26.0",
     "polished": "^3.6.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-images-upload": "^1.2.8",
     "react-images-uploading": "^2.2.0",
+    "react-moment": "^0.9.7",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.0"
