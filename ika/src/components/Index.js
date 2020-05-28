@@ -23,16 +23,22 @@ function Index(props) {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          username: correo,
+          mail: correo,
           password: contraseña,
         })
       })
-      console.log(res);
-      if (res.url=='http://localhost:4000/productos') {
+      const response = await res.json();
+
+      console.log(response)
+
+      if(response != undefined){
+        localStorage.setItem('token', response)
+        console.log(response);
         history.push('/productos');
+       }
+      else{
+          console.log("error")
       }
-      //const response = await res.json();
-      //console.log(res);
   }
   const useStyles = makeStyles((theme) => ({
     root: {
