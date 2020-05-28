@@ -19,7 +19,7 @@ function InsertarProductos(props) {
     const handleClickOpen = () => {
       setOpen(true);
     };
-  
+
     const handleClose = () => {
       setOpen(false);
       var limpiar = document.getElementById("nombr");
@@ -30,9 +30,9 @@ function InsertarProductos(props) {
       venti.value = " ";
       var compri = document.getElementById("cant");
       compri.value = " ";
-    };  
+    };
 
-    console.log(imageAsFile)
+    //console.log(imageAsFile)
     const handleImageAsFile = (e) => {
       const image = e.target.files[0]
       setImageAsFile(imageFile => (image))
@@ -46,8 +46,8 @@ function InsertarProductos(props) {
         console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
       }
       const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile)
-      //initiates the firebase side uploading 
-      uploadTask.on('state_changed', 
+      //initiates the firebase side uploading
+      uploadTask.on('state_changed',
       (snapShot) => {
         //takes a snap shot of the process as it is happening
         console.log(snapShot)
@@ -64,7 +64,7 @@ function InsertarProductos(props) {
       })
     }
 
-    console.log(imageAsUrl.imgUrl);
+    //console.log(imageAsUrl.imgUrl);
 
     const finalUrl = imageAsUrl.imgUrl;
 
@@ -93,13 +93,13 @@ function InsertarProductos(props) {
       var compri = document.getElementById("cant");
       compri.value = " ";
     }
-    
+
     function agregar(){
       handleClose();
       postProductos();
     }
     //console.log(plot);
-  
+
     const mystlye = {
       minWidth: "50%",
       minHeight: 50
@@ -116,16 +116,16 @@ function InsertarProductos(props) {
         minWidth: "30%",
         minHeight: 50,
         top: 20
-        
+
       };
-    
+
       const mystlye3 = {
         minWidth: "30%",
         minHeight: 50,
         marginTop: 40,
         right: 30
       };
-    
+
       const styletable = {
          width: "100%",
          marginTop:20
@@ -142,7 +142,7 @@ function InsertarProductos(props) {
     return (
       <div>
         <Button primary size="medium" label="Agregar producto" onClick={handleClickOpen}/>
-        
+
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Agregar</DialogTitle>
         <DialogContent>
@@ -187,7 +187,7 @@ function InsertarProductos(props) {
             fullWidth
           />
           <form onSubmit={handleFireBaseUpload}>
-            <input 
+            <input
               type="file"
               id="i"
               onChange={handleImageAsFile}

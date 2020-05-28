@@ -14,6 +14,8 @@ function Index(props) {
   const [correo, setCorreo] = useState('');
   const [contraseña, setContraseña] = useState('');
   const history = useHistory()
+  localStorage.removeItem('token');
+
 
   const iniciarSesion = async () => {
       console.log("INICIAR SESION");
@@ -30,10 +32,8 @@ function Index(props) {
       const response = await res.json();
 
       console.log(response)
-
       if(response != undefined){
         localStorage.setItem('token', response)
-        console.log(response);
         history.push('/productos');
        }
       else{

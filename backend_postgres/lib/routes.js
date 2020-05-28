@@ -2,7 +2,7 @@ var util = require('util');
 var express = require('express');
 var app = express();
 var passport = require("passport");
-
+var JWTMiddleware = express.Router();
 var fs = require('fs');
 var request = require('request');
 const { Pool, Client } = require('pg')
@@ -11,11 +11,9 @@ const uuidv4 = require('uuid/v4');
 const jwt = require('jsonwebtoken');
 const secret = "Just keep guessing";
 
-
 app.use(express.static('public'));
 
 const LocalStrategy = require('passport-local').Strategy;
-//const connectionString = process.env.DATABASE_URL;
 
 var currentAccountsData = [];
 
@@ -155,3 +153,24 @@ module.exports = function (app) {
       res.status(200).json(`User edited`)
   });
 }
+JWTMiddleware.use((req, res, next) => {
+    //console.log(req.headers);
+    const token = req.headers['authorization'] ?
+          req.headers['authorization'].slice(7) : null;
+
+    //console.log(token);
+
+    if (token) {
+      jwt.verify(token, secret, (err, decoded) => {
+        if (err) {
+          return res.status(401).send('Authentication failed');
+        } else {
+          //console.log(decoded);
+          req.decoded = decoded;
+          next();
+        }
+      });
+    } else {
+      res.send('Authentication failed');
+    }
+  });

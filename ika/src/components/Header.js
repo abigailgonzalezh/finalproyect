@@ -5,7 +5,10 @@ import imagen from "./Imagenes/logo.png"
 import { Anchor, Box, Grommet, Header, Image } from "grommet";
 import { hp } from "grommet-theme-hp"
 
-
+function logOff(){
+    localStorage.removeItem('token');
+    window.location.replace("http://localhost:4000/")
+  }
 
 function Headers(props) {
   const { classes } = props;
@@ -21,8 +24,9 @@ function Headers(props) {
         <Anchor label="Historial" href="/Historial"/>
         <Anchor label="Corte de caja" href="/corte"/>
         <Anchor label="Balance" href="/Balance" />
-        <Anchor label="Sugerencias" href="/sugerencias" />
-        <Button label="Iniciar sesion"></Button>
+        <Anchor label="Reviews" href="/review" />
+        <Anchor label="Personal" href="/personal" />
+        <Button label="Cerrar sesion" onClick={() => logOff()}>Cerrar Sesion</Button>
       </Box>
     </Header>
   </Grommet>

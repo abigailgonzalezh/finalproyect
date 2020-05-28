@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Productos from './components/Productos';
-import Sugerencias from './components/Sugerencias';
+import Reviews from './components/Reviews';
 import Cliente from './components/ClienteProductos';
 import Ventas from './components/EmpleadoProductos';
 import Corte from './components/CorteCaja';
@@ -32,8 +32,8 @@ function App() {
           <Route path="/cliente">
             <Cliente/>
           </Route>
-          <Route path="/sugerencias">
-           <Sugerencias/>
+          <Route path="/review">
+           <Reviews/>
           </Route>
           <Route path="/productos">
             <Productos/>
