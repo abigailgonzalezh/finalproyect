@@ -66,48 +66,56 @@ const [productos, setProductos] = useState([]);
 
   //
   const classes = useStyles();
-  return (
-    <div>
-       <Header/>
-        <br />
-      <Grid container spacing={3}>
-      <Grid item xs={3}></Grid>
-      <Grid item xs={3}></Grid>
-      <Grid item xs={3}>
+  const gettoken = localStorage.getItem('token');
+
+  if(gettoken!=null){
+    return (
+      <div>
+         <Header/>
+          <br />
+        <Grid container spacing={3}>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={3}>
+        </Grid>
+        <Grid item xs={3}>
+        </Grid>
       </Grid>
-      <Grid item xs={3}>
-      </Grid>
-    </Grid>
-    <Grommet theme={grommet}>
-      <Box align="center" pad="large">
-      <Table className={classes.table}>
-        <TableHeader>
-          <TableRow>
-          <TableCell scope="col" border="bottom"><strong>Producto</strong></TableCell>
-          <TableCell scope="col" border="bottom"><strong>Compra</strong></TableCell>
-          <TableCell scope="col" border="bottom"><strong>Venta</strong></TableCell>
-          <TableCell scope="col" border="bottom"><strong>Cantidad</strong></TableCell>
-          <TableCell scope="col" border="bottom"><strong>Accion</strong></TableCell>
-          <TableCell scope="col" border="bottom"><strong>Fecha</strong></TableCell>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {productos.map((producto) =>
-            <TableRow className="data-row">
-              <TableCell align="center" >{producto.producto}</TableCell>
-              <TableCell align="center" >{producto.precio_compra}</TableCell>
-              <TableCell align="center" >{producto.precio_venta}</TableCell>
-              <TableCell align="center" >{producto.cantidad}</TableCell>
-              <TableCell align="center" >{producto.action}</TableCell>
-              <TableCell align="center" ><Moment format="DD-MM-YYYY">{producto.changedate}</Moment></TableCell>
+      <Grommet theme={grommet}>
+        <Box align="center" pad="large">
+        <Table className={classes.table}>
+          <TableHeader>
+            <TableRow>
+            <TableCell scope="col" border="bottom" align="center"><strong>Producto</strong></TableCell>
+            <TableCell scope="col" border="bottom" align="center"><strong>Precio de Compra</strong></TableCell>
+            <TableCell scope="col" border="bottom" align="center"><strong>Precio de Venta</strong></TableCell>
+            <TableCell scope="col" border="bottom" align="center"><strong>Cantidad</strong></TableCell>
+            <TableCell scope="col" border="bottom" align="center"><strong>Accion</strong></TableCell>
+            <TableCell scope="col" border="bottom" align="center"><strong>Fecha</strong></TableCell>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
-      </Box>
-        </Grommet>
-    </div>
-  );
+          </TableHeader>
+          <TableBody>
+            {productos.map((producto) =>
+              <TableRow className="data-row">
+                <TableCell align="center" >{producto.producto}</TableCell>
+                <TableCell align="center" >{producto.precio_compra}</TableCell>
+                <TableCell align="center" >{producto.precio_venta}</TableCell>
+                <TableCell align="center" >{producto.cantidad}</TableCell>
+                <TableCell align="center" >{producto.action}</TableCell>
+                <TableCell align="center" ><Moment format="DD-MM-YYYY">{producto.changedate}</Moment></TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+        </Box>
+          </Grommet>
+      </div>
+    );
+  } else{
+    return(
+      <p>Necesitas inciar sesion</p>
+    );
+  }
 }
 
 export default Historial;
