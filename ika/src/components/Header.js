@@ -26,7 +26,7 @@ function Headers(props) {
         <Anchor label="Balance" href="/Balance" />
         <Anchor label="Reviews" href="/review" />
         <Anchor label="Personal" href="/personal" />
-        <Button label="Cerrar sesion" onClick={() => logOff()}>Cerrar Sesion</Button>
+        <Anchor label="Cerrar sesion" onClick={() => logOff()}>Cerrar Sesion</Anchor>
       </Box>
     </Header>
   </Grommet>

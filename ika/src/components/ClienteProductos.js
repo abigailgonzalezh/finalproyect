@@ -3,7 +3,7 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import InsertarReview from './InsertarReview';
 import Grid from '@material-ui/core/Grid';
 import { Star } from 'grommet-icons';
-import Header from './Header';
+import HeaderCliente from './HeaderCliente';
 import Footer from './Footer';
 import { hp } from "grommet-theme-hp"
 import {
@@ -90,7 +90,7 @@ function Productos(props) {
     return (
       <Grommet theme={hp} full>
         {id && open && <InsertarReview rev={id} isOpen = {open} isClose = {handleClose} /> }
-        <Header/>
+        <HeaderCliente/>
           <br />
         <Grid container spacing={3}>
         <Grid item xs={3}></Grid>
