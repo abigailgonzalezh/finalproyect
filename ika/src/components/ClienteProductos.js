@@ -60,8 +60,8 @@ function Productos(props) {
         flexGrow: 1,
       },
       media: {
-       width: 140,
-       height: 140,
+       width: 220,
+       height: 220,
      },
       footer: {
         backgroundColor: theme.palette.background.paper,
@@ -109,7 +109,7 @@ function Productos(props) {
         {/* End hero unit */}
         <Grid container spacing={4}>
           {productos.map((producto) => (
-            <Grid item key={producto} xs={6} sm={5} md={2}>
+            <Grid item key={producto} xs={6} sm={5} md={3}>
               <Card className={classes.card}>
               <CardMedia
                 className={classes.media}
