@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import CheckIcon from '@material-ui/icons/CheckBox';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Header from './Header';
 import { hp } from "grommet-theme-hp";
 import {
@@ -34,36 +34,36 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function Sugerencias(props) {
-    const [sugerencias, setSugerencias] = useState([]);
+function Reviews(props) {
+    const [reviews, setReviews] = useState([]);
     var id2 = '';
 
     useEffect(() => {
-      const getSugerencias = async () => {
-        const res = await fetch("/suggestions", {
+      const getReviews = async () => {
+        const res = await fetch("/reviews", {
             method: 'GET',
             headers: {'Content-Type': 'application/json'},
         })
         console.log(res);
         const response = await res.json();
         //console.log(response);
-        setSugerencias(response);
+        setReviews(response);
       }
-      getSugerencias();
+      getReviews();
     })
 
-    function eliminar(sugerencia){
+    function eliminar(reviews){
       console.log("EL id de sugerencia es: ");
-      console.log(sugerencia.cliente);
-      id2 = sugerencia._id;
-      deleteSugerencias();
+      console.log(reviews.cliente);
+      id2 = reviews._id;
+      deleteReviews();
       //window.location.reload();
     }
 
-    const deleteSugerencias = async () => {
+    const deleteReviews = async () => {
       console.log("entro");
       console.log(id2);
-      const res = await fetch("/suggestions/"+id2+"", {
+      const res = await fetch("/reviews/"+id2+"", {
           method: 'DELETE',
           headers: {'Content-Type': 'application/json'},
       })
@@ -91,18 +91,22 @@ function Sugerencias(props) {
         <Table className={classes.table}>
           <TableHeader>
             <TableRow>
-            <TableCell scope="col" border="bottom"><strong>Cliente</strong></TableCell>
-            <TableCell align="center" size="small" scope="col" border="bottom"><strong>Sugerencias</strong></TableCell>
-            <TableCell align="end" scope="col" border="bottom"><strong>Extras</strong></TableCell>
+            <TableCell scope="col" border="bottom"><strong>Producto</strong></TableCell>
+            <TableCell align="center" size="small" scope="col" border="bottom"><strong>Review</strong></TableCell>
+            <TableCell align="center" scope="col" border="bottom"><strong>Imagen</strong></TableCell>
+            <TableCell align="end" scope="col" border="bottom"><strong>Calificacion</strong></TableCell>
+            <TableCell align="end" scope="col" border="bottom"><strong></strong></TableCell>
               </TableRow>
           </TableHeader>
           <TableBody>
-            {sugerencias.map((sugerencia) =>
+            {reviews.map((reviews) =>
               <TableRow className="data-row">
-                <TableCell align="center" >{sugerencia.cliente}</TableCell>
-                <TableCell align="center" >{sugerencia.peticion}</TableCell>
-                <TableCell>
-                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(sugerencia)} ><CheckIcon /> </Button>
+                <TableCell align="center" >{reviews.id} </TableCell>
+                <TableCell align="center" >{reviews.review}</TableCell>
+                <TableCell align="center" ><img src={reviews.imagen}  width="180" height="100"/></TableCell>
+                <TableCell align="center" >{reviews.estrellas}</TableCell>
+                <TableCell align="center">
+                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(reviews)} ><DeleteIcon /> </Button>
                 </TableCell>
               </TableRow>
             )}
@@ -113,4 +117,4 @@ function Sugerencias(props) {
     );
 }
 
-export default Sugerencias;
+export default Reviews;
