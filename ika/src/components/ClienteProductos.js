@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import InsertarReview from './InsertarReview';
 import Grid from '@material-ui/core/Grid';
-import EditIcon from '@material-ui/icons/Edit';
+import { Star } from 'grommet-icons';
 import Header from './Header';
 import Footer from './Footer';
 import { hp } from "grommet-theme-hp"
@@ -16,6 +16,7 @@ import {
   TableRow,
   Button
 } from "grommet";
+
 import { grommet } from "grommet/themes";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -23,6 +24,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
 function Productos(props) {
     const [productos, setProductos] = useState([]);
@@ -31,26 +33,47 @@ function Productos(props) {
     const handleClose = () => {setOpen(false);};
     var id2 = '';
 
-    const useStyles = makeStyles({
-      root: {
-        maxWidth: 345,
+    const useStyles = makeStyles((theme) => ({
+      icon: {
+        marginRight: theme.spacing(2),
       },
-      media: {
-        width: 140,
-        height: 140,
+      heroContent: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(8, 0, 6),
       },
-    });
-  
+      heroButtons: {
+        marginTop: theme.spacing(4),
+      },
+      cardGrid: {
+        paddingTop: theme.spacing(8),
+        paddingBottom: theme.spacing(8),
+      },
+      card: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      },
+      cardMedia: {
+        paddingTop: '56.25%', // 16:9
+      },
+      cardContent: {
+        flexGrow: 1,
+      },
+      footer: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(6),
+      },
+    }));
+
   function review(producto){
       console.log(producto.id);
       setId(producto.id);
       setOpen(true);
   }
-  
+
   const classes = useStyles();
 
     useEffect(() => {
-
 
       const getProductos = async () => {
         const res = await fetch("/products", {
@@ -75,37 +98,32 @@ function Productos(props) {
         <Grid item xs={3}>
         </Grid>
       </Grid>
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        justify="center"
-        alignItems="center"
-      >
-      <Box align="center" pad="large">
-        {productos.map((producto) =>
-          <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image={producto.imagen}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                {producto.nombre}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                PRECIO: ${producto.precio_venta}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button variant="outlined" onClick={() => review(producto)} > <EditIcon/> </Button>
-          </CardActions>
-          </Card>
-        )}
-      </Box>
-      </Grid>
+      <Container className={classes.cardGrid} maxWidth="md">
+        {/* End hero unit */}
+        <Grid container spacing={4}>
+          {productos.map((producto) => (
+            <Grid item key={producto} xs={12} sm={6} md={4}>
+              <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                image={producto.imagen}
+              />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {producto.nombre}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    PRECIO: ${producto.precio_venta}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                    <Button variant="outlined" onClick={() => review(producto)} >Reseña <Star color='brand' />   </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
       <Footer/>
       </Grommet>
     );
