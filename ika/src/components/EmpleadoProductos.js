@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Venta from './Venta';
-import Header from './Header';
+import Header from './HeaderEmpleado';
 import { hp } from "grommet-theme-hp";
 import {
   Box,
@@ -80,7 +80,7 @@ function Ventas(props) {
   //
   const classes = useStyles();
   return (
-    <Grommet theme={grommet}>
+    <Grommet theme={hp}>
       <Header/>
          {id &&
          <Venta venta={id} />
