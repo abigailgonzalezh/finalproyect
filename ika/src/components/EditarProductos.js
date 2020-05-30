@@ -1,9 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Grommet, Box, Image, Button } from "grommet";
 import {TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 import { hp } from "grommet-theme-hp";
 import { makeStyles } from '@material-ui/core/styles';
 import {storage} from "../firebase/index";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
 function EditarProductos(props){
@@ -13,6 +18,7 @@ function EditarProductos(props){
     const precioVentaProducto = props.productoPrecioVenta;
     const cantidadProducto = props.productoCantidad;
     const urlProducto = props.productoUrl;
+    const categoriaProducto = props.productoCategoria;
 
     const [id, setId] = useState(idProducto);
     const [nombre, setNombre] = useState(nombreProducto);
@@ -23,6 +29,25 @@ function EditarProductos(props){
     const allInputs = {imgUrl: urlProducto};
     const [imageAsFile, setImageAsFile] = useState('');
     const [imageAsUrl, setImageAsUrl] = useState(allInputs);
+    const [categorias, setCategorias] = useState([]);
+    const [categoria, setCategoria] = useState(categoriaProducto);
+
+    console.log(categoria);
+
+    useEffect(() => {
+
+      const getCategorias = async () => {
+        const res = await fetch("/categories", {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        })
+        //console.log(res);
+        const response = await res.json();
+        setCategorias(response);
+        console.log(categorias);
+      }
+      getCategorias();
+  })
 
     const handleClose = () => {
       setOpen(props.isClose);
@@ -34,6 +59,7 @@ function EditarProductos(props){
       venti.value = " ";
       var compri = document.getElementById("cant");
       compri.value = " ";
+      setCategoria(" ");
       setId('');
     };
 
@@ -83,6 +109,7 @@ function EditarProductos(props){
             precioCompra1: precioCompra,
             precioVenta1: precioVenta,
             cantidad1: cantidad,
+            category: categoria,
             imagen1: finalUrl
           })
       })
@@ -99,10 +126,12 @@ function EditarProductos(props){
       var compri = document.getElementById("cant");
       compri.value = " ";
       setId('');
+      setCategoria(" ");
       setOpen(false);
     }
 
     function editar(){
+      setCategoria(categoria.id);
       handleClose();
       editProductos();
       //window.location.reload();
@@ -140,7 +169,14 @@ function EditarProductos(props){
          marginTop:20
       };
 
-    // getProductos();
+      const useStyles = makeStyles((theme) => ({
+        button: {
+          margin: theme.spacing(1),
+        },
+      }));
+
+
+    const classes = useStyles();
 
     return (
       <Grommet theme={hp} >
@@ -187,12 +223,29 @@ function EditarProductos(props){
             variant="outlined"
             fullWidth
           />
+          <br/>
+          <br/>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">Categorias</InputLabel>
+            <Select
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+              value={categorias}
+              onChange={(ev) => setCategoria(ev.target.value)}
+            >
+              {categorias.map((categoria) =>
+              <MenuItem value={categoria.id}>{categoria.nombre}</MenuItem>
+              )}
+            </Select>
+          </FormControl>
           <form onSubmit={handleFireBaseUpload}>
+            <br/>
             <input 
               type="file"
               id="i"
               onChange={handleImageAsFile}
             />
+            <br/>
             <button>Subir</button>
           </form>
         </DialogContent>

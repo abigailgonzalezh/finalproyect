@@ -52,6 +52,7 @@ function InsertarProductos(props) {
       venti.value = " ";
       var compri = document.getElementById("cant");
       compri.value = " ";
+      setCategoria(" ");
     };
 
     console.log(imageAsFile)
@@ -99,7 +100,8 @@ function InsertarProductos(props) {
             precioCompra1: precioCompra,
             precioVenta1: precioVenta,
             cantidad1: cantidad,
-            imagen1: finalUrl
+            imagen1: finalUrl,
+            category: categoria
           })
       })
       //console.log(res);
@@ -114,9 +116,11 @@ function InsertarProductos(props) {
       venti.value = " ";
       var compri = document.getElementById("cant");
       compri.value = " ";
+      setCategoria(" ");
     }
 
     function agregar(){
+      console.log(categoria);
       handleClose();
       postProductos();
     }

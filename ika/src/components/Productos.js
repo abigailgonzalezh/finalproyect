@@ -46,10 +46,10 @@ function Productos(props) {
     const [precioCompra, setPrecioCompra] = useState('');
     const [precioVenta, setPrecioVenta] = useState('');
     const [cantidad, setCantidad] = useState('');
+    const [categoria, setCategoria] = useState('');
     const [open, setOpen] = React.useState(false);
     const [url, setUrl] = useState('');
     var id2 = '';
-    const gettoken = localStorage.getItem('token');
 
     useEffect(() => {
 
@@ -59,6 +59,7 @@ function Productos(props) {
             method: 'GET',
             headers: {'Content-Type': 'application/json'},
         })
+        //console.log(res);
         const response = await res.json();
         setProductos(response);
       }
@@ -73,6 +74,7 @@ function Productos(props) {
       setPrecioCompra(producto.precio_compra);
       setPrecioVenta(producto.precio_venta);
       setCantidad(producto.cantidad);
+      setCategoria(producto.categorias_id);
       setUrl(producto.imagen);
       setOpen(true);
     }
@@ -115,71 +117,64 @@ function Productos(props) {
 
     //
     const classes = useStyles();
-    if(gettoken!=null){
-      return (
-        <Grommet theme={hp} >
-        <Header/>
-          {id && nombre && precioCompra && precioVenta && cantidad && open && url &&
-           <EditarProductos productoEdit={id} productoNombre={nombre} productoPrecioCompra ={precioCompra}
-           productoPrecioVenta = {precioVenta} productoCantidad = {cantidad} isOpen = {open} isClose = {handleClose} productoUrl = {url}/>
-           }
-           {id2}
-        <br />
-          <Grid container spacing={3}>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={3}>
-          </Grid>
-          <Grid item xs={3}>
-           <InsertarProductos productoInsert="fer"/>
-          </Grid>
+    return (
+      <Grommet theme={hp} >
+      <Header/>
+        {id && nombre && precioCompra && precioVenta && cantidad && open && url && categoria &&
+         <EditarProductos productoEdit={id} productoNombre={nombre} productoPrecioCompra ={precioCompra}
+         productoPrecioVenta = {precioVenta} productoCantidad = {cantidad} productoCategoria = {categoria}
+         isOpen = {open} isClose = {handleClose} productoUrl = {url}/>
+         }
+         {id2}
+      <br />
+        <Grid container spacing={3}>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={3}>
+         <InsertarProductos productoInsert="fer"/>
         </Grid>
-        <Box align="center" pad="large">
-          <Table className={classes.table} >
-            <TableHeader>
-              <TableRow>
-                <TableCell scope="col" border="bottom"><strong>ID</strong></TableCell>
-                <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
-                <TableCell scope="col" border="bottom"><strong>Precio de Compra</strong></TableCell>
-                <TableCell align="center" size="small" scope="col" border="bottom"><strong>Precio de Venta</strong></TableCell>
-                <TableCell scope="col" border="bottom"><strong>Cantidad</strong></TableCell>
-                <TableCell align="center" size="small" scope="col" border="bottom"><strong>Imagen</strong></TableCell>
-                <TableCell align="center" size="small" scope="col" border="bottom"><strong>Categoria</strong></TableCell>
-                <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
-                <TableCell scope="col" border="bottom"><strong></strong></TableCell>
+      </Grid>
+      <Box align="center" pad="large">
+        <Table className={classes.table} >
+          <TableHeader>
+            <TableRow>
+              <TableCell scope="col" border="bottom"><strong>ID</strong></TableCell>
+              <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
+              <TableCell scope="col" border="bottom"><strong>Precio de Compra</strong></TableCell>
+              <TableCell align="center" size="small" scope="col" border="bottom"><strong>Precio de Venta</strong></TableCell>
+              <TableCell scope="col" border="bottom"><strong>Cantidad</strong></TableCell>
+              <TableCell align="center" size="small" scope="col" border="bottom"><strong>Imagen</strong></TableCell>
+              <TableCell align="center" size="small" scope="col" border="bottom"><strong>Categoria</strong></TableCell>
+              <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
+              <TableCell scope="col" border="bottom"><strong></strong></TableCell>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {productos.map((producto) =>
+              <TableRow scope="row">
+                <TableCell >{producto.id}</TableCell>
+                <TableCell align="center" >{producto.nombre}</TableCell>
+                <TableCell align="center">{producto.precio_compra}</TableCell>
+                <TableCell align="center">{producto.precio_venta}</TableCell>
+                <TableCell align="center">{producto.cantidad}</TableCell>
+                <TableCell align="center">
+                  <img src={producto.imagen} width="100" height="100"/>
+                </TableCell>
+                <TableCell align="center">{producto.categorias_id}</TableCell>
+                <TableCell>
+                <Button hoverIndicator="true" onClick={() => editar(producto)}><EditIcon /></Button>
+                </TableCell>
+                <TableCell>
+                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(producto)} ><DeleteIcon /> </Button>
+                </TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {productos.map((producto) =>
-                <TableRow scope="row">
-                  <TableCell >{producto.id}</TableCell>
-                  <TableCell align="center" >{producto.nombre}</TableCell>
-                  <TableCell align="center">{producto.precio_compra}</TableCell>
-                  <TableCell align="center">{producto.precio_venta}</TableCell>
-                  <TableCell align="center">{producto.cantidad}</TableCell>
-                  <TableCell align="center">
-                    <img src={producto.imagen} width="100" height="100"/>
-                  </TableCell>
-                  <TableCell align="center">{producto.categorias_id}</TableCell>
-                  <TableCell>
-                  <Button hoverIndicator="true" onClick={() => editar(producto)}><EditIcon /></Button>
-                  </TableCell>
-                  <TableCell>
-                  <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(producto)} ><DeleteIcon /> </Button>
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-          </Box>
-          </Grommet>
-      );
-    }else {
-      return(
-        <p>Necesitas inciar sesion</p>
-      );
-    }
-
+            )}
+          </TableBody>
+        </Table>
+        </Box>
+        </Grommet>
+    );
 }
 
 export default Productos;
