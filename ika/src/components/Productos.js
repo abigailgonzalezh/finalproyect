@@ -59,7 +59,6 @@ function Productos(props) {
             method: 'GET',
             headers: {'Content-Type': 'application/json'},
         })
-        //console.log(res);
         const response = await res.json();
         setProductos(response);
       }

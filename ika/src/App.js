@@ -11,6 +11,7 @@ import Historial from './components/Historial';
 import Empleado from './components/Empleados';
 import Categorias from './components/Categorias';
 import Index from './components/Index';
+import Chart from './components/Chart';
 function App() {
   return (
     <Router>
