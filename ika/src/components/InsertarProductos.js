@@ -1,8 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Grommet, Box, Image, Button } from "grommet";
 import { TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {storage} from "../firebase/index";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 function InsertarProductos(props) {
     const [nombre, setNombre] = useState('');
@@ -12,9 +17,26 @@ function InsertarProductos(props) {
     const allInputs = {imgUrl: ''};
     const [imageAsFile, setImageAsFile] = useState('');
     const [imageAsUrl, setImageAsUrl] = useState(allInputs);
+    const [categorias, setCategorias] = useState([]);
+    const [categoria, setCategoria] = useState('');
     //console.log("La respuesta es");
 
     const [open, setOpen] = React.useState(false);
+
+    useEffect(() => {
+
+      const getCategorias = async () => {
+        const res = await fetch("/categories", {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        })
+        //console.log(res);
+        const response = await res.json();
+        setCategorias(response);
+        console.log(categorias);
+      }
+      getCategorias();
+  })
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -32,7 +54,7 @@ function InsertarProductos(props) {
       compri.value = " ";
     };
 
-    //console.log(imageAsFile)
+    console.log(imageAsFile)
     const handleImageAsFile = (e) => {
       const image = e.target.files[0]
       setImageAsFile(imageFile => (image))
@@ -64,7 +86,7 @@ function InsertarProductos(props) {
       })
     }
 
-    //console.log(imageAsUrl.imgUrl);
+    console.log(imageAsUrl.imgUrl);
 
     const finalUrl = imageAsUrl.imgUrl;
 
@@ -137,7 +159,7 @@ function InsertarProductos(props) {
         },
       }));
 
-    // getProductos();
+
     const classes = useStyles();
     return (
       <div>
@@ -186,12 +208,29 @@ function InsertarProductos(props) {
             variant="outlined"
             fullWidth
           />
+          <br/>
+          <br/>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">Categorias</InputLabel>
+            <Select
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+              value={categoria}
+              onChange={(ev) => setCategoria(ev.target.value)}
+            >
+              {categorias.map((categoria) =>
+              <MenuItem value={categoria.id}>{categoria.nombre}</MenuItem>
+              )}
+            </Select>
+          </FormControl>
           <form onSubmit={handleFireBaseUpload}>
+            <br/>
             <input
               type="file"
               id="i"
               onChange={handleImageAsFile}
             />
+            <br/>
             <button>Subir</button>
           </form>
         </DialogContent>

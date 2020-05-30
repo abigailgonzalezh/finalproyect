@@ -37,7 +37,6 @@ export default function Orders() {
       })
       const response = await res.json();
       setRows(response);
-      console.log(rows);
     }
     getData();
 

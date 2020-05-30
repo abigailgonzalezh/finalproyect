@@ -8,5 +8,6 @@ module.exports = function(app) {
     app.use(createProxyMiddleware("/reviews", { target: "http://localhost:3001" }));
     app.use(createProxyMiddleware("/empleados", { target: "http://localhost:3002" }));
     app.use(createProxyMiddleware("/login", { target: "http://localhost:3002" }));
+    app.use(createProxyMiddleware("/salario", { target: "http://localhost:3002" }));
     app.use(createProxyMiddleware("/categories", {target: "http://localhost:3000" }));
 };

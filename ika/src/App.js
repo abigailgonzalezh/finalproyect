@@ -6,7 +6,6 @@ import Reviews from './components/Reviews';
 import Cliente from './components/ClienteProductos';
 import Ventas from './components/EmpleadoProductos';
 import Corte from './components/CorteCaja';
-import Balance from './components/Balance';
 import Historial from './components/Historial';
 import Empleado from './components/Empleados';
 import Categorias from './components/Categorias';
@@ -21,9 +20,6 @@ function App() {
           </Route>
           <Route path="/Historial">
             <Historial/>
-          </Route>
-          <Route path="/Balance">
-            <Balance/>
           </Route>
           <Route path="/corte">
             <Corte/>
