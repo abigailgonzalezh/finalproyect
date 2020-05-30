@@ -35,12 +35,12 @@ export default function Deposits() {
     <React.Fragment>
       <Title>Ventas totales</Title>
       <Typography component="p" variant="h4">
-        {data.map((ventas) =>
+        $ {data.map((ventas) =>
           ventas.venta
         )}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        pesos
+        En esta semana
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>

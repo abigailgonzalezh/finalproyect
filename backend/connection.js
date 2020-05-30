@@ -5,6 +5,7 @@ var mysqlConnection = mysql.createConnection({
     user : "root",
     password : "",
     database: "ika",
+    dateStrings: true,
     multipleStatements : true
 });
 
