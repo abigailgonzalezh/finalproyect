@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const ReviewSchema = new mongoose.Schema({
-    id: {
-    type: Number, required: true
+    producto: {
+    type: String, required: true
     },
 
     estrellas: {

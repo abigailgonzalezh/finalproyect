@@ -101,7 +101,7 @@ function Reviews(props) {
           <TableBody>
             {reviews.map((reviews) =>
               <TableRow className="data-row">
-                <TableCell align="center" >{reviews.id} </TableCell>
+                <TableCell align="center" >{reviews.producto} </TableCell>
                 <TableCell align="center" >{reviews.review}</TableCell>
                 <TableCell align="center" ><img src={reviews.imagen}  width="180" height="100"/></TableCell>
                 <TableCell align="center" >{reviews.estrellas}</TableCell>
