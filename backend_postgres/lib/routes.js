@@ -120,7 +120,7 @@ module.exports = function (app) {
 						if(err){console.log(err);}
 						else {
 
-						client.query('COMMIT')
+						  client.query('COMMIT')
 							console.log(result)
 							console.log('success','User updated.')
 							return;
@@ -151,6 +151,24 @@ module.exports = function (app) {
     }
     catch(e){throw(e)}
       res.status(200).json(`User edited`)
+  });
+
+  app.get('/', async function(req, res) {
+    pool.query('SELECT * FROM empleado', (error, results) => {
+      if (error) {
+        throw error
+      }
+      res.status(200).json(results.rows)
+    })
+  });
+
+  app.get('/salario', async function(req, res) {
+    pool.query('select sum(salario) as salario from empleado;', (error, results) => {
+      if (error) {
+        throw error
+      }
+      res.status(200).json(results.rows)
+    })
   });
 }
 JWTMiddleware.use((req, res, next) => {
