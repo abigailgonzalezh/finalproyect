@@ -45,8 +45,8 @@ function Productos(props) {
         marginTop: theme.spacing(4),
       },
       cardGrid: {
-        paddingTop: theme.spacing(8),
-        paddingBottom: theme.spacing(8),
+        paddingTop: theme.spacing(4),
+        paddingBottom: theme.spacing(4),
       },
       card: {
         height: '100%',
@@ -59,10 +59,17 @@ function Productos(props) {
       cardContent: {
         flexGrow: 1,
       },
+      media: {
+       width: 220,
+       height: 220,
+     },
       footer: {
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(6),
       },
+      root: {
+  maxWidth: 345,
+},
     }));
 
   function review(producto){
@@ -102,11 +109,12 @@ function Productos(props) {
         {/* End hero unit */}
         <Grid container spacing={4}>
           {productos.map((producto) => (
-            <Grid item key={producto} xs={12} sm={6} md={4}>
+            <Grid item key={producto} xs={6} sm={5} md={3}>
               <Card className={classes.card}>
               <CardMedia
                 className={classes.media}
                 image={producto.imagen}
+                alignItems="center"
               />
                 <CardContent className={classes.cardContent}>
                   <Typography gutterBottom variant="h5" component="h2">

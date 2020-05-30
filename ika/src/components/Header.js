@@ -22,8 +22,7 @@ function Headers(props) {
       <Box direction="row" gap="medium">
         <Anchor label="Productos" href="/productos" />
         <Anchor label="Historial" href="/Historial"/>
-        <Anchor label="Corte de caja" href="/corte"/>
-        <Anchor label="Balance" href="/Balance" />
+        <Anchor label="Ventas" href="/corte"/>
         <Anchor label="Reviews" href="/review" />
         <Anchor label="Personal" href="/personal" />
         <Anchor label="Cerrar sesion" onClick={() => logOff()}>Cerrar Sesion</Anchor>

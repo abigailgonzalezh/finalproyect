@@ -10,6 +10,7 @@ import Balance from './components/Balance';
 import Historial from './components/Historial';
 import Empleado from './components/Empleados';
 import Index from './components/Index';
+import Chart from './components/Chart';
 function App() {
   return (
     <Router>
