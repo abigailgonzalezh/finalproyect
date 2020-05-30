@@ -9,6 +9,7 @@ import Corte from './components/CorteCaja';
 import Balance from './components/Balance';
 import Historial from './components/Historial';
 import Empleado from './components/Empleados';
+import Categorias from './components/Categorias';
 import Index from './components/Index';
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route path="/productos">
             <Productos/>
+          </Route>
+          <Route path="/categorias">
+            <Categorias/>
           </Route>
           <Route path="/">
             <Index/>
