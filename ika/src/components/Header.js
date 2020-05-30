@@ -21,6 +21,7 @@ function Headers(props) {
   />
       <Box direction="row" gap="medium">
         <Anchor label="Productos" href="/productos" />
+        <Anchor label="Categorias" href="/categorias"  />
         <Anchor label="Historial" href="/Historial"/>
         <Anchor label="Ventas" href="/corte"/>
         <Anchor label="Reviews" href="/review" />

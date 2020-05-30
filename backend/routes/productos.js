@@ -22,7 +22,7 @@ Router.post("/", (req, res) =>{
     const venta = req.body.precioVenta1;
     const cantidad = req.body.cantidad1;
     const imagen = req.body.imagen1;
-    const categoria = 1;
+    const categoria = req.body.category;
     var values = [
         nombre, compra, venta, cantidad, categoria
     ];
@@ -59,7 +59,7 @@ Router.put("/", (req, res) => {
     const venta = req.body.precioVenta1;
     const cantidad = req.body.cantidad1;
     const imagen = req.body.imagen1;
-    const categoria = 1;
+    const categoria = req.body.category;
 
     mysqlConnection.query("UPDATE productos SET nombre = '"+nombre+"', precio_compra = "+compra+", precio_venta = "+venta+", cantidad = "+cantidad+", imagen = '"+ imagen + "', categorias_id = "+categoria+" WHERE id = "+id+";", (err, rows, fields) => {
         if(!err){
