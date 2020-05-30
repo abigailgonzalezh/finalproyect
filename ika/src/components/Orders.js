@@ -57,10 +57,10 @@ export default function Orders() {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.fecha}</TableCell>
+              <TableCell><Moment format="DD-MM-YYYY">{row.fecha}</Moment></TableCell>
               <TableCell>{row.nombre}</TableCell>
               <TableCell>{row.cantidad}</TableCell>
-              <TableCell>{row.totalVenta}</TableCell>
+              <TableCell>$ {row.totalVenta}</TableCell>
             </TableRow>
           ))}
         </TableBody>
