@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Venta from './Venta';
-import Header from './Header';
+import Header from './HeaderEmpleado';
 import { hp } from "grommet-theme-hp";
 import {
   Box,
@@ -80,7 +80,7 @@ function Ventas(props) {
   //
   const classes = useStyles();
   return (
-    <Grommet theme={grommet}>
+    <Grommet theme={hp}>
       <Header/>
          {id &&
          <Venta venta={id} />
@@ -98,6 +98,7 @@ function Ventas(props) {
         <Table className={classes.table} >
         <TableHeader>
           <TableRow>
+          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Imagen</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
           <TableCell scope="col" border="bottom"><strong>Precio</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Categoria</strong></TableCell>
@@ -108,6 +109,9 @@ function Ventas(props) {
         <TableBody>
           {productos.map((producto) =>
             <TableRow className="row">
+              <TableCell align="center">
+                <img src={producto.imagen} width="100" height="100"/>
+              </TableCell>
               <TableCell align="center" >{producto.nombre}</TableCell>
               <TableCell align="center" >{producto.precio_venta}</TableCell>
               <TableCell align="center" >{producto.categorias_id}</TableCell>

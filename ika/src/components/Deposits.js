@@ -31,6 +31,7 @@ export default function Deposits() {
 
   })
 
+
   return (
     <React.Fragment>
       <Title>Ventas totales</Title>
@@ -42,11 +43,6 @@ export default function Deposits() {
       <Typography color="textSecondary" className={classes.depositContext}>
         En esta semana
       </Typography>
-      <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          Ver balance
-        </Link>
-      </div>
     </React.Fragment>
   );
 }

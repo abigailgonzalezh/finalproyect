@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Grommet, Box, Image, Button } from "grommet";
 import {TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 import { hp } from "grommet-theme-hp";
+import NumberFormat from 'react-number-format';
 function Venta(props){
     const [cantidad, setCantidad] = useState('');
     const idProducto = props.venta;
@@ -79,12 +80,13 @@ function Venta(props){
           <DialogContentText>
              Digite el numero de productos a vender
           </DialogContentText>
-          <TextField
+          <NumberFormat
             autoFocus
             margin="dense"
             id="cant"
             //value={cantidad}
             onChange={(ev) => setCantidad(ev.target.value)}
+            customInput={TextField}
             label="Cantidad"
             variant="outlined"
             fullWidth

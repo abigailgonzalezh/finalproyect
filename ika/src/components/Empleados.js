@@ -46,6 +46,8 @@ const [password, setPassword] = useState('');
 const [id, setId] = useState('');
 const [nombre, setNombre] = useState('');
 const [apellido, setApellido] = useState('');
+const [mail, setMail] = useState('');
+const [password, setPassword] = useState('');
 const [salario, setSalario] = useState('');
 const [open, setOpen] = React.useState(false);
 
@@ -78,6 +80,8 @@ var id2 = '';
     setPassword(empleado.password);
     setNombre(empleado.nombre);
     setApellido(empleado.apellido);
+    setMail(empleado.mail);
+    setPassword(empleado.password);
     setSalario(empleado.salario);
     setOpen(true);
   }
@@ -136,6 +140,8 @@ var id2 = '';
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Password</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Apellido</strong></TableCell>
+          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Correo</strong></TableCell>
+          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Contraseña</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Salario</strong></TableCell>
           <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
           <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
@@ -149,12 +155,14 @@ var id2 = '';
               <TableCell align="center" >{empleado.password}</TableCell>
               <TableCell align="center" >{empleado.nombre}</TableCell>
               <TableCell align="center" >{empleado.apellido}</TableCell>
+              <TableCell align="center" >{empleado.mail}</TableCell>
+              <TableCell align="center" >{empleado.password}</TableCell>
               <TableCell align="center" >{empleado.salario}</TableCell>
               <TableCell align="center">
-                <Button hoverIndicator="true" onClick={() => editar(empleado)}><EditIcon /></Button>
+                <Button hoverIndicator="true" onClick={() => editar(empleados)}><EditIcon /></Button>
               </TableCell>
               <TableCell align="center" >
-                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(empleado)} ><DeleteIcon /> </Button>
+                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(empleados)} ><DeleteIcon /> </Button>
                 </TableCell>
             </TableRow>
           )}

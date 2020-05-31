@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import NumberFormat from 'react-number-format';
 
 
 function EditarProductos(props){
@@ -77,8 +78,8 @@ function EditarProductos(props){
         console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
       }
       const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile)
-      //initiates the firebase side uploading 
-      uploadTask.on('state_changed', 
+      //initiates the firebase side uploading
+      uploadTask.on('state_changed',
       (snapShot) => {
         //takes a snap shot of the process as it is happening
         console.log(snapShot)
@@ -196,29 +197,32 @@ function EditarProductos(props){
             variant="outlined"
             fullWidth
           />
-          <TextField
+          <NumberFormat
             margin="dense"
             id="compr"
             value={precioCompra}
             onChange={(ev) => setPrecioCompra(ev.target.value)}
             label="Precio de Compra"
+            customInput={TextField}
             variant="outlined"
             fullWidth
           />
-          <TextField
+          <NumberFormat
             margin="dense"
             id="vent"
             value={precioVenta}
             onChange={(ev) => setPrecioVenta(ev.target.value)}
             label="Precio de Venta"
+            customInput={TextField}
             variant="outlined"
             fullWidth
           />
-          <TextField
+          <NumberFormat
             margin="dense"
             id="cant"
             value={cantidad}
             onChange={(ev) => setCantidad(ev.target.value)}
+            customInput={TextField}
             label="Cantidad"
             variant="outlined"
             fullWidth
@@ -240,7 +244,7 @@ function EditarProductos(props){
           </FormControl>
           <form onSubmit={handleFireBaseUpload}>
             <br/>
-            <input 
+            <input
               type="file"
               id="i"
               onChange={handleImageAsFile}
