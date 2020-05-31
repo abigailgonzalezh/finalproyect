@@ -116,7 +116,7 @@ module.exports = function (app) {
       const apellido = req.body.apellido;
       const salario = req.body.salario;
 			var pwd = await bcrypt.hash(req.body.password, 5);
-					client.query("UPDATE empleado SET nombre = $1, apellido = $2, salario = $3, mail = $4, password = $5 WHERE mail = $4", [nombre, apellido, salario, mail, pwd], function(err, result) {
+					client.query("UPDATE empleado SET nombre = $1, apellido = $2, salario = $3, mail = $4, password = $5 WHERE id = $6", [nombre, apellido, salario, mail, pwd, id], function(err, result) {
 						if(err){console.log(err);}
 						else {
 
@@ -136,8 +136,8 @@ module.exports = function (app) {
     try{
       const client = await pool.connect()
       await client.query('BEGIN')
-      const mail = req.body.mail;
-          client.query("DELETE FROM empleado WHERE mail = $1", [mail], function(err, result) {
+      const id = req.body.id;
+          client.query("DELETE FROM empleado WHERE id = $1", [id], function(err, result) {
             if(err){console.log(err);}
             else {
 
@@ -153,7 +153,7 @@ module.exports = function (app) {
       res.status(200).json(`User edited`)
   });
 
-  app.get('/', async function(req, res) {
+  app.get('/empleados', async function(req, res) {
     pool.query('SELECT * FROM empleado', (error, results) => {
       if (error) {
         throw error

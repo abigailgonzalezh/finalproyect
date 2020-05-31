@@ -5,12 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 function InsertarEmpleados(props) {
     const [mail, setMail] = useState('');
-    const [password, setPassword] = ('');
+    const [password, setPassword] = useState('');
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [salario, setSalario] = useState('');
-
-
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -32,11 +30,7 @@ function InsertarEmpleados(props) {
     };
 
     const postEmpleados = async () => {
-        console.log("AGREGANDO EMPLEADO");
-        console.log(nombre);
-        console.log(apellido);
-        console.log(salario);
-        const res = await fetch("/empleados", {
+        const res = await fetch("/join", {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -47,12 +41,11 @@ function InsertarEmpleados(props) {
             salario: salario
           })
         })
-        console.log(res);
         const response = await res.json();
-        console.log(response);
     }
 
-    function agregar(){
+    function agregar(){    const [password, setPassword] = ('');
+
       handleClose();
       postEmpleados();
     }

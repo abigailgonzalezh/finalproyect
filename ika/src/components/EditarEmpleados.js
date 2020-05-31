@@ -19,7 +19,7 @@ function EditarEmpleados(props){
     const [open, setOpen] = React.useState(props.isOpen);
 
     const editEmpleados = async () => {
-      const res = await fetch("/empleados", {
+      const res = await fetch("/edit", {
           method: 'PUT',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -98,15 +98,15 @@ function EditarEmpleados(props){
         <DialogTitle id="form-dialog-title">Agregar</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Llene el formulario para agregar empleados
+            Llene el formulario para editar al empleado
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="mail"
-            value={nombre}
+            value={mail}
             onChange={(ev) => setMail(ev.target.value)}
-            label="Nombre"
+            label="Correo"
             variant="outlined"
             fullWidth
           />
@@ -114,9 +114,9 @@ function EditarEmpleados(props){
             autoFocus
             margin="dense"
             id="pass"
-            value={nombre}
+            value={password}
             onChange={(ev) => setPassword(ev.target.value)}
-            label="Nombre"
+            label="Contraseña"
             variant="outlined"
             fullWidth
           />

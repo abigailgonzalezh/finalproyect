@@ -46,8 +46,6 @@ const [password, setPassword] = useState('');
 const [id, setId] = useState('');
 const [nombre, setNombre] = useState('');
 const [apellido, setApellido] = useState('');
-const [mail, setMail] = useState('');
-const [password, setPassword] = useState('');
 const [salario, setSalario] = useState('');
 const [open, setOpen] = React.useState(false);
 
@@ -87,11 +85,12 @@ var id2 = '';
   }
 
   const deleteEmpleado = async () => {
-    console.log("aqui");
-    console.log(id2);
-    const res = await fetch("/empleados/"+id2+"", {
+    const res = await fetch("/delete/", {
         method: 'DELETE',
-        headers: {'Content-Type': 'application/json'}
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          id: id2
+        })
     })
     const response = await res.json();
   }
@@ -136,12 +135,9 @@ var id2 = '';
         <TableHeader>
           <TableRow>
           <TableCell scope="col" border="bottom"><strong>ID</strong></TableCell>
-          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Mail</strong></TableCell>
-          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Password</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Apellido</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Correo</strong></TableCell>
-          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Contraseña</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Salario</strong></TableCell>
           <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
           <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
@@ -151,18 +147,15 @@ var id2 = '';
           {empleados.map((empleado) =>
             <TableRow className="data-row">
               <TableCell align="center" >{empleado.id}</TableCell>
-              <TableCell align="center" >{empleado.mail}</TableCell>
-              <TableCell align="center" >{empleado.password}</TableCell>
               <TableCell align="center" >{empleado.nombre}</TableCell>
               <TableCell align="center" >{empleado.apellido}</TableCell>
               <TableCell align="center" >{empleado.mail}</TableCell>
-              <TableCell align="center" >{empleado.password}</TableCell>
               <TableCell align="center" >{empleado.salario}</TableCell>
               <TableCell align="center">
-                <Button hoverIndicator="true" onClick={() => editar(empleados)}><EditIcon /></Button>
+                <Button hoverIndicator="true" onClick={() => editar(empleado)}><EditIcon /></Button>
               </TableCell>
               <TableCell align="center" >
-                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(empleados)} ><DeleteIcon /> </Button>
+                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(empleado)} ><DeleteIcon /> </Button>
                 </TableCell>
             </TableRow>
           )}
