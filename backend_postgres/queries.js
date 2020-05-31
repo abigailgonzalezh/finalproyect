@@ -42,11 +42,11 @@ const postEmpleados = (request, response) =>{
   //const nombre = request.params.nombre;
   //const apellido = request.params.apellido;
   //const salario =request.params.salario;
-  const { nombre, apellido, salario } = request.body
+  const { mail, password, nombre, apellido, salario } = request.body
   console.log("------POST--------");
   console.log(nombre);
 
-  pool.query("INSERT INTO empleado (nombre, apellido, salario) VALUES ($1, $2, $3)", [nombre, apellido, salario], (error, results) =>{
+  pool.query("INSERT INTO empleado (mail, password, nombre, apellido, salario) VALUES ($1, $2, $3, $4, $5)", [mail, password, nombre, apellido, salario], (error, results) =>{
     if (error){
       throw error;
     }
@@ -59,7 +59,7 @@ const putEmpleados = (request, response) => {
   //const apellido = request.body;
   //const salario = request.body;
   //const id = request.body;
-  const { nombre, apellido, salario, id} = request.body;
+  const { mail, password, nombre, apellido, salario, id} = request.body;
   //const id = parseInt(request.params.id);
   console.log("------PUT--------");
   console.log(nombre);
@@ -67,7 +67,7 @@ const putEmpleados = (request, response) => {
   console.log(salario);
   console.log(id);
 
-  pool.query("UPDATE empleado SET nombre = $1, apellido = $2, salario = $3 WHERE id = $4", [nombre, apellido, salario, id], (error, results) =>{
+  pool.query("UPDATE empleado SET mail = $1, password = $2, nombre = $3, apellido = $4, salario = $5 WHERE id = $6", [mail, password, nombre, apellido, salario, id], (error, results) =>{
     if (error){
       throw error;
       console.log(error);

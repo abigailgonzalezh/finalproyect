@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import { Grommet, Box, Image, Button } from "grommet";
-import { TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core'
+import { TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 function InsertarEmpleados(props) {
+    const [mail, setMail] = useState('');
+    const [password, setPassword] = ('');
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [salario, setSalario] = useState('');
@@ -22,6 +25,10 @@ function InsertarEmpleados(props) {
       apellidov.value = " ";
       var salariov = document.getElementById("sal");
       salariov.value = " ";
+      var mailv = document.getElementById("mail");
+      mailv.value = " ";
+      var passv = document.getElementById("pass");
+      passv.value = " ";
     };
 
     const postEmpleados = async () => {
@@ -33,6 +40,8 @@ function InsertarEmpleados(props) {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
+            mail: mail,
+            password: password,
             nombre: nombre,
             apellido: apellido,
             salario: salario
@@ -48,7 +57,7 @@ function InsertarEmpleados(props) {
       postEmpleados();
     }
 
-    const mystlye = {
+     const mystlye = {
       minWidth: "50%",
       minHeight: 50
     };
@@ -79,6 +88,12 @@ function InsertarEmpleados(props) {
          marginTop:20
       };
 
+      const useStyles = makeStyles((theme) => ({
+        button: {
+          margin: theme.spacing(1),
+        },
+      }));
+
 
     return (
       <div>
@@ -90,6 +105,26 @@ function InsertarEmpleados(props) {
           <DialogContentText>
             Llene el formulario para agregar empleados
           </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="mail"
+            //value={nombre}
+            onChange={(ev) => setMail(ev.target.value)}
+            label="Mail"
+            variant="outlined"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="pass"
+            //value={nombre}
+            onChange={(ev) => setPassword(ev.target.value)}
+            label="Password"
+            variant="outlined"
+            fullWidth
+          />
           <TextField
             autoFocus
             margin="dense"

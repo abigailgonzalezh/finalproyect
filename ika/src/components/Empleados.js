@@ -20,6 +20,7 @@ import {
   Button
 } from "grommet";
 import { grommet } from "grommet/themes";
+
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -40,6 +41,8 @@ const StyledTableRow = withStyles((theme) => ({
 
 function Empleados (props) {
 const [empleados, setEmpleados] = useState([]);
+const [mail, setMail] = useState('');
+const [password, setPassword] = useState('');
 const [id, setId] = useState('');
 const [nombre, setNombre] = useState('');
 const [apellido, setApellido] = useState('');
@@ -71,6 +74,8 @@ var id2 = '';
     console.log("entro 1");
     console.log(empleado.id);
     setId(empleado.id);
+    setMail(empleado.mail);
+    setPassword(empleado.password);
     setNombre(empleado.nombre);
     setApellido(empleado.apellido);
     setSalario(empleado.salario);
@@ -108,8 +113,9 @@ var id2 = '';
   return (
     <Grommet theme={grommet}>
       <Header/>
-      {id && nombre && apellido && salario && open &&
-      <EditarEmpleados empleadoEdit={id} empleadoNombre = {nombre} empleadoApellido = {apellido} empleadoSalario = {salario} isOpen = {open} isClose = {handleClose}/>
+      {id && nombre && apellido && salario && open && mail && password &&
+      <EditarEmpleados empleadoEdit={id} empleadoNombre = {nombre} empleadoApellido = {apellido} empleadoSalario = {salario}
+       empleadoMail = {mail} empleadoPassword = {password} isOpen = {open} isClose = {handleClose}/>
       }
         <br />
       <Grid container spacing={3}>
@@ -126,6 +132,8 @@ var id2 = '';
         <TableHeader>
           <TableRow>
           <TableCell scope="col" border="bottom"><strong>ID</strong></TableCell>
+          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Mail</strong></TableCell>
+          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Password</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Apellido</strong></TableCell>
           <TableCell align="center" size="small" scope="col" border="bottom"><strong>Salario</strong></TableCell>
@@ -137,6 +145,8 @@ var id2 = '';
           {empleados.map((empleado) =>
             <TableRow className="data-row">
               <TableCell align="center" >{empleado.id}</TableCell>
+              <TableCell align="center" >{empleado.mail}</TableCell>
+              <TableCell align="center" >{empleado.password}</TableCell>
               <TableCell align="center" >{empleado.nombre}</TableCell>
               <TableCell align="center" >{empleado.apellido}</TableCell>
               <TableCell align="center" >{empleado.salario}</TableCell>

@@ -4,11 +4,15 @@ import {TextField, Dialog, DialogActions, DialogContent, DialogContentText, Dial
 import { hp } from "grommet-theme-hp";
 function EditarEmpleados(props){
     const idEmpleado = props.empleadoEdit;
+    const mailEmpleado = props.empleadoMail;
+    const passwordEmpleado = props.empleadoPassword;
     const nombreEmpleado = props.empleadoNombre;
     const apellidoEmpleado = props.empleadoApellido;
     const salarioEmpleado = props.empleadoSalario;
 
     const [id, setId] = useState(idEmpleado);
+    const [mail, setMail] = useState(mailEmpleado);
+    const [password, setPassword] = useState(passwordEmpleado);
     const [nombre, setNombre] = useState(nombreEmpleado);
     const [apellido, setApellido] = useState(apellidoEmpleado);
     const [salario, setSalario] = useState(salarioEmpleado);
@@ -20,6 +24,8 @@ function EditarEmpleados(props){
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
             id: id,
+            mail: mail,
+            password: password,
             nombre: nombre,
             apellido: apellido,
             salario: salario
@@ -46,6 +52,10 @@ function EditarEmpleados(props){
       apellidov.value = " ";
       var salariov = document.getElementById("sal");
       salariov.value = " ";
+      var mailv = document.getElementById("mail");
+      mailv.value = " ";
+      var passv = document.getElementById("pass");
+      passv.value = " ";
       setId('');
     };
 
@@ -90,6 +100,26 @@ function EditarEmpleados(props){
           <DialogContentText>
             Llene el formulario para agregar empleados
           </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="mail"
+            value={nombre}
+            onChange={(ev) => setMail(ev.target.value)}
+            label="Nombre"
+            variant="outlined"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="pass"
+            value={nombre}
+            onChange={(ev) => setPassword(ev.target.value)}
+            label="Nombre"
+            variant="outlined"
+            fullWidth
+          />
           <TextField
             autoFocus
             margin="dense"
