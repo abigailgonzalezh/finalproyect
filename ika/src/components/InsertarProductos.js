@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import NumberFormat from 'react-number-format';
 
 function InsertarProductos(props) {
     const [nombre, setNombre] = useState('');
@@ -185,29 +186,33 @@ function InsertarProductos(props) {
             variant="outlined"
             fullWidth
           />
-          <TextField
+          <NumberFormat
             margin="dense"
             id="compr"
             //value={precioCompra}
             onChange={(ev) => setPrecioCompra(ev.target.value)}
+            customInput={TextField}
             label="Precio de Compra"
             variant="outlined"
             fullWidth
           />
-          <TextField
+          <NumberFormat
             margin="dense"
             id="vent"
             //value={precioVenta}
             onChange={(ev) => setPrecioVenta(ev.target.value)}
+            customInput={TextField}
             label="Precio de Venta"
             variant="outlined"
             fullWidth
+
           />
-          <TextField
+          <NumberFormat
             margin="dense"
             id="cant"
             //value={cantidad}
             onChange={(ev) => setCantidad(ev.target.value)}
+            customInput={TextField}
             label="Cantidad"
             variant="outlined"
             fullWidth
@@ -223,7 +228,7 @@ function InsertarProductos(props) {
               onChange={(ev) => setCategoria(ev.target.value)}
             >
               {categorias.map((categoria) =>
-              <MenuItem value={categoria.id}>{categoria.nombre}</MenuItem>
+              <MenuItem  value={categoria.id}>{categoria.nombre}</MenuItem>
               )}
             </Select>
           </FormControl>
