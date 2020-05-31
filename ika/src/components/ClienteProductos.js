@@ -74,7 +74,7 @@ function Productos(props) {
 
   function review(producto){
       console.log(producto.id);
-      setId(producto.id);
+      setId(producto);
       setOpen(true);
   }
 

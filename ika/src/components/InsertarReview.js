@@ -3,49 +3,21 @@ import { Grommet, Box, Image, Button } from "grommet";
 import { TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,TableHead,TableRow, TableCell, TableBody} from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
-import ImageUploader from 'react-images-upload';
-
-var imagen1;
-
-class Upload extends React.Component {
-
-    constructor(props) {
-        super(props);
-         this.state = { pictures: [] };
-         this.onDrop = this.onDrop.bind(this);
-    }
-
-    onDrop(picture) {
-        this.setState({
-            pictures: this.state.pictures.concat(picture),
-        });
-        imagen1 = this.state.pictures.concat(picture);
-    }
-
-    render() {
-        return (
-            <ImageUploader
-                withIcon={true}
-                buttonText='Choose images'
-                //onChange={this.onDrop}
-                imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                maxFileSize={5242880}
-            />
-        );
-    }
-}
-
+import {storage} from "../firebase/index";
 
 function InsertarSugerencias(props) {
 
     const [nombre, setNombre] = useState('');
     const [peticion1, setPeticion1] = useState('');
-
     const [value, setValue] = React.useState(5);
     const [open, setOpen] = React.useState(true);
     const [hover, setHover] = React.useState(-1);
     const [id1, setId] = useState(props.rev);
     const [allreviews, setAllreviews] = useState([]);
+    const [imageAsFile, setImageAsFile] = useState('');
+    const allInputs = {imgUrl: ''};
+    const [imageAsUrl, setImageAsUrl] = useState(allInputs);
+    const finalUrl = imageAsUrl.imgUrl;
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -57,16 +29,46 @@ function InsertarSugerencias(props) {
       comprav.value = " ";
     };
 
+    const handleImageAsFile = (e) => {
+      const image = e.target.files[0]
+      setImageAsFile(imageFile => (image))
+    }
+
+    const handleFireBaseUpload = e => {
+      e.preventDefault()
+      // async magic goes here...
+      if(imageAsFile === '') {
+        console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
+      }
+      const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile)
+      //initiates the firebase side uploading
+      uploadTask.on('state_changed',
+      (snapShot) => {
+        //takes a snap shot of the process as it is happening
+        console.log(snapShot)
+      }, (err) => {
+        //catches the errors
+        console.log(err)
+      }, () => {
+        // gets the functions from storage refences the image storage in firebase by the children
+        // gets the download url then sets the image from firebase as the value for the imgUrl key:
+        storage.ref('images').child(imageAsFile.name).getDownloadURL()
+        .then(fireBaseUrl => {
+          setImageAsUrl(prevObject => ({...prevObject, imgUrl: fireBaseUrl}))
+        })
+      })
+    }
+
     const postReview = async () => {
-      console.log(imagen1);
       const res = await fetch("/reviews", {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            id: id1,
+            id: id1.id,
+            producto: id1.nombre,
             estrellas: value,
             review: peticion1,
-            imagen: imagen1,
+            imagen: finalUrl,
           })
       })
       //console.log(res);
@@ -75,8 +77,9 @@ function InsertarSugerencias(props) {
     }
 
     useEffect(() => {
+      console.log(id1.id)
     const getReviews = async() => {
-      const res = await fetch("/reviews/"+id1+"", {
+      const res = await fetch("/reviews/"+id1.id+"", {
           method: 'GET',
           headers: {'Content-Type': 'application/json'},
       })
@@ -132,7 +135,7 @@ function InsertarSugerencias(props) {
         5: 'Excelente',
       };
 
-    //<TableCell>{btoa(String.fromCharCode.apply(null, new Uint8Array(allreview.imagen.data)))}</TableCell>  
+    //<TableCell>{btoa(String.fromCharCode.apply(null, new Uint8Array(allreview.imagen.data)))}</TableCell>
     // getSugerencias();
 
     return (
@@ -168,7 +171,16 @@ function InsertarSugerencias(props) {
             fullWidth
           />
 
-          <Upload productoInsert="fer"/>
+          <form onSubmit={handleFireBaseUpload}>
+            <br/>
+            <input
+              type="file"
+              id="i"
+              onChange={handleImageAsFile}
+            />
+            <br/>
+            <button>Subir</button>
+          </form>
 
            <div>
               <table style={styletable}>
@@ -183,9 +195,15 @@ function InsertarSugerencias(props) {
                 <TableBody>
                   {allreviews.map((allreview) =>
                     <TableRow className="data-row2">
-                      <TableCell><img src={"data:image/jpg;base64," +  Buffer.from(allreview.imagen.data).toString('base64')} /></TableCell>
+                      <TableCell align="center">
+                        <img src={allreview.imagen} width="100" height="100"/>
+                      </TableCell>
                       <TableCell>{allreview.review}</TableCell>
-                      <TableCell>{allreview.estrellas}</TableCell>
+                      <TableCell>
+                        <Box component="fieldset" mb={3} borderColor="transparent">
+                          <Rating name="read-only" value={allreview.estrellas} readOnly />
+                        </Box>
+                      </TableCell>
                    </TableRow>
                  )}
                </TableBody>
