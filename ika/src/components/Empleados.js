@@ -114,7 +114,7 @@ var id2 = '';
   //
   const classes = useStyles();
   return (
-    <Grommet theme={grommet}>
+    <Grommet theme={hp}>
       <Header/>
       {id && nombre && apellido && salario && open && mail && password &&
       <EditarEmpleados empleadoEdit={id} empleadoNombre = {nombre} empleadoApellido = {apellido} empleadoSalario = {salario}
