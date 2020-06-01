@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import {grommet, Image, Box, Form, FormField, TextInput, Grommet,Button, Clock} from "grommet";
 import Carrousel from './Carrousel.js'
 import imagen from "./Imagenes/logo3.png"
+import images from "./Imagenes/Koy.jpg"
 import { hp } from "grommet-theme-hp"
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
@@ -45,7 +46,7 @@ function Index(props) {
       height: '100vh',
     },
     image: {
-      background: 'url(https://drive.google.com/uc?export=download&id=1IKA6dvi6p9FGqhHZq8b4nMvVCJefwCJ8)',
+      background: 'url(https://drive.google.com/uc?export=download&id=1kDsOopsNwwkQOdMVC9zlvzvYI5RbYMzs)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     },
