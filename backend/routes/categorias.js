@@ -5,7 +5,7 @@ const mysqlConnection = require("../connection");
 Router.get("/", (req, res) =>{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    mysqlConnection.query("SELECT id, nombre FROM categorias;", (err, rows, fields) =>{
+    mysqlConnection.query("SELECT * FROM categorias_view;", (err, rows, fields) =>{
         if(!err){
             res.send(rows);
         }else{
@@ -60,4 +60,4 @@ Router.put("/", (req, res) => {
     })
 })
 
-module.exports = Router; 
+module.exports = Router;

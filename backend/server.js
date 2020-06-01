@@ -1,10 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysqlConnection = require("./connection");
-
 const ProductosRoutes = require("./routes/productos");
 const ProcedimientosRoutes = require("./routes/procedimientos");
-const BalanceRoutes = require("./routes/balance");
 const HistorialRoutes = require("./routes/historial");
 const CategoriasRoutes = require("./routes/categorias");
 
@@ -13,7 +11,6 @@ app.use(bodyParser.json());
 
 app.use("/products", ProductosRoutes);
 app.use("/procedimientos", ProcedimientosRoutes);
-app.use("/bal", BalanceRoutes);
 app.use("/his", HistorialRoutes);
 app.use("/categories", CategoriasRoutes);
 

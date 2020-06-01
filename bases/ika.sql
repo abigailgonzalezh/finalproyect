@@ -26,16 +26,16 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ventas` (IN `id1` INT, `cantidad1` INT)  BEGIN 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ventas` (IN `id1` INT, `cantidad1` INT)  BEGIN
   	DECLARE productoCantidad INT;
-		 SET productoCantidad = 
-     (SELECT cantidad FROM productos 
+		 SET productoCantidad =
+     (SELECT cantidad FROM productos
       WHERE id = id1);
     IF productoCantidad >= cantidad1 THEN
-     UPDATE productos 
+     UPDATE productos
      SET cantidad = productoCantidad-cantidad1
      WHERE id = id1;
-    END IF;   
+    END IF;
   END$$
 
 DELIMITER ;
@@ -225,3 +225,24 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--VIEWS
+CREATE VIEW productos_view
+ AS SELECT productos.id as id, productos.nombre as nombre, precio_compra, precio_venta, cantidad, imagen, categorias.nombre as categorias_id
+ FROM productos INNER JOIN categorias ON categorias_id = categorias.id;
+
+ CREATE VIEW procedimientos_view
+  AS select sum(totalVenta) as venta, date(fecha) as dia from historial
+  WHERE fecha >= DATE_SUB(NOW(),INTERVAL 7 DAY) group by dia;
+
+  CREATE VIEW ventas_view
+  AS select sum(totalVenta) as venta from historial WHERE fecha >= DATE_SUB(NOW(),INTERVAL 7 DAY);
+
+  CREATE VIEW historial_view
+  AS select * from historial WHERE fecha >= DATE_SUB(NOW(),INTERVAL 7 DAY);
+
+  CREATE VIEW historial_trigger_view
+  AS SELECT * FROM historial_inventario ORDER BY changedate DESC;
+
+  CREATE VIEW categorias_view
+  AS SELECT id, nombre FROM categorias;
