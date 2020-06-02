@@ -113,57 +113,64 @@ var id2 = '';
 
   //
   const classes = useStyles();
-  return (
-    <Grommet theme={hp}>
-      <Header/>
-      {id && nombre && apellido && salario && open && mail && password &&
-      <EditarEmpleados empleadoEdit={id} empleadoNombre = {nombre} empleadoApellido = {apellido} empleadoSalario = {salario}
-       empleadoMail = {mail} empleadoPassword = {password} isOpen = {open} isClose = {handleClose}/>
-      }
-        <br />
-      <Grid container spacing={3}>
-      <Grid item xs={3}></Grid>
-      <Grid item xs={3}></Grid>
-      <Grid item xs={3}>
+  const gettoken = localStorage.getItem('token');
+  if(gettoken!=null){
+    return (
+      <Grommet theme={hp}>
+        <Header/>
+        {id && nombre && apellido && salario && open && mail && password &&
+        <EditarEmpleados empleadoEdit={id} empleadoNombre = {nombre} empleadoApellido = {apellido} empleadoSalario = {salario}
+         empleadoMail = {mail} empleadoPassword = {password} isOpen = {open} isClose = {handleClose}/>
+        }
+          <br />
+        <Grid container spacing={3}>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={3}>
+        </Grid>
+        <Grid item xs={3}>
+        < EmpleadoInsert InsertarEmpleado/>
+        </Grid>
       </Grid>
-      <Grid item xs={3}>
-      < EmpleadoInsert InsertarEmpleado/>
-      </Grid>
-    </Grid>
-      <Box align="center" pad="large">
-        <Table className={classes.table} >
-        <TableHeader>
-          <TableRow>
-          <TableCell scope="col" border="bottom"><strong>ID</strong></TableCell>
-          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
-          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Apellido</strong></TableCell>
-          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Correo</strong></TableCell>
-          <TableCell align="center" size="small" scope="col" border="bottom"><strong>Salario</strong></TableCell>
-          <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
-          <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {empleados.map((empleado) =>
-            <TableRow className="data-row">
-              <TableCell align="center" >{empleado.id}</TableCell>
-              <TableCell align="center" >{empleado.nombre}</TableCell>
-              <TableCell align="center" >{empleado.apellido}</TableCell>
-              <TableCell align="center" >{empleado.mail}</TableCell>
-              <TableCell align="center" >{empleado.salario}</TableCell>
-              <TableCell align="center">
-                <Button hoverIndicator="true" onClick={() => editar(empleado)}><EditIcon /></Button>
-              </TableCell>
-              <TableCell align="center" >
-                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(empleado)} ><DeleteIcon /> </Button>
-                </TableCell>
+        <Box align="center" pad="large">
+          <Table className={classes.table} >
+          <TableHeader>
+            <TableRow>
+            <TableCell scope="col" border="bottom"><strong>ID</strong></TableCell>
+            <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
+            <TableCell align="center" size="small" scope="col" border="bottom"><strong>Apellido</strong></TableCell>
+            <TableCell align="center" size="small" scope="col" border="bottom"><strong>Correo</strong></TableCell>
+            <TableCell align="center" size="small" scope="col" border="bottom"><strong>Salario</strong></TableCell>
+            <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
+            <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
             </TableRow>
-          )}
-        </TableBody>
-        </Table>
-        </Box>
-        </Grommet>
-  );
+          </TableHeader>
+          <TableBody>
+            {empleados.map((empleado) =>
+              <TableRow className="data-row">
+                <TableCell align="center" >{empleado.id}</TableCell>
+                <TableCell align="center" >{empleado.nombre}</TableCell>
+                <TableCell align="center" >{empleado.apellido}</TableCell>
+                <TableCell align="center" >{empleado.mail}</TableCell>
+                <TableCell align="center" >{empleado.salario}</TableCell>
+                <TableCell align="center">
+                  <Button hoverIndicator="true" onClick={() => editar(empleado)}><EditIcon /></Button>
+                </TableCell>
+                <TableCell align="center" >
+                  <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(empleado)} ><DeleteIcon /> </Button>
+                  </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+          </Table>
+          </Box>
+          </Grommet>
+    );
+  }else{
+      return(
+        <p>Necesitas inciar sesion</p>
+      );
+    }
 }
 
 export default Empleados;

@@ -30,7 +30,7 @@ const StyledTableCell = withStyles((theme) => ({
       fontSize: 14,
     },
 }))(TableCell);
-  
+
 const StyledTableRow = withStyles((theme) => ({
     root: {
       '&:nth-of-type(odd)': {
@@ -104,51 +104,57 @@ function Categorias(props){
     };
 
     const classes = useStyles();
-
-    return (
-        <Grommet theme={hp}>
-            <Header/> 
-            {id && nombre && open &&
-            <EditarCategoria categoriaEdit={id} categoriaNombre={nombre} isOpen = {open} isClose = {handleClose}/>
-            }
-            {id2}
-            <br/>
-            <Grid container spacing={3}>
-                <Grid item xs={3}></Grid>
-                <Grid item xs={3}></Grid>
-                <Grid item xs={3}></Grid>
-                <Grid item xs={3}>
-                    <InsertarCategoria categoriasInsert="fer"/>
-                </Grid>
-            </Grid>
-            <Box align="center" pad="large">
-                <Table className={classes.table} >
-                    <TableHeader>
-                        <TableRow>
-                            <TableCell scope="col" border="bottom"><strong>ID</strong></TableCell>
-                            <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
-                            <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
-                            <TableCell scope="col" border="bottom"><strong></strong></TableCell>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {categorias.map((categoria) =>
-                            <TableRow scope="row">
-                                <TableCell >{categoria.id}</TableCell>
-                                <TableCell align="center" >{categoria.nombre}</TableCell>
-                                <TableCell>
-                                    <Button hoverIndicator="true" onClick={() => editar(categoria)}><EditIcon /></Button>
-                                </TableCell>
-                                <TableCell>
-                                    <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(categoria)} ><DeleteIcon /> </Button>
-                                </TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
-            </Box>
-        </Grommet>
-    );
+    const gettoken = localStorage.getItem('token');
+    if(gettoken!=null){
+      return (
+          <Grommet theme={hp}>
+              <Header/>
+              {id && nombre && open &&
+              <EditarCategoria categoriaEdit={id} categoriaNombre={nombre} isOpen = {open} isClose = {handleClose}/>
+              }
+              {id2}
+              <br/>
+              <Grid container spacing={3}>
+                  <Grid item xs={3}></Grid>
+                  <Grid item xs={3}></Grid>
+                  <Grid item xs={3}></Grid>
+                  <Grid item xs={3}>
+                      <InsertarCategoria categoriasInsert="fer"/>
+                  </Grid>
+              </Grid>
+              <Box align="center" pad="large">
+                  <Table className={classes.table} >
+                      <TableHeader>
+                          <TableRow>
+                              <TableCell scope="col" border="bottom"><strong>ID</strong></TableCell>
+                              <TableCell align="center" size="small" scope="col" border="bottom"><strong>Nombre</strong></TableCell>
+                              <TableCell align="end"scope="col" border="bottom"><strong></strong></TableCell>
+                              <TableCell scope="col" border="bottom"><strong></strong></TableCell>
+                          </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                          {categorias.map((categoria) =>
+                              <TableRow scope="row">
+                                  <TableCell >{categoria.id}</TableCell>
+                                  <TableCell align="center" >{categoria.nombre}</TableCell>
+                                  <TableCell>
+                                      <Button hoverIndicator="true" onClick={() => editar(categoria)}><EditIcon /></Button>
+                                  </TableCell>
+                                  <TableCell>
+                                      <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(categoria)} ><DeleteIcon /> </Button>
+                                  </TableCell>
+                              </TableRow>
+                          )}
+                      </TableBody>
+                  </Table>
+              </Box>
+          </Grommet>
+      );
+    }else{
+      return(
+        <p>Necesitas inciar sesion</p>
+      );
+    }
 }
 
 export default Categorias;

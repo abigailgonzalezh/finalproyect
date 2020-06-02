@@ -83,38 +83,45 @@ function Reviews(props) {
 
     //
     const classes = useStyles();
-    return (
-      <Grommet theme={grommet}>
-        <Header/>
-        <br/>
-      <Box align="center" pad="large">
-        <Table className={classes.table}>
-          <TableHeader>
-            <TableRow>
-            <TableCell scope="col" border="bottom"><strong>Producto</strong></TableCell>
-            <TableCell align="center" size="small" scope="col" border="bottom"><strong>Review</strong></TableCell>
-            <TableCell align="center" scope="col" border="bottom"><strong>Imagen</strong></TableCell>
-            <TableCell align="end" scope="col" border="bottom"><strong>Calificacion</strong></TableCell>
-            <TableCell align="end" scope="col" border="bottom"><strong></strong></TableCell>
-              </TableRow>
-          </TableHeader>
-          <TableBody>
-            {reviews.map((reviews) =>
-              <TableRow className="data-row">
-                <TableCell align="center" >{reviews.producto} </TableCell>
-                <TableCell align="center" >{reviews.review}</TableCell>
-                <TableCell align="center" ><img src={reviews.imagen}  width="180" height="100"/></TableCell>
-                <TableCell align="center" >{reviews.estrellas}</TableCell>
-                <TableCell align="center">
-                <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(reviews)} ><DeleteIcon /> </Button>
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-        </Box>
-        </Grommet>
-    );
+    const gettoken = localStorage.getItem('token');
+    if(gettoken!=null){
+      return (
+        <Grommet theme={grommet}>
+          <Header/>
+          <br/>
+        <Box align="center" pad="large">
+          <Table className={classes.table}>
+            <TableHeader>
+              <TableRow>
+              <TableCell scope="col" border="bottom"><strong>Producto</strong></TableCell>
+              <TableCell align="center" size="small" scope="col" border="bottom"><strong>Review</strong></TableCell>
+              <TableCell align="center" scope="col" border="bottom"><strong>Imagen</strong></TableCell>
+              <TableCell align="end" scope="col" border="bottom"><strong>Calificacion</strong></TableCell>
+              <TableCell align="end" scope="col" border="bottom"><strong></strong></TableCell>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+              {reviews.map((reviews) =>
+                <TableRow className="data-row">
+                  <TableCell align="center" >{reviews.producto} </TableCell>
+                  <TableCell align="center" >{reviews.review}</TableCell>
+                  <TableCell align="center" ><img src={reviews.imagen}  width="180" height="100"/></TableCell>
+                  <TableCell align="center" >{reviews.estrellas}</TableCell>
+                  <TableCell align="center">
+                  <Button hoverIndicator="true" variant="outlined" onClick={() => eliminar(reviews)} ><DeleteIcon /> </Button>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+          </Box>
+          </Grommet>
+      );
+    }else{
+      return(
+        <p>Necesitas inciar sesion</p>
+      );
+    }
 }
 
 export default Reviews;
