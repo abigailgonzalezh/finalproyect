@@ -114,7 +114,7 @@ var id2 = '';
   //
   const classes = useStyles();
   const gettoken = localStorage.getItem('token');
-  if(gettoken!=null){
+  if(gettoken==1){
     return (
       <Grommet theme={hp}>
         <Header/>
@@ -166,11 +166,18 @@ var id2 = '';
           </Box>
           </Grommet>
     );
-  }else{
+  } else{
+    if (gettoken == 2) {
       return(
-        <p>Necesitas inciar sesion</p>
+        <p>El acceso a esta página es solo para personal autorizado</p>
+      );
+    } else{
+      return(
+        <p>Tienes que iniciar sesion</p>
       );
     }
+
+  }
 }
 
 export default Empleados;

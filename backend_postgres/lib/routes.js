@@ -39,7 +39,7 @@ module.exports = function (app) {
 					res.redirect('/join');
 				}
 				else{
-					client.query('INSERT INTO empleado (mail, password, nombre, apellido, salario) VALUES ($1, $2, $3, $4, $5)', [req.body.mail,pwd, req.body.nombre, req.body.apellido, req.body.salario], function(err, result) {
+					client.query('INSERT INTO empleado (mail, password, nombre, apellido, salario, tipo) VALUES ($1, $2, $3, $4, $5, 2)', [req.body.mail,pwd, req.body.nombre, req.body.apellido, req.body.salario], function(err, result) {
 						if(err){console.log(err);}
 						else {
 
@@ -76,7 +76,7 @@ module.exports = function (app) {
       const client = await pool.connect()
   		try{
   			await client.query('BEGIN')
-  			var currentAccountsData = await JSON.stringify(client.query('SELECT id, "nombre", "mail", "password" FROM "empleado" WHERE "mail"=$1', [req.body.mail], function(err, result) {
+  			var currentAccountsData = await JSON.stringify(client.query('SELECT id, "nombre", "mail", "password", "tipo" FROM "empleado" WHERE "mail"=$1', [req.body.mail], function(err, result) {
 
   				if(err) {
   					return done(err)
@@ -93,7 +93,7 @@ module.exports = function (app) {
   							console.log('Bien');
                 const token = jwt.sign({id: result.rows[0].id}, secret)
                 res.setHeader("authorization", `Bearer ${token}`);
-                return res.json(token);
+                return res.json(result.rows[0].tipo);
   						}
   						else{
   							console.log('danger', "Oops. Incorrect login details.");

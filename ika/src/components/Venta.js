@@ -71,39 +71,45 @@ function Venta(props){
       };
 
     // getProductos();
-
-    return (
-      <Grommet theme={hp}>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Vender</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-             Digite el numero de productos a vender
-          </DialogContentText>
-          <NumberFormat
-            autoFocus
-            margin="dense"
-            id="cant"
-            //value={cantidad}
-            onChange={(ev) => setCantidad(ev.target.value)}
-            customInput={TextField}
-            label="Cantidad"
-            variant="outlined"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button  size="medium" label="Cancelar" onClick={handleClose} >
-          </Button>
-          <Button id="submit-button"
-              onClick={() => vender()}
-              size="large"
-              size="medium" label="Vender">
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Grommet>
-    );
+    const gettoken = localStorage.getItem('token');
+    if(gettoken!=null){
+      return (
+        <Grommet theme={hp}>
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">Vender</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+               Digite el numero de productos a vender
+            </DialogContentText>
+            <NumberFormat
+              autoFocus
+              margin="dense"
+              id="cant"
+              //value={cantidad}
+              onChange={(ev) => setCantidad(ev.target.value)}
+              customInput={TextField}
+              label="Cantidad"
+              variant="outlined"
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button  size="medium" label="Cancelar" onClick={handleClose} >
+            </Button>
+            <Button id="submit-button"
+                onClick={() => vender()}
+                size="large"
+                size="medium" label="Vender">
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Grommet>
+      );
+    }else{
+      return(
+        <p>Necesitas inciar sesion</p>
+      );
+    }
 }
 
 export default Venta;

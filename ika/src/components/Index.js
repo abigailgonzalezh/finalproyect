@@ -33,12 +33,17 @@ function Index(props) {
       const response = await res.json();
 
       console.log(response)
-      if(response != undefined){
+      if(response == 1){
         localStorage.setItem('token', response)
         history.push('/productos');
        }
       else{
-          console.log("error")
+        if (response == 2) {
+          localStorage.setItem('token', response)
+          history.push('/ventas');
+        } else{
+          console.log("error");
+        }
       }
   }
   const useStyles = makeStyles((theme) => ({

@@ -68,7 +68,7 @@ const [productos, setProductos] = useState([]);
   const classes = useStyles();
   const gettoken = localStorage.getItem('token');
 
-  if(gettoken!=null){
+  if(gettoken==1){
     return (
       <div>
          <Header/>
@@ -112,9 +112,16 @@ const [productos, setProductos] = useState([]);
       </div>
     );
   } else{
-    return(
-      <p>Necesitas inciar sesion</p>
-    );
+    if (gettoken == 2) {
+      return(
+        <p>El acceso a esta página es solo para personal autorizado</p>
+      );
+    } else{
+      return(
+        <p>Tienes que iniciar sesion</p>
+      );
+    }
+
   }
 }
 

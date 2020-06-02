@@ -105,7 +105,7 @@ function Categorias(props){
 
     const classes = useStyles();
     const gettoken = localStorage.getItem('token');
-    if(gettoken!=null){
+    if(gettoken==1){
       return (
           <Grommet theme={hp}>
               <Header/>
@@ -150,10 +150,17 @@ function Categorias(props){
               </Box>
           </Grommet>
       );
-    }else{
-      return(
-        <p>Necesitas inciar sesion</p>
-      );
+    } else{
+      if (gettoken == 2) {
+        return(
+          <p>El acceso a esta página es solo para personal autorizado</p>
+        );
+      } else{
+        return(
+          <p>Tienes que iniciar sesion</p>
+        );
+      }
+
     }
 }
 
